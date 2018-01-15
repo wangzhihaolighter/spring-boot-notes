@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.part0302mybatis.mapper.DogMapper">
+
+  <insert id="insert" parameterType="com.example.mybatis.part0302mybatis.entity.Dog">
+    INSERT INTO dog ( `name`, `age`, `description` )
+    VALUES
+     ( #{name}, #{age}, #{description} )
+  </insert>
+  <select id="findByName" parameterType="java.lang.String" resultType="com.example.mybatis.part0302mybatis.entity.Dog">
+    SELECT *
+    FROM dog
+    WHERE name = #{name}
+  </select>
+
+</mapper>
