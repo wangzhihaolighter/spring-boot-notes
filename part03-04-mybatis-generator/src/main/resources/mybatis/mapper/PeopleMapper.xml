@@ -57,36 +57,4 @@
     select id, `name`, age, description
     from people
   </select>
-  <resultMap id="BaseResultMap" type="com.example.springboot.part0304mybatisgenerator.entity.People">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="age" jdbcType="INTEGER" property="age" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from people
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.example.springboot.part0304mybatisgenerator.entity.People">
-    insert into people (id, `name`, age, 
-      description)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{description,jdbcType=VARCHAR})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.example.springboot.part0304mybatisgenerator.entity.People">
-    update people
-    set `name` = #{name,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
-      description = #{description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, `name`, age, description
-    from people
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, `name`, age, description
-    from people
-  </select>
 </mapper>
