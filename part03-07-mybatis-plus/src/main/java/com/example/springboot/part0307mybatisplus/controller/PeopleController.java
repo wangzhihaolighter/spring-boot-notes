@@ -1,6 +1,7 @@
 package com.example.springboot.part0307mybatisplus.controller;
 
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.example.springboot.part0307mybatisplus.entity.People;
 import com.example.springboot.part0307mybatisplus.service.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -33,6 +35,11 @@ public class PeopleController {
     @GetMapping("/query/all")
     private List<People> queryAll(){
         return peopleService.selectList(null);
+    }
+
+    @GetMapping("/query/page")
+    private List<People> queryPage(Integer pageNum,Integer pageSize){
+        return peopleService.queryPageList(pageNum,pageSize);
     }
 
 }
