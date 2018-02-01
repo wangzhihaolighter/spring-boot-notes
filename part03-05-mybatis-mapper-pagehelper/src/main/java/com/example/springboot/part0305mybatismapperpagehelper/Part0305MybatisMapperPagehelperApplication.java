@@ -1,6 +1,6 @@
 package com.example.springboot.part0305mybatismapperpagehelper;
 
-import com.example.springboot.part0305mybatismapperpagehelper.util.CommonMapper;
+import com.example.springboot.part0305mybatismapperpagehelper.util.BaseMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -25,8 +25,8 @@ public class Part0305MybatisMapperPagehelperApplication {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setBasePackage("com.example.springboot.part0305mybatismapperpagehelper.mapper");
         Properties properties = new Properties();
-        // 这里要特别注意，不要把MyMapper放到 basePackage 中，也就是不能同其他Mapper一样被扫描到。
-        properties.setProperty("mappers", CommonMapper.class.getName());
+        // 这里要特别注意，不要把BaseMapper放到 basePackage 中，也就是不能同其他Mapper一样被扫描到。
+        properties.setProperty("mappers", BaseMapper.class.getName());
         properties.setProperty("notEmpty", "false");
         properties.setProperty("IDENTITY", "MYSQL");
         mapperScannerConfigurer.setProperties(properties);

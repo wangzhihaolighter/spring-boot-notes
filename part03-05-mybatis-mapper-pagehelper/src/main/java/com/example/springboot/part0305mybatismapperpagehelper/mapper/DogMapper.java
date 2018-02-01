@@ -1,7 +1,7 @@
 package com.example.springboot.part0305mybatismapperpagehelper.mapper;
 
 import com.example.springboot.part0305mybatismapperpagehelper.model.Dog;
-import com.example.springboot.part0305mybatismapperpagehelper.util.CommonMapper;
+import com.example.springboot.part0305mybatismapperpagehelper.util.BaseMapper;
 
-public interface DogMapper extends CommonMapper<Dog> {
+public interface DogMapper extends BaseMapper<Dog> {
 }
