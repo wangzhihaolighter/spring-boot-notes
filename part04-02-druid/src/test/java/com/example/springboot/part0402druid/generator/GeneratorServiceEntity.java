@@ -10,26 +10,21 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.Test;
 
 /**
- * <p>
  * 测试生成代码
  * (来源于https://gitee.com/baomidou/mybatisplus-spring-boot/blob/dev/src/test/java/com/baomidou/springboot/test/generator/GeneratorServiceEntity.java)
- * </p>
- *
- * @author K神
- * @date 2017/12/18
  */
 public class GeneratorServiceEntity {
 
     @Test
     public void generateCode() {
-        String packageName = "com.example.springboot.part0402druid.primary";
+        String packageName = "generator";
         boolean serviceNameStartWithI = false;//user -> UserService, 设置成true: user -> IUserService
-        generateByTables(serviceNameStartWithI, packageName, "people", "dog");
+        generateByTables(serviceNameStartWithI, packageName, "user");
     }
 
     private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
         GlobalConfig config = new GlobalConfig();
-        String dbUrl = "jdbc:mysql://localhost:3306/springboot-learn?useUnicode=true&characterEncoding=utf-8";
+        String dbUrl = "jdbc:mysql://localhost:3306/springboot-learn-second?useUnicode=true&characterEncoding=utf-8";
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setUrl(dbUrl)
@@ -44,8 +39,7 @@ public class GeneratorServiceEntity {
                 .setNaming(NamingStrategy.underline_to_camel)
                 .setInclude(tableNames);//修改替换成你需要的表名，多个表名传数组
         config.setActiveRecord(false)
-                .setAuthor("佚名")
-                .setOutputDir("D:\\workspace\\mine\\springboot-learn\\part04-02-druid\\src\\main\\java")
+                .setOutputDir("D:\\workspace\\mine\\springboot-learn\\part04-02-druid\\src\\main\\java\\com\\example\\springboot\\part0402druid\\admin")
                 .setFileOverride(true);
         if (!serviceNameStartWithI) {
             config.setServiceName("%sService");
@@ -56,7 +50,6 @@ public class GeneratorServiceEntity {
                 .setPackageInfo(
                         new PackageConfig()
                                 .setParent(packageName)
-                                .setController("controller")
                                 .setEntity("entity")
                 ).execute();
     }

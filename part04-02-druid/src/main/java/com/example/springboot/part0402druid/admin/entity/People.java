@@ -1,19 +1,11 @@
-package com.example.springboot.part0402druid.admin.entity.primary;
+package com.example.springboot.part0402druid.admin.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author 佚名123
- * @since 2018-01-26
- */
-public class Dog implements Serializable {
+public class People implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,7 +20,7 @@ public class Dog implements Serializable {
      */
     private Integer age;
     /**
-     * 描述
+     * 简介
      */
     private String description;
 
@@ -67,7 +59,7 @@ public class Dog implements Serializable {
 
     @Override
     public String toString() {
-        return "Dog{" +
+        return "People{" +
         ", id=" + id +
         ", name=" + name +
         ", age=" + age +

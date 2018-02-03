@@ -1,19 +1,11 @@
-package com.example.springboot.part0402druid.admin.entity.primary;
+package com.example.springboot.part0402druid.admin.entity;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author 佚名123
- * @since 2018-01-26
- */
-public class People implements Serializable {
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,9 +16,9 @@ public class People implements Serializable {
      */
     private String name;
     /**
-     * 年龄
+     * 密码
      */
-    private Integer age;
+    private String password;
     /**
      * 简介
      */
@@ -49,12 +41,12 @@ public class People implements Serializable {
         this.name = name;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDescription() {
@@ -67,10 +59,10 @@ public class People implements Serializable {
 
     @Override
     public String toString() {
-        return "People{" +
+        return "User{" +
         ", id=" + id +
         ", name=" + name +
-        ", age=" + age +
+        ", password=" + password +
         ", description=" + description +
         "}";
     }
