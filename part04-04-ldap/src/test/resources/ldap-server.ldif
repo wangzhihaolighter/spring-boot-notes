@@ -1,0 +1,18 @@
+dn: dc=qq,dc=com
+objectClass: top
+objectClass: domain
+
+dn: ou=people,dc=qq,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=tony,ou=people,dc=qq,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: tony
+sn: mahuateng
+uid: mahuateng
+#userPassword: {SHA}nFCebWjxfaLbHHG1Qk5UU4trbvQ=
