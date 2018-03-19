@@ -13,17 +13,17 @@
 5. 面向切面编程
 ##基础篇-数据层
 1. [数据层：spring data jpa]()
-2. 数据层：mybatis
-3. 数据层：mybatis plugin
-4. 数据层：JdbcTemplate
-5. 连接池druid
-6. 连接池HikariCP
-6. 多数据源配置
-7. 使用flyway管理数据库版本
+2. 数据层：[mybatis]()
+3. 数据层：[mybatis plugin]()
+4. 数据层：[JdbcTemplate]()
+5. [连接池druid及多数据源配置（注解扫描方式）]()
+6. [连接池HikariCP及多数据源配置（拦截器方式）]()
+7. [使用flyway管理数据库版本]()
+8. [使用LDAP来统一管理用户信息]()
 ##基础篇-显示层
 1. 使用Freemarker模板引擎渲染web视图
 2. 使用Thymeleaf模板引擎渲染web视图
-3. 使用Velocity模板引擎渲染web视图
+4. 使用jsp视图
 ##基础篇-缓存
 1. 整合redis实现缓存
 2. 整合MongoDB实现缓存
@@ -34,3 +34,12 @@
 3. 对log4j进行多环境不同日志级别的控制
 4. 使用AOP统一处理Web请求日志
 5. ELK
+##基础篇-权限管理
+##基础篇-事务管理
+##基础篇-消息服务
+##基础篇-监控管理
+##其他功能篇
+1. 定时任务
+2. 异步任务
+3. jenkins
+4. 文件上传
