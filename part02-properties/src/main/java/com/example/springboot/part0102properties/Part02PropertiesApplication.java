@@ -1,4 +1,4 @@
-package com.example.springboot.part02properties;
+package com.example.springboot.part0102properties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,9 +1,9 @@
-package com.example.springboot.part02properties.web;
+package com.example.springboot.part0102properties.web;
 
-import com.example.springboot.part02properties.domain.Dog;
-import com.example.springboot.part02properties.domain.People;
-import com.example.springboot.part02properties.property.DogProperties;
-import com.example.springboot.part02properties.property.PeopleProperties;
+import com.example.springboot.part0102properties.domain.Dog;
+import com.example.springboot.part0102properties.domain.People;
+import com.example.springboot.part0102properties.property.DogProperties;
+import com.example.springboot.part0102properties.property.PeopleProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

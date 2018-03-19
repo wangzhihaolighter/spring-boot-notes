@@ -1,4 +1,4 @@
-package com.example.springboot.part02properties.property;
+package com.example.springboot.part0102properties.property;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

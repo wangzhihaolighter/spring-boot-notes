@@ -1,12 +1,17 @@
-package com.example.springboot.part02properties.domain;
+package com.example.springboot.part0102properties.property;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * Description:
  *
  * @author zhihao.wang
- * @date 2018/1/3
+ * @date 2018/1/2
  */
-public class People {
+@Component
+@ConfigurationProperties(prefix = "people")
+public class PeopleProperties {
     private String name;
 
     private Integer age;

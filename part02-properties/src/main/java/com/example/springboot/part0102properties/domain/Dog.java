@@ -1,4 +1,4 @@
-package com.example.springboot.part02properties.domain;
+package com.example.springboot.part0102properties.domain;
 
 /**
  * Description:
