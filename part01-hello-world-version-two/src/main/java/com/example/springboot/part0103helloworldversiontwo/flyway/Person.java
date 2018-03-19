@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.springboot.part01helloworldversiontwo.flyway;
+package com.example.springboot.part0103helloworldversiontwo.flyway;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.springboot.part01helloworldversiontwo.webflux;
+package com.example.springboot.part0103helloworldversiontwo.webflux;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

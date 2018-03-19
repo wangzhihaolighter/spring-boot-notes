@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.springboot.part01helloworldversiontwo.webflux;
+package com.example.springboot.part0103helloworldversiontwo.webflux;
 
-import com.example.springboot.part01helloworldversiontwo.flyway.Person;
-import com.example.springboot.part01helloworldversiontwo.flyway.PersonRepository;
+import com.example.springboot.part0103helloworldversiontwo.flyway.Person;
+import com.example.springboot.part0103helloworldversiontwo.flyway.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
