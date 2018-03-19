@@ -1,4 +1,4 @@
-package com.example.springboot.part01helloworld.hello;
+package com.example.springboot.part0101helloworld.hello;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
