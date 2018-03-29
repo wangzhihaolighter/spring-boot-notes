@@ -6,6 +6,9 @@
 原来整理目录结构十分难看，重新整理，并spring boot版本全部改为2.0，边总结边学习。
 
 #### 01-hello 入门
+1. hello
+2. properties
+3. test
 
 #### 02-web web业务开发
 
