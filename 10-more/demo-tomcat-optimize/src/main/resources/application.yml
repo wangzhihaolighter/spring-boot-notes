@@ -1,6 +1,6 @@
-#1.Ä¬ÈÏ
+#1.é»˜è®¤
 
-#2.×î´óÁ¬½ÓÊıºÍ×î´óÏß³ÌÊıÎª1000
+#2.æœ€å¤§è¿æ¥æ•°å’Œæœ€å¤§çº¿ç¨‹æ•°ä¸º1000
 server:
   tomcat:
     max-connections: 1000
@@ -8,7 +8,7 @@ server:
     max-http-header-size: 8192
     min-spare-threads: 100
 
-#3.×î´óÁ¬½ÓÊıºÍ×î´óÏß³ÌÊıÎª2000
+#3.æœ€å¤§è¿æ¥æ•°å’Œæœ€å¤§çº¿ç¨‹æ•°ä¸º2000
 #server:
 #  tomcat:
 #    max-connections: 2000
@@ -16,11 +16,11 @@ server:
 #    max-http-header-size: 8192
 #    min-spare-threads: 100
 
-#±¾»úwindow£¬8g + 256g ssd,ÔÚÅäÖÃ2Ê±ĞÔÄÜ×îÓÅ£¬È¡ÆäÎª×î¼ÑTomcatÈİÆ÷×ÔÉí²ÎÊıµÄÓÅ»¯
-#maven´ò°üÏîÄ¿£¬½øĞĞJVMÓÅ»¯²âÊÔ
-#JVMÓÅ»¯²âÊÔÊ¹ÓÃµÄÆô¶¯·½Ê½ÈıÖÖ
-#·½Ê½1£ºjava -jar demo-tomcat-optimize-0.0.1-SNAPSHOT.jar
-#·½Ê½2£ºjava -jar -server demo-tomcat-optimize-0.0.1-SNAPSHOT.jar
-#·½Ê½3£ºjava -jar -server -XX:PermSize=512M -XX:MaxPermSize=1024m -Xms2048m -Xmx2048m demo-tomcat-optimize-0.0.1-SNAPSHOT.jar
-#ÈıÖÖ·½Ê½¶¼ÊÇÖ±½ÓÔÚWindowsÉÏÆô¶¯µÄ£¬×ÜµÄÓÃJMeterÑ¹Á¦²âÊÔºó£¬´ÓÊı¾İÉÏÀ´ËµµÚ¶şÖÖ¸üºÃ¡£¡£¡£
-#JVM²ÎÊı¿ÉÄÜ´æÔÚÆäËû¸üÓÅ½â
+#æœ¬æœºwindowï¼Œ8g + 256g ssd,åœ¨é…ç½®2æ—¶æ€§èƒ½æœ€ä¼˜ï¼Œå–å…¶ä¸ºæœ€ä½³Tomcatå®¹å™¨è‡ªèº«å‚æ•°çš„ä¼˜åŒ–
+#mavenæ‰“åŒ…é¡¹ç›®ï¼Œè¿›è¡ŒJVMä¼˜åŒ–æµ‹è¯•
+#JVMä¼˜åŒ–æµ‹è¯•ä½¿ç”¨çš„å¯åŠ¨æ–¹å¼ä¸‰ç§
+#æ–¹å¼1ï¼šjava -jar demo-tomcat-optimize-0.0.1-SNAPSHOT.jar
+#æ–¹å¼2ï¼šjava -jar -server demo-tomcat-optimize-0.0.1-SNAPSHOT.jar
+#æ–¹å¼3ï¼šjava -jar -server -XX:PermSize=512M -XX:MaxPermSize=1024m -Xms2048m -Xmx2048m demo-tomcat-optimize-0.0.1-SNAPSHOT.jar
+#ä¸‰ç§æ–¹å¼éƒ½æ˜¯ç›´æ¥åœ¨Windowsä¸Šå¯åŠ¨çš„ï¼Œæ€»çš„ç”¨JMeterå‹åŠ›æµ‹è¯•åï¼Œä»æ•°æ®ä¸Šæ¥è¯´ç¬¬äºŒç§æ›´å¥½ã€‚ã€‚ã€‚
+#JVMå‚æ•°å¯èƒ½å­˜åœ¨å…¶ä»–æ›´ä¼˜è§£
