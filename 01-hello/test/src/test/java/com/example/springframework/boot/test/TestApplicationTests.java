@@ -50,10 +50,12 @@ public class TestApplicationTests {
     @Autowired
     private WebApplicationContext webApplicationContext;
     private MockMvc mvc;
+
     @Before
     public void setUp() throws Exception {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
+
     @Test
     public void mockTest() throws Exception {
         User user = new User();
@@ -65,7 +67,7 @@ public class TestApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(MAPPER.writeValueAsString(user))).andReturn();
         //日志
-        log.info("response ==> "+mvcResult.getResponse().getContentAsString());
+        log.info("response ==> " + mvcResult.getResponse().getContentAsString());
         //断言
         Assert.assertEquals(MAPPER.writeValueAsString(user), mvcResult.getResponse().getContentAsString());
     }
