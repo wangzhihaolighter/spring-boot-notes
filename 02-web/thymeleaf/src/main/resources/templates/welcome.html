@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>welcome</title>
+</head>
+<link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+<body>
+    <form class="form-inline" role="form">
+        <button class="btn btn-primary">这是一个用户信息:</button>
+        <div class="form-group">
+            <label>id:</label>
+            <input class="form-control" th:value="${sysUser.id}"/><br/>
+        </div>
+        <div class="form-group">
+            <label>姓名:</label> <input class="form-control" th:value="${sysUser.username}"/><br/>
+        </div>
+        <div class="form-group">
+            <label>密码:</label> <input class="form-control" th:value="${sysUser.password}"/><br/>
+        </div>
+        <div class="form-group">
+            <a class="nav-link" th:href="@{/test/error}">试试错误吧</a>
+        </div>
+    </form>
+</body>
+</html>
