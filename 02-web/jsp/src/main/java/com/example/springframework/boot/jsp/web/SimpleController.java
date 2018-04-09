@@ -22,6 +22,7 @@ public class SimpleController {
 
     @GetMapping("/test/error")
     public String error() {
+        //cant return error.jsp
         throw new RuntimeException("one error");
     }
 
@@ -32,9 +33,15 @@ public class SimpleController {
         //return new ModelAndView("/error");
 
         //error
-        return new ModelAndView("error");
+        //return new ModelAndView("error");
 
-        //spring - BasicErrorController user new ModelAndView("error") cant find error.jsp
+        //spring boot - BasicErrorController user new ModelAndView("error") cant find error.jsp
+
+        //find WEB-INF/jsp/error2.jsp
+
+        //correct
+        //return new ModelAndView("error2");
+        return new ModelAndView("/error2");
     }
 
 }
