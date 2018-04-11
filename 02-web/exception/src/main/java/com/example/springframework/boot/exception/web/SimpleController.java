@@ -16,7 +16,7 @@ public class SimpleController {
 
     @GetMapping("/")
     public String home() {
-        return "hello freemarker";
+        return "hello exception";
     }
 
     @GetMapping("/user")
