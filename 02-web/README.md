@@ -27,3 +27,10 @@
 #### 统一异常处理
 1. 统一异常处理配置 - rest:@RestControllerAdvice / html:@ControllerAdvice
 1. 自定义错误类型、枚举
+
+#### 使用校验框架validation校验
+1. bean 中添加标签
+1. Controller中开启验证
+1. resource下新建错误信息配置文件
+1. 自定义异常处理器，捕获错误信息
+1. 部分常用标签含义
