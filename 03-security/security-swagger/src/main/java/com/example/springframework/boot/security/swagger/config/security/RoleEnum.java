@@ -1,6 +1,7 @@
 package com.example.springframework.boot.security.swagger.config.security;
 
 public enum RoleEnum {
+    ADMIN,
     ACTUATOR,
     DEVELOPER
     ;
