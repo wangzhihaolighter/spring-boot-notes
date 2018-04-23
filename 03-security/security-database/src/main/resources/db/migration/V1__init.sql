@@ -30,6 +30,7 @@ CREATE TABLE SYSTEM_PERMISSION (
 	`name` varchar(255) not null COMMENT '权限名',
 	`description` varchar(255) not null COMMENT '描述',
 	`url` varchar(255) not null COMMENT '资源路径',
+	`method` varchar(255) not null COMMENT 'http请求方式',
 	`flag` bit(1) DEFAULT 1 COMMENT '是否启用',
 	PRIMARY KEY (`id`)
 );
@@ -49,15 +50,17 @@ CREATE TABLE SYSTEM_ROLE_PERMISSION (
 );
 
 -- 创建默认用户
-insert into SYSTEM_USER (id, username, password,flag) values (1,'admin','123456',1);
-insert into SYSTEM_USER (id, username, password,flag) values (2,'lighter','666666',1);
+-- admin/123456
+insert into SYSTEM_USER (id, username, password,flag) values (1,'admin','2EA5D2E1DFC93F323BB5F35E81C1F991E24F046D53BB5431F380BD13',1);
+-- lighter/666666
+insert into SYSTEM_USER (id, username, password,flag) values (2,'lighter','4B556880D6EB8582B4A9318FA5D9A9607150C35D4E381025F8E6FBC5',1);
 -- 创建默认角色
 insert into SYSTEM_ROLE (id, name) values (1,'admin');
 insert into SYSTEM_ROLE (id, name) values (2,'developer');
 -- 创建默认权限
-insert into SYSTEM_PERMISSION (id, pid, name, description, url) values (1,null,'welcome','欢迎','/');
-insert into SYSTEM_PERMISSION (id, pid, name, description, url) values (2,null,'manage','系统管理页','/manage');
-insert into SYSTEM_PERMISSION (id, pid, name, description, url) values (3,null,'api docs','系统接口文档','/api/docs');
+insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (1,null,'welcome','欢迎','/','GET');
+insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (2,null,'manage','系统管理页','/manage','GET');
+insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (3,null,'api docs','系统接口文档','/api/docs','ALL');
 -- 创建默认用户角色关联
 insert into SYSTEM_USER_ROLE (id, system_user_id, system_role_id) values (1,1,1);
 insert into SYSTEM_USER_ROLE (id, system_user_id, system_role_id) values (2,2,2);

@@ -136,5 +136,7 @@ public class MD5Util {
 
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         System.out.println(validPassword("123456", getEncryptedPwd("123456")));
+        System.out.println(getEncryptedPwd("123456"));
+        System.out.println(getEncryptedPwd("666666"));
     }
 }

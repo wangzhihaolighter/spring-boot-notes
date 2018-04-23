@@ -9,5 +9,6 @@ public class SystemPermission {
     private String name;
     private String description;
     private String url;
+    private String method;
     private Boolean flag;
 }

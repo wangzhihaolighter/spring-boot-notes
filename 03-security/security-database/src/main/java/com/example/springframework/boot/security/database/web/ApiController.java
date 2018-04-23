@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/system")
-public class SystemController {
-
+@RequestMapping("/api")
+public class ApiController {
 }

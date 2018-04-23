@@ -3,5 +3,13 @@
 <mapper namespace="com.example.springframework.boot.security.database.mapper.SystemPermissionMapper">
 
     <select id="getByUserId"
-            resultType="com.example.springframework.boot.security.database.entity.SystemPermission"></select>
+            resultType="com.example.springframework.boot.security.database.entity.SystemPermission">
+        select sp.*
+        from SYSTEM_USER su
+        left join SYSTEM_USER_ROLE sur on sur.system_user_id=su.id
+        left join SYSTEM_ROLE sr on sr.id=sur.system_role_id
+        left join SYSTEM_ROLE_PERMISSION srp on srp.system_role_id=sr.id
+        left join SYSTEM_PERMISSION sp on sp.id=srp.system_permission_id
+        where su.id=#{id}
+    </select>
 </mapper>

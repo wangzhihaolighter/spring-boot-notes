@@ -20,9 +20,20 @@ public class SystemAccessDecisionManager implements AccessDecisionManager {
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         String url, method;
+        //校验是否直接放行：1.管理员 2.静态文件/通用接口/api接口
         if (RoleEnum.ADMIN.toString().equals(authentication.getPrincipal())
+                //静态文件
+                || matchers("/css/**", request)
+                || matchers("/js/**", request)
+                || matchers("/images/**", request)
+                || matchers("/fonts/**", request)
+                || matchers("/favicon.ico", request)
+                //通用接口
                 || matchers("/", request)
-                || matchers("/login", request)) {
+                || matchers("/welcome", request)
+                //api接口
+                || matchers("/rest/**", request)
+                ) {
             return;
         } else {
             for (GrantedAuthority ga : authentication.getAuthorities()) {
