@@ -30,9 +30,10 @@ public class SystemAccessDecisionManager implements AccessDecisionManager {
                 || matchers("/favicon.ico", request)
                 //通用接口
                 || matchers("/", request)
+                || matchers("/login", request)
                 || matchers("/welcome", request)
                 //api接口
-                || matchers("/rest/**", request)
+                || matchers("/api/**", request)
                 ) {
             return;
         } else {
@@ -40,7 +41,7 @@ public class SystemAccessDecisionManager implements AccessDecisionManager {
                 if (ga instanceof SystemGrantedAuthority) {
                     SystemGrantedAuthority systemGrantedAuthority = (SystemGrantedAuthority) ga;
                     url = systemGrantedAuthority.getPermissionUrl();
-                    method = systemGrantedAuthority.getPermissionName();
+                    method = systemGrantedAuthority.getPermissionMethod();
                     if (matchers(url, request)) {
                         if (method.equals(request.getMethod()) || "ALL".equals(method)) {
                             return;

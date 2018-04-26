@@ -18,6 +18,7 @@ public class SystemUser implements UserDetails {
     private String email;
     private Boolean flag;
     private List<? extends GrantedAuthority> authorities;
+    private SystemRole systemRole;
 
     @Override
     @JsonIgnore

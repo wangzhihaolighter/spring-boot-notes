@@ -59,8 +59,8 @@ insert into SYSTEM_ROLE (id, name) values (1,'admin');
 insert into SYSTEM_ROLE (id, name) values (2,'developer');
 -- 创建默认权限
 insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (1,null,'welcome','欢迎','/','GET');
-insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (2,null,'manage','系统管理页','/manage','GET');
-insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (3,null,'api docs','系统接口文档','/api/docs','ALL');
+insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (2,null,'manage','系统管理页','/system/manage','GET');
+insert into SYSTEM_PERMISSION (id, pid, name, description, url, method) values (3,null,'api docs','系统接口文档','/swagger-ui.html','ALL');
 -- 创建默认用户角色关联
 insert into SYSTEM_USER_ROLE (id, system_user_id, system_role_id) values (1,1,1);
 insert into SYSTEM_USER_ROLE (id, system_user_id, system_role_id) values (2,2,2);

@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springframework.boot.security.database.mapper.SystemRoleMapper">
 
+    <select id="getById" resultType="com.example.springframework.boot.security.database.entity.SystemRole">
+      select * from SYSTEM_ROLE where id=#{id}
+    </select>
+
+    <select id="getPermissonsByRoleId"
+            resultType="com.example.springframework.boot.security.database.entity.SystemPermission">
+        select sp.* from SYSTEM_ROLE sr
+        inner join SYSTEM_ROLE_PERMISSION srp on srp.system_role_id=sr.id
+        inner join SYSTEM_PERMISSION sp on sp.id=srp.system_permission_id
+        where sr.id=#{id}
+    </select>
 </mapper>

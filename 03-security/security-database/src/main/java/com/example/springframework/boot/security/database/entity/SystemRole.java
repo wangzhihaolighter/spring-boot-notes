@@ -2,6 +2,8 @@ package com.example.springframework.boot.security.database.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class SystemRole {
     private Long id;
@@ -10,4 +12,5 @@ public class SystemRole {
     private String description;
     private String menuItems;
     private Boolean flag;
+    private List<SystemPermission> systemPermissions;
 }

@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface SystemPermissionMapper {
     List<SystemPermission> getByUserId(Long id);
+
+    SystemPermission getById(Long id);
 }

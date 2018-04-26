@@ -33,7 +33,7 @@ public class SecurityUserService implements UserDetailsService {
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
             for (SystemPermission systemPermission : systemPermissions) {
                 if (systemPermission != null && systemPermission.getName() != null) {
-                    GrantedAuthority grantedAuthority = new SystemGrantedAuthority(systemPermission.getName(), systemPermission.getUrl());
+                    GrantedAuthority grantedAuthority = new SystemGrantedAuthority(systemPermission.getMethod(), systemPermission.getUrl());
                     grantedAuthorities.add(grantedAuthority);
                 }
             }

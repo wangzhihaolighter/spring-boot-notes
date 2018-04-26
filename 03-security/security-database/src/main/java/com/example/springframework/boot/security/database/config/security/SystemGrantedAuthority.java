@@ -5,16 +5,16 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Data
 public class SystemGrantedAuthority implements GrantedAuthority {
-    private String permissionName;
+    private String permissionMethod;
     private String permissionUrl;
 
-    public SystemGrantedAuthority(String permissionName, String permissionUrl) {
-        this.permissionName = permissionName;
+    public SystemGrantedAuthority(String permissionMethod, String permissionUrl) {
+        this.permissionMethod = permissionMethod;
         this.permissionUrl = permissionUrl;
     }
 
     @Override
     public String getAuthority() {
-        return this.permissionName + "&" + this.permissionUrl;
+        return this.permissionMethod + "&" + this.permissionUrl;
     }
 }

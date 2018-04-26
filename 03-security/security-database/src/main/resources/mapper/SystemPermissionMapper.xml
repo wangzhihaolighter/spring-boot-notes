@@ -12,4 +12,8 @@
         left join SYSTEM_PERMISSION sp on sp.id=srp.system_permission_id
         where su.id=#{id}
     </select>
+    <select id="getById"
+            resultType="com.example.springframework.boot.security.database.entity.SystemPermission">
+        select * from SYSTEM_PERMISSION where id=#{id}
+    </select>
 </mapper>

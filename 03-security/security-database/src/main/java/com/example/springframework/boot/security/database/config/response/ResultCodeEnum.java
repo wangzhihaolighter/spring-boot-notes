@@ -8,7 +8,7 @@ public enum ResultCodeEnum {
     //未知,
     NOT_FOUND(1,"未找到"),
     //需要登录
-    AUTH_LOGIN(2,"需要认证，请登录"),
+    AUTH_LOGIN(2,"权限不足"),
     //认证登录失败
     AUTH_ERROR(2,"认证失败，请检查登录信息或联系管理员")
     ;
