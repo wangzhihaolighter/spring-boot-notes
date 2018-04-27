@@ -34,6 +34,8 @@ public class SystemAccessDecisionManager implements AccessDecisionManager {
                 || matchers("/welcome", request)
                 //api接口
                 || matchers("/api/**", request)
+                //actuator健康检查
+                || matchers("/actuator/**", request)
                 ) {
             return;
         } else {
