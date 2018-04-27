@@ -93,7 +93,7 @@ public class Swagger2 {
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(Collections.singletonList(new SecurityReference("spring_oauth", scopes())))
-                .forPaths(PathSelectors.regex("/user.*"))
+                .forPaths(PathSelectors.regex("/welcome.*"))
                 .build();
     }
 
@@ -101,7 +101,7 @@ public class Swagger2 {
         return new AuthorizationScope[]{
                 new AuthorizationScope("read", "for read operations"),
                 new AuthorizationScope("write", "for write operations"),
-                new AuthorizationScope("user", "Access foo API")};
+                new AuthorizationScope("welcome", "Access welcome API")};
     }
 
 }
