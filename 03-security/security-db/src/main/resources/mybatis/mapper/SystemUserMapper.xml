@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springframework.boot.security.db.mapper.SystemUserMapper">
+
+    <resultMap id="UserResultMap" type="com.example.springframework.boot.security.db.entity.SystemUser">
+        <id column="su_id" property="id"/>
+        <result column="su_username" property="username"/>
+        <result column="su_password" property="password"/>
+        <result column="su_name" property="name"/>
+        <result column="su_email" property="email"/>
+        <collection property="systemRoles" resultMap="RoleResultMap" javaType="java.util.List"/>
+    </resultMap>
+
+    <resultMap id="RoleResultMap" type="com.example.springframework.boot.security.db.entity.SystemRole">
+        <id column="sr_id" property="id"/>
+        <result column="sr_name" property="name"/>
+        <result column="sr_roleLevel" property="roleLevel"/>
+        <result column="sr_description" property="description"/>
+        <result column="sr_menuItems" property="menuItems"/>
+        <collection property="systemPermissions" resultMap="PermissionResultMap" javaType="java.util.List"/>
+    </resultMap>
+
+    <resultMap id="PermissionResultMap" type="com.example.springframework.boot.security.db.entity.SystemPermission">
+        <id column="sp_id" property="id"/>
+        <result column="sp_pid" property="pid"/>
+        <result column="sp_name" property="name"/>
+        <result column="sp_description" property="description"/>
+        <result column="sp_url" property="url"/>
+        <result column="sp_method" property="method"/>
+    </resultMap>
+
+    <select id="getByUserName" resultMap="UserResultMap">
+        select
+        su.id as su_id,su.username as su_username,su.password as su_password,su.name as su_name,su.email as su_email,
+        sr.id as sr_id,sr.name as sr_name,sr.roleLevel as sr_roleLevel,sr.description as sr_description, sr.menuItems as sr_menuItems,
+        sp.id as sp_id,sp.pid as sp_pid,sp.name as sp_name,sp.description as sp_description,sp.url as sp_url,sp.method as sp_method
+        from system_user su
+        inner join SYSTEM_USER_ROLE sur on sur.system_user_id=su.id
+        inner join SYSTEM_ROLE sr on sr.id=sur.system_role_id
+        inner join SYSTEM_ROLE_PERMISSION srp on srp.system_role_id=sr.id
+        inner join SYSTEM_PERMISSION sp on sp.id=srp.system_permission_id
+        where su.username=#{username}
+    </select>
+</mapper>
