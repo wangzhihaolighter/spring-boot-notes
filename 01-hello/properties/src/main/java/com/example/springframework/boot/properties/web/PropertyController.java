@@ -41,7 +41,7 @@ public class PropertyController {
      */
     @Component
     @ConfigurationProperties(prefix = "user")
-    class User {
+    static class User {
         private String name;
         private String description;
 
