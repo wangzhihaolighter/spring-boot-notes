@@ -2,6 +2,7 @@ package com.example.springframework.boot.security.db.html.config.security;
 
 import com.example.springframework.boot.security.db.html.config.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,7 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //所有路径均需认证
                 //无需登录的路径需放行,放行后由自定义权限认证拦截器校验
-                .antMatchers("/").permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 //只能登陆一次
