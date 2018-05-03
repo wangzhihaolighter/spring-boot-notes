@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.springfamework.boot.flyway.web;
+package com.example.springframework.boot.flyway.web;
 
-import com.example.springfamework.boot.flyway.entity.User;
-import com.example.springfamework.boot.flyway.repository.UserRepository;
+import com.example.springframework.boot.flyway.entity.User;
+import com.example.springframework.boot.flyway.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

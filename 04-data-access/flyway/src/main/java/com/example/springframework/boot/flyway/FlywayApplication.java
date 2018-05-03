@@ -1,4 +1,4 @@
-package com.example.springfamework.boot.flyway;
+package com.example.springframework.boot.flyway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

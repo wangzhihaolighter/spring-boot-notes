@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 the original author or authors.
+ * Copyright 2012-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,13 @@
  * limitations under the License.
  */
 
-package com.example.springfamework.boot.flyway.entity;
+package com.example.springframework.boot.flyway.repository;
 
-import lombok.Data;
+import com.example.springframework.boot.flyway.entity.User;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
+@Repository
+public interface UserRepository extends CrudRepository<User, Long> {
 
-@Data
-@Entity
-@Table(name = "user")
-public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String username;
-	private String password;
 }
