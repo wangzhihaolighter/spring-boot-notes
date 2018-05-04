@@ -15,7 +15,7 @@ public class SimpleController {
     @ApiOperation(value = "hello", produces = MediaType.TEXT_PLAIN_VALUE, notes = "返回：Hello")
     @GetMapping("/")
     public DemoResult home() {
-        return DemoResult.success("hello spring security db json");
+        return DemoResult.success("hello spring security db swagger");
     }
 
     @ApiOperation(value = "欢迎页", produces = MediaType.TEXT_PLAIN_VALUE, notes = "返回：欢迎页")
