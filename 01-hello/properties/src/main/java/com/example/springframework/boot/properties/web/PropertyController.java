@@ -1,5 +1,6 @@
 package com.example.springframework.boot.properties.web;
 
+import com.example.springframework.boot.properties.properties.PeopleProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class PropertyController {
      * 1.@Value注解
      * 2.@ConfigurationProperties
      * 3.@Autowired注入Environment
+     * 4.读取自定义properties文件中的配置,注意：自定义的yml这种方式获取不了
      * 注意：properties默认是GBK编码，获取中文会乱码,yml文件默认是utf-8编码，获取中文不会乱码
      */
 
@@ -90,6 +92,18 @@ public class PropertyController {
         LOGGER.info("-----通过@Autowired注入Environment获取-----");
         LOGGER.info(env.getProperty("user.name"));
         LOGGER.info(env.getProperty("user.description"));
+    }
+
+    /**
+     * 4.读取自定义properties文件中的配置
+     */
+    @Autowired
+    private PeopleProperties peopleProperties;
+
+    @GetMapping("/resource")
+    public void resource(){
+        LOGGER.info("-----读取自定义properties文件中的配置-----");
+        LOGGER.info(peopleProperties.toString());
     }
 
 }
