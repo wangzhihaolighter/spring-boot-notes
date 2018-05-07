@@ -38,10 +38,20 @@
 > 用户权限从数据库中获取<br/>
 > 认证流程中不跳转页面，而是提示自定义的json信息
 > swagger文档被权限管理
-1.自定义权限校验，需要把swagger对应的路径交予security管理，不能忽略，放行swagger相关资源
+1. 自定义权限校验，需要把swagger对应的路径交予security管理，不能忽略，放行swagger相关资源
 
-#### shiro
+#### oauth2 : authorization server / resources
+> 实现：一个oauth2.0 server / 一个oauth2.0 client
+> 上面心里存在的疑问：
+1. 登录后的生效时间是多少？
+1. security如何判断是登录的？token？cookie？
+1. 如何将这种认证流程抽取出来，成为一个单独的认证服务？而不是跟单个项目耦合？
+1. 认证基于自身可以这么做，如果需要第三方服务如何整合认证？
+> 解决这些问题，需要一个独立的授权认证服务<br/>
+> name如何搭建一个独立的认证服务并能控制其他服务的权限呢？其他服务接口的访问均需要认证服务器的认证。
+1. 参考：[Spring与OAuth2的整合(spring boot版本)](https://gitee.com/shengzhao/spring-oauth-server)
+1. 参考：http://www.360doc.com/content/17/0909/17/16915_685787844.shtml
+1. 参考项目：https://github.com/leftso/demo-spring-boot-security-oauth2.git
+1. 参考项目：https://gitee.com/shengzhao/spring-oauth-server.git
 
 #### jwt - JSON Web Token
-
-#### oauth2
