@@ -1,6 +1,7 @@
 package com.example.springframework.boot.hikaricp.web;
 
 import com.example.springframework.boot.hikaricp.dao.UserDao;
+import com.example.springframework.boot.hikaricp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,11 +16,11 @@ public class SimpleController {
 
     @GetMapping("/")
     public String home() {
-        return "hello hikaricp";
+        return "hello HikariCP";
     }
 
     @GetMapping("/user/all")
-    public List getAllUser(){
+    public List<User> getAllUser() {
         return userDao.findAll();
     }
 

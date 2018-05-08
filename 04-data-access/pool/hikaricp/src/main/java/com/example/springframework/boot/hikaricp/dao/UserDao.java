@@ -14,7 +14,7 @@ public class UserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List findAll() {
+    public List<User> findAll() {
         String sql = "SELECT * FROM user";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
