@@ -18,6 +18,8 @@
 #### 04-data-access 数据访问
 
 #### 05-transaction 事务管理
+1. 事务管理
+1. 分布式事务管理
 
 #### 06-cache 缓存支持
 
@@ -32,3 +34,5 @@
 1. Spring Boot使用@Async实现异步调用
 1. 配置过滤器filter
 1. 配置拦截器interceptor
+1. 配置aop切面
+1. 修改spring中bean的属性值
