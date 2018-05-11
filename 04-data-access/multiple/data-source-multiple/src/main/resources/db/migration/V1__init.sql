@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `people`;
 CREATE TABLE USER (
 	id bigint(20) NOT NULL AUTO_INCREMENT,
 	username varchar(255) not null,
