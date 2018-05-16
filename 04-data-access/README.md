@@ -13,8 +13,16 @@
 #### JdbcTemplate
 
 #### spring data jpa
+1. 单表数据的基本操作 - 继承jpa通用接口，获取通用方法
+1. 自定义简单查询 - jpa根据方法名来自动生成SQL
+1. 分页查询/排序查询
+1. 自定义SQL查询
 
 #### mybatis
+1. 基本配置
+1. 单表数据的基本操作
+1. 高级查询
+1. 批处理
 
 ### tool : 常用的简化开发工具
 
@@ -30,8 +38,6 @@
 #### mybatis增强库 - pageHelper分页插件
 
 #### mybatis generator自动生成代码插件
-
-#### LDAP : 使用LDAP来统一管理用户信息
 
 ### multiple dataSources : 多数据源配置
 
@@ -49,3 +55,5 @@
 #### redis
 
 #### MongoDB
+
+#### LDAP : 使用LDAP来统一管理用户信息
