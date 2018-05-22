@@ -53,7 +53,10 @@
 ### NoSQL : 常用的非关系型数据库
 
 #### redis
+1. redis java客户端选择
+1. redis参数配置
+1. 数据操作
 
 #### MongoDB
-
-#### LDAP : 使用LDAP来统一管理用户信息
+1. docker拉取MongoDB镜像
+1. 启动MongoDB，创建管理员
