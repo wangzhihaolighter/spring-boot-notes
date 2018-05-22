@@ -1,0 +1,40 @@
+#dc：domainComponent（域名）
+dn: dc=example,dc=com
+objectClass: top
+objectClass: domain
+
+#ou：organization unit（组织单元-部门）
+dn: ou=engineering,dc=example,dc=com
+objectclass: top
+objectclass: organizationalUnit
+#ou: engineering
+
+#ou：organization unit（组织单元-部门）
+dn: ou=hiring,dc=example,dc=com
+objectclass: top
+objectclass: organizationalUnit
+#ou: hiring
+
+#uid:定义的一个人员信息 - uid是一个新的dn
+dn: uid=example_uid,ou=hiring,dc=example,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: hr_commonName
+sn: hr_surname
+#uid: example_uid
+description: hiring_description
+
+#uid:定义的一个人员信息 - uid是一个新的dn
+dn: uid=example_uid,ou=engineering,dc=example,dc=com
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: engineer_commonName
+sn: engineer_surname
+#uid: example_uid
+description: engineer_description
+
+#注意，不同ou的uid可以重复，同一ou则不行 - ou：organization unit（组织单元-部门）
