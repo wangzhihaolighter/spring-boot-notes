@@ -31,8 +31,11 @@
 
 #### 10-more 更多功能
 1. Spring Boot内嵌tomcat调优
+1. LDAP : 使用LDAP来统一管理用户信息（LDAP:轻量级目录访问协议）
 1. Spring Boot使用@Async实现异步调用
 1. 配置过滤器filter
 1. 配置拦截器interceptor
 1. 配置aop切面
-1. 修改spring中bean的属性值
+1. spring中bean初始化后修改其属性值
+1. 整合docker
+1. 配置SSL，http转向https
