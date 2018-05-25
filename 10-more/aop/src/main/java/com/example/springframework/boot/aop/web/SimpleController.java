@@ -1,5 +1,6 @@
 package com.example.springframework.boot.aop.web;
 
+import com.example.springframework.boot.aop.interceptor.Classified;
 import com.example.springframework.boot.aop.service.SimpleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,18 @@ public class SimpleController {
     @GetMapping("/auth/do")
     public void authDoSomething() {
         log.info("执行一些业务方法");
+    }
+
+    @Classified
+    @GetMapping("/classified")
+    public void classified() {
+        log.info("方法机密，不允许访问");
+    }
+
+    @Classified(false)
+    @GetMapping("/unclassified")
+    public void unclassified() {
+        log.info("方法不是机密，允许访问");
     }
 
 }

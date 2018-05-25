@@ -3,6 +3,11 @@ package com.example.springframework.boot.aop.config;
 import com.example.springframework.boot.aop.aspect.LogAspect;
 import com.example.springframework.boot.aop.aspect.ServiceCostTimeAspect;
 import com.example.springframework.boot.aop.aspect.TokenAuthAspect;
+import com.example.springframework.boot.aop.interceptor.ClassifiedInterceptor;
+import org.springframework.aop.Advisor;
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -73,6 +78,10 @@ public class AspectConfig {
         @target ：和@within的功能类似，但必须要指定注解接口的保留策略为RUNTIME。
         @annotation ：匹配连接点被它参数指定的Annotation注解的方法。也就是说，所有被指定注解标注的方法都将匹配。
         bean：通过受管Bean的名字来限定连接点所在的Bean。该关键词是Spring2.5新增的。
+
+    另一种实现方式:实现aop interceptor,通常实现的是下面两种:
+        MethodInterceptor:方法拦截器
+        ConstructorInterceptor:构造拦截器，不常用（还没用过。。。）
      */
 
     @Bean
@@ -88,5 +97,23 @@ public class AspectConfig {
     @Bean
     public ServiceCostTimeAspect serviceCostTimeAspect() {
         return new ServiceCostTimeAspect();
+    }
+
+    /*
+    另一种实现方式:实现interceptor
+     */
+
+    @Autowired
+    private ClassifiedInterceptor classifiedInterceptor;
+
+    @Bean
+    public Advisor classifiedAdvisor() {
+        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
+        //两种表达式的写法均可
+        pointcut.setExpression("execution(public * com.example.springframework.boot.aop.web..*.*(..))");
+        pointcut.setExpression("com.example.springframework.boot.aop.interceptor.ClassifiedInterceptor.pointcut()");
+        DefaultPointcutAdvisor classifiedAdvisor = new DefaultPointcutAdvisor(pointcut, classifiedInterceptor);
+        classifiedAdvisor.setOrder(4);
+        return classifiedAdvisor;
     }
 }
