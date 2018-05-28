@@ -18,3 +18,7 @@
 1. 注册路由
 
 #### starter:快速开发一个自定义Spring Boot Starter，并使用它
+1. artifactId命名格式：Spring官方建议 - 非官方Starter命名应遵循{name}-spring-boot-starter的格式
+1. 提供service,编写AutoConfiguration自动配置类
+1. 注解说明
+1. 打包安装至本地maven仓库，并使用
