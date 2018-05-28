@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.example.springframework.boot.demo.spring.boot.starter.service.SimpleAutoConfiguration
