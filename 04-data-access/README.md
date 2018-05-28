@@ -36,6 +36,7 @@
 #### MongoDB
 1. docker拉取MongoDB镜像
 1. 启动MongoDB，创建管理员
+1. 使用mongoTemplate实现对MongoDB的数据操作
 
 ### tool:常用的简化开发工具
 ---
