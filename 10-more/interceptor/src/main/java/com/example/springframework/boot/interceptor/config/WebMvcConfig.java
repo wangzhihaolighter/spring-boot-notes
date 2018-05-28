@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-        /*
+    /*
     参考链接：https://blog.csdn.net/qq_35246620/article/details/68487904?1491374806898
 
     Java里的拦截器是动态拦截 action 调用的对象。它提供了一种机制可以使开发者可以定义在一个 action 执行的前后执行的代码，也可以在一个 action 执行前阻止其执行，同时也提供了一种可以提取 action 中可重用部分的方式。
@@ -35,7 +35,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     实现自定义拦截器的步骤：
         1.创建拦截器，实现对应的拦截器接口
         2.创建拦截器配置类，添加自定义拦截器至拦截器链中
-     */
+    */
 
     @Bean
     public LoginInterceptor loginInterceptor() {
