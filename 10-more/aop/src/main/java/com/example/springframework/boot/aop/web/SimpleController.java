@@ -4,6 +4,7 @@ import com.example.springframework.boot.aop.interceptor.Classified;
 import com.example.springframework.boot.aop.service.SimpleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,6 +42,15 @@ public class SimpleController {
     @GetMapping("/unclassified")
     public void unclassified() {
         log.info("方法不是机密，允许访问");
+    }
+
+    /**
+     * 异常捕获处理
+     */
+    @ExceptionHandler(value = Exception.class)
+    public String defaultErrorHandler(Exception e) {
+        e.printStackTrace();
+        return e.getMessage();
     }
 
 }

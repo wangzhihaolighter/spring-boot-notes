@@ -48,7 +48,7 @@ public class TokenAuthAspect {
         log.info("[TOKEN AUTH] : request token -> ->" + token);
         if (isAuthUrl(url) && !authToken(token)) {
             //token认证不通过
-            throw new RuntimeException("access denied");
+            throw new RuntimeException("[TOKEN AUTH] : access denied");
         }
         log.info("[TOKEN AUTH] : access success");
     }

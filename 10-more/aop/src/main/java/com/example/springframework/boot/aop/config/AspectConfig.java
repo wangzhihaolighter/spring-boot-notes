@@ -7,7 +7,6 @@ import com.example.springframework.boot.aop.interceptor.ClassifiedInterceptor;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -118,19 +117,19 @@ public class AspectConfig {
     }
 
     /*
-    其他实现方式:实现xxxInterceptor
+    其他方式:实现xxxInterceptor
      */
 
-    @Autowired
-    private ClassifiedInterceptor classifiedInterceptor;
+    @Bean
+    public ClassifiedInterceptor classifiedInterceptor() {
+        return new ClassifiedInterceptor();
+    }
 
     @Bean
     public Advisor classifiedAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        //两种表达式的写法均可
         pointcut.setExpression("execution(public * com.example.springframework.boot.aop.web..*.*(..))");
-        pointcut.setExpression("com.example.springframework.boot.aop.interceptor.ClassifiedInterceptor.pointcut()");
-        DefaultPointcutAdvisor classifiedAdvisor = new DefaultPointcutAdvisor(pointcut, classifiedInterceptor);
+        DefaultPointcutAdvisor classifiedAdvisor = new DefaultPointcutAdvisor(pointcut, classifiedInterceptor());
         classifiedAdvisor.setOrder(4);
         return classifiedAdvisor;
     }
