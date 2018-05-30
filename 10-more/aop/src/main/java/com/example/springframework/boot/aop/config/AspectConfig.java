@@ -79,9 +79,27 @@ public class AspectConfig {
         @annotation ：匹配连接点被它参数指定的Annotation注解的方法。也就是说，所有被指定注解标注的方法都将匹配。
         bean：通过受管Bean的名字来限定连接点所在的Bean。该关键词是Spring2.5新增的。
 
-    另一种实现方式:实现aop interceptor,通常实现的是下面两种:
-        MethodInterceptor:方法拦截器
-        ConstructorInterceptor:构造拦截器，不常用（还没用过。。。）
+    其他实现方式:实现Advice(包：org.aopalliance.aop)，通常实现具体的接口或继承类,有xxxInterceptor与xxxAdvice，如下
+        实现Advice，结构大致如下，选择对应的具体实现即可
+            Advice：
+                xxxInterceptor:
+                    MethodInterceptor:方法拦截器
+                    ConstructorInterceptor:构造拦截器，不常用（还没用过。。。）
+                    IntroductionInterceptor:在不改变原有方法的基础上却可以增加新的方法
+                    。。。
+                xxxAdvice
+                    DynamicIntroductionAdvice
+                    BeforeAdvice：
+                        MethodBeforeAdvice
+                    AfterAdvice
+                        AfterReturningAdvice
+                        ThrowsAdvice
+                    。。。
+                可以参考以下类的实现
+                    org.springframework.aop.aspectj.AspectJAfterAdvice
+                    org.springframework.aop.aspectj.AspectJAfterReturningAdvice
+                    org.springframework.aop.aspectj.AspectJAroundAdvice
+
      */
 
     @Bean
@@ -100,7 +118,7 @@ public class AspectConfig {
     }
 
     /*
-    另一种实现方式:实现interceptor
+    其他实现方式:实现xxxInterceptor
      */
 
     @Autowired
