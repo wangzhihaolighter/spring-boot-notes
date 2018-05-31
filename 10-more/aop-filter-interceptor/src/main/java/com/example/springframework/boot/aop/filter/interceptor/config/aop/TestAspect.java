@@ -27,9 +27,9 @@ public class TestAspect {
 
     @Around("test()")
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
-        log.info("[aspect] do around start");
+        log.info("[ ASPECT ] do around start");
         Object proceed = point.proceed();
-        log.info("[aspect] do around end");
+        log.info("[ ASPECT ] do around end");
         return proceed;
     }
 

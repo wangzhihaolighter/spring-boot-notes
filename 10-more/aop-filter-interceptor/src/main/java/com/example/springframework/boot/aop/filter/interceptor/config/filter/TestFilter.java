@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 @Slf4j
-@Order(1)
+@Order(4)
 @Component
 @WebFilter(urlPatterns = "/**", filterName = TestFilter.FILTER_NAME)
 public class TestFilter implements Filter {
