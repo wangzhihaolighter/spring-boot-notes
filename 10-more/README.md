@@ -25,12 +25,15 @@
 1. 配置filter的方式及如何调整加载顺序
 
 #### 测试aspect、filter、interceptor的执行顺序
-1. 执行顺序: filter(do filter start) -> interceptor(preHandle) -> aspect start -> aspect end -> interceptor(postHandle) -> interceptor(afterCompletion) -> filter(do filter end)
+1. order均设为1，interceptor先注册HandlerInterceptor再注册WebRequestInterceptor，默认执行顺序: filter(do filter start) -> HandlerInterceptor(preHandle) -> WebRequestInterceptor(preHandle) -> aspect start -> aspect end -> WebRequestInterceptor(postHandle) -> HandlerInterceptor(postHandle) -> WebRequestInterceptor(afterCompletion) -> HandlerInterceptor(afterCompletion) -> filter(do filter end)
 1. filter原理基于servlet
 1. interceptor基于动态代理
 1. aop，基于AspectJ，修改切面方法前后的源代码
     1. AspectJ是一个代码生成工具（Code Generator）。
     1. AspectJ语法就是用来定义代码生成规则的语法。
+1. 其他测试：
+    1. 调整order后， 执行顺序依旧为 filter-> interceptor -> aspect
+    1. interceptor的HandlerInterceptor，WebRequestInterceptor的顺序注册时的order决定的，WebRequestInterceptor本质是由适配器WebRequestHandlerInterceptorAdapter转换为HandlerInterceptor添加进拦截器链中，若order一致，由添加顺序决定，本质是list中对象排序
 
 #### async:使用@Async实现异步调用
 1. 配置@EnableAsync,开启异步注解
