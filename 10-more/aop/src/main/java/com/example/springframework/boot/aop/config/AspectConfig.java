@@ -6,6 +6,7 @@ import com.example.springframework.boot.aop.aspect.TokenAuthAspect;
 import com.example.springframework.boot.aop.interceptor.ClassifiedInterceptor;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
+import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -125,6 +126,8 @@ public class AspectConfig {
         return new ClassifiedInterceptor();
     }
 
+    /* 注入方式：aop */
+
     @Bean
     public Advisor classifiedAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
@@ -133,4 +136,16 @@ public class AspectConfig {
         classifiedAdvisor.setOrder(4);
         return classifiedAdvisor;
     }
+
+    /* 注入方式：动态代理 */
+
+    //@Bean
+    //public BeanNameAutoProxyCreator transactionAutoProxy() {
+    //    BeanNameAutoProxyCreator autoProxy = new BeanNameAutoProxyCreator();
+    //    autoProxy.setProxyTargetClass(true);
+    //    autoProxy.setBeanNames("*Controller");
+    //    autoProxy.setInterceptorNames("classifiedInterceptor");
+    //    autoProxy.setOrder(4);
+    //    return autoProxy;
+    //}
 }
