@@ -31,6 +31,10 @@ public class ScheduleConfig {
     值得注意的是：当corn表达式报错 expression must consist of 6 fields时，原因是：
         不支持年位定时,它毕竟不是quartz,只是简单的定时框架,比起jdk Timer就加入了线程池而以.
         org.springframework.scheduling.support.CronSequenceGenerator中说明了不支持年位定位
+
+    实现：
+    定时任务注册类：org.springframework.scheduling.config.ScheduledTaskRegistrar
+    注解式定时任务处理类：org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor
     */
 
     @Bean
