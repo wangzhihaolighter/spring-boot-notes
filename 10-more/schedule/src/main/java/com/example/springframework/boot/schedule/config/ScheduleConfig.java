@@ -20,12 +20,18 @@ public class ScheduleConfig {
             initialDelay：初始时延,任务的第一次运行会是在进程启动的n(ms)之后
             cron：通过cron表达式定义规则
             zone：给cron表达式用的时区
+                时区参考：http://www.cnblogs.com/tracy/archive/2010/07/16/1778566.html
+                中国时区：GMT+8 格林威治标准时间+8小时
 
      值得注意的是：schedule，执行定时方法的线程是同一个（哪怕两个component），故任务之间会挤占，可以理解为
-     Spring在任务调度时，fixedRate, fixedDelay 或 cron 只是决定提交任务到线程池的时刻，至于真正执行任务的时间就看有没有空闲的线程，因此最终决定于线程池的配置
-     默认配置下，同一时刻执行任务的线程只有一个
-     这种情况一般不满足需求，所以需要配置用于定时任务执行的线程池，有足够的线程，就不会出现挤占的情况
-     */
+         Spring在任务调度时，fixedRate, fixedDelay 或 cron 只是决定提交任务到线程池的时刻，至于真正执行任务的时间就看有没有空闲的线程，因此最终决定于线程池的配置
+         默认配置下，同一时刻执行任务的线程只有一个
+         这种情况一般不满足需求，所以需要配置用于定时任务执行的线程池，有足够的线程，就不会出现挤占的情况
+
+    值得注意的是：当corn表达式报错 expression must consist of 6 fields时，原因是：
+        不支持年位定时,它毕竟不是quartz,只是简单的定时框架,比起jdk Timer就加入了线程池而以.
+        org.springframework.scheduling.support.CronSequenceGenerator中说明了不支持年位定位
+    */
 
     @Bean
     public Executor taskScheduler() {

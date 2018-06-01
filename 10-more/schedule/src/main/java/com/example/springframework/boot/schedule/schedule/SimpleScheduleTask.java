@@ -44,7 +44,7 @@ public class SimpleScheduleTask {
      * 每分钟执行一次，从0分0秒开始
      * zone时区:ZoneId.systemDefault()
      */
-    @Scheduled(cron = "0 0/1 * * * ? ", zone = "Asia/Shanghai")
+    @Scheduled(cron = "0 0/1 * * * ?", zone = "GMT+8")
     public void doSomethingThree() {
         //do something
         try {
