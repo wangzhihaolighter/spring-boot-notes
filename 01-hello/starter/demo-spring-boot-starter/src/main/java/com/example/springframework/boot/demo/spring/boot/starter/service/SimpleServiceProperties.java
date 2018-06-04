@@ -8,6 +8,8 @@ public class SimpleServiceProperties {
 
     private String suffix;
 
+    private Boolean enabled;
+
     public String getPrefix() {
         return prefix;
     }
@@ -22,5 +24,13 @@ public class SimpleServiceProperties {
 
     public void setSuffix(String suffix) {
         this.suffix = suffix;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

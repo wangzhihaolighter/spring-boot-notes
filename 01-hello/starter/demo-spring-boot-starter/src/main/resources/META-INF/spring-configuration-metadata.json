@@ -1,0 +1,10 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.example.springframework.boot.demo.spring.boot.starter.service.SimpleServiceProperties",
+      "name": "simple.service",
+      "type": "com.example.springframework.boot.demo.spring.boot.starter.service.SimpleServiceProperties"
+    }
+  ]
+}

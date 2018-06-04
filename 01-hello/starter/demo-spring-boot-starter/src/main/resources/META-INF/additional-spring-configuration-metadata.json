@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "simple.service.enable",
+      "type": "java.lang.Boolean",
+      "description": "enabled simple service,default false.",
+      "defaultValue": false
+    }
+  ]
+}
