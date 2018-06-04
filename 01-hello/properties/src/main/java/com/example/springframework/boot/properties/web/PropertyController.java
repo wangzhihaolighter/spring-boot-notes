@@ -7,9 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 @RestController
 public class PropertyController {
@@ -20,6 +25,7 @@ public class PropertyController {
      * 2.@ConfigurationProperties
      * 3.@Autowired注入Environment
      * 4.读取自定义properties文件中的配置,注意：自定义的yml这种方式获取不了
+     * 5.通过new ClassPathResource()获取ClassPath下配置文件信息
      * 注意：properties默认是GBK编码，获取中文会乱码,yml文件默认是utf-8编码，获取中文不会乱码
      */
 
@@ -101,9 +107,27 @@ public class PropertyController {
     private PeopleProperties peopleProperties;
 
     @GetMapping("/resource")
-    public void resource(){
+    public void resource() {
         LOGGER.info("-----读取自定义properties文件中的配置-----");
         LOGGER.info(peopleProperties.toString());
+    }
+
+    /**
+     * 5.通过new ClassPathResource()获取ClassPath下配置文件信息
+     */
+    @GetMapping("/classPathResource")
+    public void classPathResource() {
+        LOGGER.info("-----通过new ClassPathResource()获取ClassPath下配置文件信息-----");
+        ClassPathResource resource = new ClassPathResource("people.properties");
+        InputStream inputStream;
+        try {
+            inputStream = resource.getInputStream();
+            Properties properties = new Properties();
+            properties.load(inputStream);
+            LOGGER.info(properties.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
