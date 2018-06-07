@@ -11,14 +11,19 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
+    /*
+    HikariCP依赖由spring-boot-starter-jdbc默认引入
+     */
+
     @Bean
     @Primary
     public DataSource dataSource() {
         HikariDataSource dataSource = new HikariDataSource();
+        //内嵌h2数据库连接
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setJdbcUrl("jdbc:h2:mem:test");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setUsername("sa");
+        dataSource.setPassword(null);
         dataSource.setMinimumIdle(5);
         dataSource.setMaximumPoolSize(15);
         dataSource.setAutoCommit(true);
