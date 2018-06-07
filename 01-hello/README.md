@@ -18,7 +18,9 @@
 1. 注册路由
 
 #### starter:快速开发一个自定义Spring Boot Starter，并使用它
-1. artifactId命名格式：Spring官方建议 - 非官方Starter命名应遵循{name}-spring-boot-starter的格式
-1. 提供service,编写AutoConfiguration自动配置类
-1. 注解说明
+1. starter的artifactId命名格式：Spring官方建议 - 非官方Starter命名应遵循{name}-spring-boot-starter的格式
+1. starter中提供service,并编写AutoConfiguration自动配置类
+1. 使用`@AutoConfigureAfter`和`@AutoConfigureBefore`可以限制xxxAutoConfiguration.class的加载顺序
+1. spring-configuration-metadata.json,配置xxxAutoConfiguration需要用到的一些properties
+1. additional-spring-configuration-metadata.json,提供配置属性的说明、类型及默认值
 1. 打包安装至本地maven仓库，并使用

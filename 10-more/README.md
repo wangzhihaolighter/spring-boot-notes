@@ -35,13 +35,13 @@
     1. 调整order后， 执行顺序依旧为 filter-> interceptor -> aspect
     1. interceptor的HandlerInterceptor，WebRequestInterceptor的顺序注册时的order决定的，WebRequestInterceptor本质是由适配器WebRequestHandlerInterceptorAdapter转换为HandlerInterceptor添加进拦截器链中，若order一致，由添加顺序决定，本质是list中对象排序
 
-#### async:使用@Async实现异步调用
-1. 配置@EnableAsync,开启异步注解
+#### async:使用`@Async`实现异步调用
+1. 配置`@EnableAsync`,开启异步注解
 1. spring线程池配置
-1. 如何实现异步调用：bean中方法上使用@Async，并指定线程池
+1. 如何实现异步调用：bean中方法上使用`@Async`，并指定线程池
 1. 异步方法返回结果：Future接口方法说明
 
-#### schedule:使用@Scheduled创建定时任务
+#### schedule:使用`@Scheduled`创建定时任务
 1. 启用定时任务的配置
 1. 注解说明
 1. 创建定时任务
@@ -49,4 +49,4 @@
 
 #### dynamic quartz scheduler:整合quartz，实现可动态修改时间定时任务
 1. spring tasks不支持年定位，创建更完整的定时任务，需整合Quartz
-1. 动态配置定时任务
+1. 动态配置定时任务,基于http访问
