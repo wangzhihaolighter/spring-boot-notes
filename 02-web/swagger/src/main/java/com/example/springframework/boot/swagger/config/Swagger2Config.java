@@ -22,7 +22,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
-public class Swagger2 {
+public class Swagger2Config {
 
     @Bean
     public Docket createRestApi() {
@@ -34,6 +34,7 @@ public class Swagger2 {
         pars.add(tokenPar.build());
 
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("demo swagger api")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.example.springframework.boot.swagger.web"))
                 .paths(PathSelectors.any())
@@ -44,12 +45,19 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
+                //大标题
                 .title("Spring Boot中使用Swagger2构建RESTFul APIs")
+                //描述
                 .description("demo swagger")
+                //服务条款
                 .termsOfServiceUrl("http://springfox.github.io/springfox/")
+                //作者信息
                 .contact(new Contact("lighter", "https://github.com/wangzhihaolighter", "1984800194wzh@gmail.com"))
+                //版本
                 .version("1.0")
+                //许可证显示文字
                 .license("license")
+                //许可证链接
                 .licenseUrl("https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples")
                 .build();
     }
