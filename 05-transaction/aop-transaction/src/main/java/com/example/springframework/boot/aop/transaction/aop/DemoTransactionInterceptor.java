@@ -18,8 +18,8 @@ public class DemoTransactionInterceptor extends TransactionAspectSupport impleme
     ISOLATION:
     timeout:
     readOnly:注意，当存在这个配置相当于readOnly=true，不存在相当于readOnly=false
-    _:RollbackRuleAttribute,对应配置rollbackForClassName，注意不需要加下划线
-    +:NoRollbackRuleAttribute,对应配置noRollbackForClassName，注意不需要加下划线
+    -:RollbackRuleAttribute,对应配置rollbackForClassName，注意配置名和值之间不需要加下划线
+    +:NoRollbackRuleAttribute,对应配置noRollbackForClassName，注意配置名和值之间不需要加下划线
      */
 
     public DemoTransactionInterceptor() {
