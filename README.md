@@ -52,8 +52,8 @@
     1. __mybatis generator__,自动生成代码插件
 
 ### 05-transaction:事务管理
-1. 事务管理
-1. 分布式事务管理
+1. __spring-annotation-transaction__:基于spring的注解式事务管理
+1. __aop-transaction__:基于aop的约定式事务管理
 
 ### 06-cache:缓存支持
 
@@ -64,15 +64,16 @@
 ### 09-monitor:监控管理
 
 ### 10-more:更多功能
-1. Spring Boot内嵌tomcat调优
-1. __LDAP__:使用LDAP来统一管理用户信息（LDAP:轻量级目录访问协议）
-1. __AOP(Aspect Oriented Programming)__:面向切面编程
-1. 配置过滤器filter
-1. 配置拦截器interceptor
-1. aop、filter、interceptor执行顺序测试
-1. 使用`@Async`实现异步调用
-1. 使用`@Scheduled`创建定时任务
-1. __dynamic quartz scheduler__:整合*quartz*，实现可动态修改时间定时任务
+1. __demo-tomcat-optimize__:Spring Boot内嵌tomcat调优
+1. __ldap__:使用LDAP来统一管理用户信息（LDAP:轻量级目录访问协议）
+1. __aop__:AOP(Aspect Oriented Programming),面向切面编程
+1. __filter__:配置过滤器filter
+1. __interceptor__:配置拦截器interceptor
+1. __aop-filter-interceptor__:aop、filter、interceptor执行顺序测试
+1. __async__:使用`@Async`实现异步调用
+1. __async-transaction__:异步方法在方法事务提交后执行
+1. __schedule__:使用`@Scheduled`创建定时任务
+1. __dynamic-quartz-scheduler__:整合*quartz*，实现可动态修改时间定时任务
 1. __Bean__:spring中bean处理相关
 1. 配置SSL,http转向https
 1. 整合docker
