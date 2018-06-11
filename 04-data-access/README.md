@@ -36,9 +36,10 @@
 
 ### tool:常用的简化开发工具
 #### flyway:使用Flyway来管理数据库版本
-1. flyway介绍
-1. flyway使用场景、实现功能
-1. flyway配置(默认/详细)
+flyway执行流程：
+1. flyway包下`org.flywaydb.core.Flyway`加载flyway相关配置
+1. spring autoconfigure中flyway初始化类`org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer`，实现InitializingBean，afterPropertiesSet方法中判断flyway.migrate数据库迁移方法的执行
+1. spring autoconfigure中`org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration`自动配置flyway相关bean
 #### mybatis generator自动生成代码插件
 #### mybatis增强库 - 通用mapper
 #### mybatis增强库 - pageHelper分页插件
