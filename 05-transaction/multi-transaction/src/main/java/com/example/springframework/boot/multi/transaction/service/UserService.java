@@ -20,7 +20,7 @@ public class UserService {
     @Autowired
     private ClusterMapper clusterMapper;
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         List<User> result = new ArrayList<>();
         result.addAll(primaryMapper.queryAll());
         result.addAll(clusterMapper.queryAll());
@@ -51,8 +51,8 @@ public class UserService {
         user.setUsername("失落的小水牛");
         user.setPassword("123456");
         primaryMapper.insert(user);
-        int i = 1/0;
         clusterMapper.insert(user);
+        int i = 1 / 0;
     }
 
     @Transactional(rollbackFor = Exception.class)
