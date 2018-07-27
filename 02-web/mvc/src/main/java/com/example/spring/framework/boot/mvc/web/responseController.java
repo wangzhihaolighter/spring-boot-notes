@@ -35,7 +35,7 @@ public class responseController {
     }
 
     /**
-     * 2.页面 页面默认存放地址为
+     * 2.页面 页面默认存放地址为classpath:/templates
      */
     @RequestMapping("/page")
     public String page() {

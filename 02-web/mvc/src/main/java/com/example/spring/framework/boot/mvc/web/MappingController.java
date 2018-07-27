@@ -19,7 +19,7 @@ public class MappingController {
      */
 
     /**
-     * 1.标准URL应谁
+     * 1.标准URL映射
      */
     @RequestMapping("/basic")
     public String basic() {
