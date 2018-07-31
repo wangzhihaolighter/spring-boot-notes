@@ -2,7 +2,7 @@ package com.example.springframework.boot.multi.transaction.service;
 
 import com.example.springframework.boot.multi.transaction.entity.User;
 import com.example.springframework.boot.multi.transaction.mapper.cluster.ClusterMapper;
-import com.example.springframework.boot.multi.transaction.mapper.primary.primaryMapper;
+import com.example.springframework.boot.multi.transaction.mapper.primary.PrimaryMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private primaryMapper primaryMapper;
+    private PrimaryMapper primaryMapper;
     @Autowired
     private ClusterMapper clusterMapper;
 
@@ -26,17 +26,6 @@ public class UserService {
         result.addAll(clusterMapper.queryAll());
         return result;
     }
-
-//    public void save() {
-////        saveSuccess();
-////        saveFailure();
-//    }
-//
-//    @Transactional(rollbackFor = Exception.class)
-//    public void saveTransaction() {
-//        saveSuccess();
-//        saveFailure();
-//    }
 
     public void saveSuccess() {
         User user = new User();

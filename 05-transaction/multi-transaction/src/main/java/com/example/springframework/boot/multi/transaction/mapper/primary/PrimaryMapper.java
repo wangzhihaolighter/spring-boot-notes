@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface primaryMapper {
+public interface PrimaryMapper {
     List<User> queryAll();
 
     User queryById(@Param("id") Long id);
