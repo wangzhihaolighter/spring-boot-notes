@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example.springframework.boot</groupId>
-    <artifactId>aop-filter-interceptor</artifactId>
+    <artifactId>execution-order</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>aop-filter-interceptor</name>
+    <name>execution-order</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
