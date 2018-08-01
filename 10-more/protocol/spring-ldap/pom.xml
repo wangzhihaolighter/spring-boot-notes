@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example.springframework.boot</groupId>
-    <artifactId>ldap</artifactId>
+    <artifactId>spring-ldap</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ldap</name>
+    <name>spring-ldap</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
