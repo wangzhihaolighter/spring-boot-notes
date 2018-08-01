@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example.springframework.boot</groupId>
-    <artifactId>validation</artifactId>
+    <artifactId>request-parameter-validation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>validation</name>
+    <name>request-parameter-validation</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
