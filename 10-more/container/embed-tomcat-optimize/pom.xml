@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example.springframework.boot</groupId>
-    <artifactId>demo-tomcat-optimize</artifactId>
+    <artifactId>embed-tomcat-optimize</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>demo-tomcat-optimize</name>
+    <name>embed-tomcat-optimize</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
