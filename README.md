@@ -1,8 +1,11 @@
 # 说明
 
 spring boot学习汇总。这些都是demo，用于记录spring boot的一些特性，实现一些小功能。
+
 Spring Boot版本：2.X
+
 JDK版本：8
+
 开发工具：IntelliJ IDEA
 
 ## 01-hello:入门
