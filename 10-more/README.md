@@ -56,3 +56,8 @@
 - dynamic quartz scheduler:整合quartz，实现可动态修改时间定时任务
     - spring tasks不支持年定位，创建更完整的定时任务，需整合Quartz
     - 动态配置定时任务,基于http访问
+
+## listener：事件监听
+spring boot启动中存在事件监听机制
+监听器：org.springframework.context.ApplicationListener
+事件：org.springframework.context.ApplicationEvent
