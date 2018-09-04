@@ -9,12 +9,10 @@ import java.util.Map;
 public enum SecurityMethod {
     //无加密
     NULL,
-
     AES,
     RSA,
     DES,
     DES3,
-
     SHA1,
     MD5;
 

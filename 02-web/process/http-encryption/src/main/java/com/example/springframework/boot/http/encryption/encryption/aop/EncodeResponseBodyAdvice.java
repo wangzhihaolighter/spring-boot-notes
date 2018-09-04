@@ -44,6 +44,7 @@ public class EncodeResponseBodyAdvice implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         ResponseEncode responseEncode = returnType.getMethodAnnotation(ResponseEncode.class);
+        assert responseEncode != null;
         SecurityMethod securityMethod = responseEncode.method();
         //响应不加密
         if (securityMethod == SecurityMethod.NULL) {

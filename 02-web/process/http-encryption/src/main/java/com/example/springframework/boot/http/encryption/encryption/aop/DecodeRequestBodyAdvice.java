@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 请求参数解密
@@ -66,7 +67,7 @@ public class DecodeRequestBodyAdvice implements RequestBodyAdvice {
             case AES: {
                 //最好在将字节流转换为字符流的时候 进行转码
                 InputStream inputStream = request.getBody();
-                BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                 StringBuilder buffer = new StringBuilder();
                 String line;
                 while ((line = bf.readLine()) != null) {
@@ -80,7 +81,7 @@ public class DecodeRequestBodyAdvice implements RequestBodyAdvice {
                     log.error("解密失败: {}", body);
                 } else {
                     log.info("解密完成: {}", bodyDecrypt);
-                    return new DecodedHttpInputMessage(request.getHeaders(), new ByteArrayInputStream(bodyDecrypt.getBytes("UTF-8")));
+                    return new DecodedHttpInputMessage(request.getHeaders(), new ByteArrayInputStream(bodyDecrypt.getBytes(StandardCharsets.UTF_8)));
                 }
             }
             default:
@@ -98,7 +99,7 @@ public class DecodeRequestBodyAdvice implements RequestBodyAdvice {
         HttpHeaders headers;
         InputStream body;
 
-        public DecodedHttpInputMessage(HttpHeaders headers, InputStream body) {
+        DecodedHttpInputMessage(HttpHeaders headers, InputStream body) {
             this.headers = headers;
             this.body = body;
         }
