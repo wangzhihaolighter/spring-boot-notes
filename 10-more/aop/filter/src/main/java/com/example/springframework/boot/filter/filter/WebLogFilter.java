@@ -4,7 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -37,7 +42,7 @@ public class WebLogFilter implements Filter {
         StringBuilder args = new StringBuilder();
         Map<String, String[]> parameterMap = request.getParameterMap();
         for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-            args = args.append(entry.getKey()).append(":").append(Arrays.toString(entry.getValue())).append(";");
+            args.append(entry.getKey()).append(":").append(Arrays.toString(entry.getValue())).append(";");
         }
         log.info("[WEB LOG] ARGS : " + args);
 
