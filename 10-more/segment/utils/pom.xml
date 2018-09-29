@@ -86,6 +86,20 @@
             <version>26.0-jre</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.49</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -93,6 +107,10 @@
         </dependency>
     </dependencies>
 
+    <!--
+        此插件会在Maven的package后进行二次打包，目的为了生成可执行jar包。
+        若是作为公用包需要去掉。
+    -->
     <build>
         <plugins>
             <plugin>
