@@ -6,6 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
@@ -17,6 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -31,6 +33,8 @@ import static org.apache.poi.ss.usermodel.CellType.STRING;
  * Excel工具类.基于Apache POI 4.0
  */
 public class ExcelUtil {
+    private static final String LOW_LEVEL_SUFFIX = ".xls";
+    private static final String HIGH_LEVEL_SUFFIX = ".xlsx";
     /**
      * 工作簿
      */
@@ -53,21 +57,17 @@ public class ExcelUtil {
      *
      * @param response  响应
      * @param fileName  文件名
-     * @param isXlsx    是否xlsx,否xls
      * @param sheetName sheet名称
      * @param title     标题
      * @param values    内容
      * @throws Exception
      */
-    public static void exportResponse(HttpServletResponse response, String fileName, boolean isXlsx, String sheetName, String[] title, String[][] values) throws Exception {
+    public static void exportResponse(HttpServletResponse response, String fileName, String sheetName, String[] title, String[][] values) throws Exception {
         //创建HSSFWorkbook
         HSSFWorkbook wb = ExcelUtil.getHSSFWorkbook(sheetName, title, values, null);
 
-        if (isXlsx) {
-            fileName = fileName + ".xlsx";
-        } else {
-            fileName = fileName + ".xls";
-        }
+        //拼接格式
+        fileName = fileName + LOW_LEVEL_SUFFIX;
 
         //响应到客户端
         try {
@@ -113,7 +113,7 @@ public class ExcelUtil {
      * @param wb        HSSFWorkbook对象
      * @return
      */
-    public static HSSFWorkbook getHSSFWorkbook(String sheetName, String[] title, String[][] values, HSSFWorkbook wb) {
+    public static HSSFWorkbook getHSSFWorkbook(String sheetName, String[] title, String[][] values, HSSFWorkbook wb) throws IOException {
 
         // 第一步，创建一个HSSFWorkbook，对应一个Excel文件
         if (wb == null) {
@@ -712,7 +712,27 @@ public class ExcelUtil {
         return "第 " + (sheetIx + 1) + "个sheet 页，名称： " + getSheetName(sheetIx) + "，共 " + getRowCount(sheetIx) + "行！";
     }
 
-    public static void main(String[] args) {
-        System.out.println(isExcel("test.xls"));
+    public static void main(String[] args) throws IOException {
+        // new .xls file
+        String sheetName = "一个孤独症患者";
+        String[] titles = {"拥有", "失去"};
+        String[][] values = new String[2][3];
+        values[0][0] = "停摆的吊钟";
+        values[0][1] = "白色的墙";
+        values[0][2] = "白色的床";
+        values[1][0] = "穿透窗帘的晨光";
+        values[1][1] = "绿意盎然的草地";
+        values[1][2] = "略带暖意的微风";
+        String basePath = "C:\\Users\\Administrator\\Desktop";
+        String fileName = "孤独症患者";
+        String suffix = ".xls";
+        String pathName = basePath + File.separator + fileName + suffix;
+        HSSFWorkbook hssfWorkbook = ExcelUtil.getHSSFWorkbook(sheetName, titles, values, null);
+        hssfWorkbook.write(new File(pathName));
+
+        // read
+        HSSFWorkbook workbook = new HSSFWorkbook(new POIFSFileSystem(new File(pathName)));
+        ExcelUtil excelUtil = new ExcelUtil(workbook);
+        System.out.println(excelUtil.getValueAt(0, 1, 0));
     }
 }
