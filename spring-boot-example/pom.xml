@@ -20,11 +20,13 @@
         <java.version>1.8</java.version>
     </properties>
 
-    <dependencies>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+        </dependencies>
+    </dependencyManagement>
 
     <modules>
-        <module>A.hello</module>
+        <module>A.hello/hello-world</module>
     </modules>
 
     <build>
