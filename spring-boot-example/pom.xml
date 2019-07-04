@@ -27,6 +27,7 @@
 
     <modules>
         <module>A.hello/hello-world</module>
+        <module>B.features/sending-email</module>
     </modules>
 
     <build>
