@@ -1,0 +1,10 @@
+my:
+  enjoy:
+    website:
+      - github
+      - google
+    open_source: spring
+  like:
+    food: chicken
+    pc: Thinkpad,macbook pro
+

@@ -28,6 +28,7 @@
     <modules>
         <module>A.hello/hello-world</module>
         <module>B.features/sending-email</module>
+        <module>B.features/externalized-configuration</module>
     </modules>
 
     <build>
