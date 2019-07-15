@@ -1,7 +1,6 @@
 package example.bean;
 
 import lombok.Data;
-import lombok.ToString;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
  * 项目配置属性bean
  */
 @Data
-@ToString
 @Component
 public class PropertiesBean implements InitializingBean {
     //Spring Boot配置属性

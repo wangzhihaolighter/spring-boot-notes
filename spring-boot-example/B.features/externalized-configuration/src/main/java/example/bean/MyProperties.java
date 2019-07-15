@@ -12,7 +12,6 @@ import java.util.List;
  * 我的自定义配置属性
  */
 @Data
-@ToString
 @Component
 @ConfigurationProperties(prefix = "my")
 public class MyProperties implements InitializingBean {

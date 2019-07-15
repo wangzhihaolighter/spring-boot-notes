@@ -109,7 +109,6 @@ server:
 
 ```java
 import lombok.Data;
-import lombok.ToString;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -118,7 +117,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Data
-@ToString
 @Component
 @ConfigurationProperties(prefix = "my.love")
 @PropertySource("classpath:config/simple.properties")
@@ -135,7 +133,6 @@ public class SimpleProperties {
 
 ```java
 import lombok.Data;
-import lombok.ToString;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -147,7 +144,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Data
-@ToString
 @Component
 @ConfigurationProperties(prefix = "my.enjoy")
 public class SimpleYaml implements InitializingBean {
@@ -232,7 +228,6 @@ public class YamlPropertySourceFactory implements PropertySourceFactory {
 
 ```java
 import lombok.Data;
-import lombok.ToString;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -241,7 +236,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Data
-@ToString
 @Component
 @ConfigurationProperties(prefix = "my.like")
 @PropertySource(value = "classpath:config/simple.yml", factory = YamlPropertySourceFactory.class)
