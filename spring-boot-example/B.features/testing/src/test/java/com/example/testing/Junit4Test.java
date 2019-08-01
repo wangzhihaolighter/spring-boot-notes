@@ -6,6 +6,9 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * junit单元测试
+ */
 public class Junit4Test {
     /**
      * `@BeforeClass`注解的public void方法将会在所有测试方法执行之前执行。
@@ -51,17 +54,19 @@ public class Junit4Test {
     @Test(expected = RuntimeException.class, timeout = 1000)
     public void test2() {
         System.out.println("test...");
-        throw new RuntimeException("我错了。。。");
+        throw new RuntimeException("认错了。。。");
     }
 
     @Test(expected = RuntimeException.class)
     public void test3() {
         System.out.println("test...");
+        System.out.println("不认错。。。");
     }
 
     @Test(timeout = 1000)
     public void test4() throws InterruptedException {
         System.out.println("test...");
+        System.out.println("我超时了。。。");
         Thread.sleep(2000);
     }
 
