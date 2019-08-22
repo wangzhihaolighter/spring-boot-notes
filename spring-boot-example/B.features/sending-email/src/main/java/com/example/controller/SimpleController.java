@@ -12,16 +12,17 @@ public class SimpleController {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @RequestMapping("/email")
-    public String email() {
+    @RequestMapping("/email/send")
+    public String sendEmail() {
+        //发件人邮箱必须与配置的邮箱一致
         String fromEmail = "xxx@qq.com";
         String toEmail = "xxx@qq.com";
         // 构造Email消息
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromEmail);
         message.setTo(toEmail);
-        message.setSubject("到 2022 年，75% 的数据库将托管在云端");
-        message.setText("不久前，MySQL 首席技术官在博客发文表示：“我们正在向云迁移！”所以，数据库向云平台迁移将会是一个趋势吗？");
+        message.setSubject("邮件标题");
+        message.setText("邮件内容");
         javaMailSender.send(message);
         return "email send success!";
     }
