@@ -1,6 +1,6 @@
 # Spring Boot 中的配置
 
-**1.配置随机值**
+## 1.配置随机值
 
 Spring Boot的配置支持使用随机值，在配置文件中以`${random.xxx}`形式添加，具体有以下几种类型：
 
@@ -13,7 +13,7 @@ value5=${random.uuid}
 value6=${random.value}
 ```
 
-**2.属性中的占位符**
+## 2.属性中的占位符
 
 在Spring Boot的配置文件中，可以引用以前定义的值。
 
@@ -22,7 +22,7 @@ app.name=MyApp
 app.description=${app.name} is a Spring Boot application
 ```
 
-**3.多环境配置**
+## 3.多环境配置
 
 Spring Boot中可以指定加载不同环境的环境的配置文件，通过`spring.profiles.active`属性指定加载不同环境配置文件。
 
@@ -42,9 +42,9 @@ spring.profiles.active[2]=prod
 spring.profiles.active=default,dev,prod
 ```
 
-**4.获取配置文件中属性值**
+## 4.获取配置文件中属性值
 
-**方式1**：在Spring管理的Bean中使用`@Value("${xxx})`获取，这里xxx就是属性的key。
+**方式一**：在Spring管理的Bean中使用`@Value("${xxx})`获取，这里xxx就是属性的key。
 
 ```java
 import org.springframework.stereotype.*;
@@ -61,7 +61,7 @@ public class MyBean {
 }
 ```
 
-**方式2**：在Spring管理的Bean中注入`org.springframework.core.env.Environment`，使用环境类获取配置值。
+**方式二**：在Spring管理的Bean中注入`org.springframework.core.env.Environment`，使用环境类获取配置值。
 
 ```java
 import org.springframework.beans.factory.InitializingBean;
@@ -82,26 +82,26 @@ public class EnvironmentBean implements InitializingBean {
 }
 ```
 
-**5.多配置的YAML文档**
+## 5.多配置的YAML文档
 
 Spring Boot中可以在一个YAML文档指定多个环境的配置信息，通过配置`spring.profiles`，指示文档配置在何种环境生效。
 
 ```yaml
 server:
-	address: 192.168.1.100
+  address: 192.168.1.100
 ---
 spring:
-	profiles: development
+  profiles: development
 server:
-	address: 127.0.0.1
+  address: 127.0.0.1
 ---
 spring:
-	profiles: production,eu-central
+  profiles: production,eu-central
 server:
-	address: 192.168.1.120
+  address: 192.168.1.120
 ```
 
-**6.加载`.properties`配置文件**
+## 6.加载`.properties`配置文件
 
 使用`@PropertySource("classpath:xxx.properties")`指定配置文件路径。
 
@@ -127,9 +127,9 @@ public class SimpleProperties {
 }
 ```
 
-**7.加载`.yml`配置文件**
+## 7.加载`.yml`配置文件
 
-方式一：在Spring Boot管理的Bean中使用`YamlPropertiesFactoryBean`把yaml文件注入到系统配置中。
+**方式一**：在Spring Boot管理的Bean中使用`YamlPropertiesFactoryBean`把yaml文件注入到系统配置中。
 
 ```java
 import lombok.Data;
@@ -172,7 +172,7 @@ public class SimpleYaml implements InitializingBean {
 }
 ```
 
-方式二：使用`YamlMapFactoryBean`加载yaml文件为Map，自行读取
+**方式二**：使用`YamlMapFactoryBean`加载yaml文件为Map，自行读取
 
 ```java
 import lombok.Data;
@@ -201,7 +201,7 @@ public class SimpleYaml2 implements InitializingBean {
 }
 ```
 
-**方式三：扩展`PropertySourceFactory`，使它支持加载yaml文件**
+**方式三**：扩展`PropertySourceFactory`，使它支持加载yaml文件
 
 扩展`PropertySourceFactory`，实现一个加载yaml文件的配置文件工厂类
 
@@ -250,8 +250,8 @@ public class SimpleYaml3 implements InitializingBean {
 }
 ```
 
+---
+
 **一些注意事项：**
 
-- 用ide开发时，`.properties`文件的默认编码为`GBK`，获取中文值会乱码；而`.yml`文件的默认编码为`UTF-8
-`，则没有中文乱码的问题。
-
+- 用ide开发时，`.properties`文件的默认编码为`GBK`，获取中文值会乱码；而`.yml`文件的默认编码为`UTF-8`，则没有中文乱码的问题。

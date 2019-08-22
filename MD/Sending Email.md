@@ -36,4 +36,26 @@ spring.mail.properties.mail.smtp.socks.port=
 
 具体可配置属性可以查看类`org.springframework.boot.autoconfigure.mail.MailProperties`。
 
-`spring.mail.properties`是一个map，它支持更多属性，更详细的配置可以查看官方主页：https://javaee.github.io/javamail/。
+`spring.mail.properties`是一个map，它支持更多属性，更详细的配置可以查看官方主页：<https://javaee.github.io/javamail/。>。
+
+3.注入`org.springframework.mail.javamail.JavaMailSender`，使用它发送邮件
+
+```java
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @RequestMapping("/email/send")
+    public String sendEmail() {
+        //发件人邮箱必须与配置的邮箱一致
+        String fromEmail = "xxx@qq.com";
+        String toEmail = "xxx@qq.com";
+        // 构造Email消息
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(toEmail);
+        message.setSubject("邮件标题");
+        message.setText("邮件内容");
+        javaMailSender.send(message);
+        return "email send success!";
+    }
+```

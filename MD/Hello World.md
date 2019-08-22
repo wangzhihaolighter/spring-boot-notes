@@ -2,15 +2,15 @@
 
 建立一个Spring Boot的Hello World项目非常简单。
 
-1.使用Spring官方提供的初始化工具创建项目（https://start.spring.io）
+1.使用Spring官方提供的初始化工具创建项目（<https://start.spring.io）>
 
 IntelliJ IDEA:
 
-![](../IMG/hello/01.png)
+![示例](../IMG/hello/01.png)
 
 2.勾选web依赖，web依赖中包含Spring MVC和嵌入式的tomcat
 
-![](../IMG/hello/02.png)
+![示例](../IMG/hello/02.png)
 
 3.创建后，Maven项目的pom.xml如下
 
@@ -60,7 +60,7 @@ IntelliJ IDEA:
 
 4.在Application类同级目录下创建Controller类
 
-![](../IMG/hello/03.png)
+![示例](../IMG/hello/03.png)
 
 ```java
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,15 +78,15 @@ public class SimpleController {
 
 5.启动项目，运行Application类的main方法
 
-![](../IMG/hello/04.png)
+![示例](../IMG/hello/04.png)
 
 6.查看运行结果
 
-![](../IMG/hello/05.png)
+![示例](../IMG/hello/05.png)
 
-![](../IMG/hello/06.png)
+![示例](../IMG/hello/06.png)
 
-运行成功，通过浏览器访问 **http://localhost:8080/** ，可以看到成功返回了Hello World。
+运行成功，通过浏览器访问 **<http://localhost:8080/>** ，可以看到成功返回了Hello World。
 
 ---
 
@@ -100,17 +100,10 @@ public class SimpleController {
 对于Spring Boot入门来说，一个Hello World只能看到它简化开发的一面，更详细准确的资料就要查询关网了。
 Spring官方提供的文档非常详细，每个版本和每个整合的模块都有对应的文档，可以直接通过官网进行学习。
 
-
 **[Spring Boot开发文档地址](https://spring.io/projects/spring-boot#learn)**：
 
-![](../IMG/hello/07.png)
+![Spring Boot开发文档地址](../IMG/hello/07.png)
 
 **[Spring Boot项目Github地址](https://github.com/spring-projects/spring-boot)**：
 
-![](../IMG/hello/08.png)
-
-
-
- 
-
-
+![Spring Boot项目Github地址](../IMG/hello/08.png)
