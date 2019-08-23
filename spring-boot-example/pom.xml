@@ -31,6 +31,7 @@
         <module>B.features/externalized-configuration</module>
         <module>B.features/testing</module>
         <module>B.features/auto-configuration</module>
+        <module>C.starters/okhttp-spring-boot-starter</module>
     </modules>
 
     <build>
