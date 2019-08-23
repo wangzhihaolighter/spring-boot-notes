@@ -34,7 +34,7 @@ Spring Boot使用标准的 `@Configuration` 类实现自动配置，使用 `@Con
 - `@ConditionalOnJndi`：在JNDI存在的条件下查找指定的位置。
 - `@ConditionalOnSingleCandidate`：当指定Bean在容器中只有一个，或者虽然有多个但 是指定首选的Bean。
 
-## 创建自己的 starter
+## 创建一个自己的 spring boot starter
 
 这里先贴一下官方文档对 starter 的说明：
 
@@ -45,7 +45,7 @@ Spring Boot使用标准的 `@Configuration` 类实现自动配置，使用 `@Con
 
 通过这段话，可以看出一个标准的 starter 需要提供使用这个库的完整功能。
 
-### starter 命名规范
+### 了解 spring boot starter 命名规范
 
 同样也是贴下官方文档对命名规范的说明：
 
@@ -58,11 +58,9 @@ Spring Boot使用标准的 `@Configuration` 类实现自动配置，使用 `@Con
 - 自动配置模块的命名规范为：`xxx--spring-boot-autoconfigure`
 - 如果只有一个模块，这个模块包含自动配置模块，则它的命名规范为：`xxx-spring-boot-starter`
 
-## 创建一个 okhttp 库的 starter
+### 创建一个 okhttp 库的 starter
 
 这里选择一个常用的http库 `okhttp` 来创建 `okhttp-spring-boot-starter`。
-
-### 引入依赖
 
 创建一个标准的starter需要有`spring-boot-starter`、`spring-boot-autoconfigure`和`spring-boot-configuration-processor`依赖，用于提供自动化配置支持。
 
@@ -154,7 +152,7 @@ public class OkHttpProperties {
 }
 ```
 
-2.创建自动化配置类
+2.创建配置类
 
 ```java
 import okhttp3.OkHttpClient;
@@ -188,10 +186,10 @@ public class OkHttpAutoConfiguration {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         //设置代理
-        if (properties.getProxy().isEnable()) {
+        if (properties.getProxy() != null && properties.getProxy().isEnable()) {
             builder.proxy(
                     new Proxy(Proxy.Type.valueOf(properties.getProxy().getType()),
-                    new InetSocketAddress(properties.getProxy().getIp(), properties.getProxy().getPort()))
+                            new InetSocketAddress(properties.getProxy().getIp(), properties.getProxy().getPort()))
             );
         }
 
@@ -207,33 +205,38 @@ public class OkHttpAutoConfiguration {
 }
 ```
 
-### 让Spring Boot 找到自动化配置类
+### 让 Spring Boot 找到自动化配置类
 
-Spring Boot 在启动时扫描项目所依赖的jar包，寻找包含 `spring.factories` 文件的jar包，根据 `spring.factories` 配置加载自动化配置类。
+**starter 原理**：
 
-再根据`@Conditional`注解的条件，进行自动配置并将 Bean 注入 Spring Context 中。
+>Spring Boot 会在启动时扫描项目所依赖的jar包，寻找包含 `spring.factories` 文件的jar包，根据 `spring.factories` 配置加载自动化配置类。
+>
+>再根据`@Conditional`注解的条件，进行自动配置并将 Bean 注入 Spring Context 中。
 
-`spring.factories`需要添加在`src/main/resources/META-INF` 目录下，用于标识需要自动化配置的类。
+**创建 spring.factories 文件**：
 
-```factories
+根据starter的创建规范，我们需要创建`spring.factories` 文件，并且放置在`src/main/resources/META-INF` 目录下，用于标识需要自动化配置的类。
+
+`spring.factories`文件内容如下：
+
+```properties
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.example.okhttp.spring.boot.starter.OkHttpAutoConfiguration
 ```
 
-starter 编译后，会根据配置类生成对应的 `spring-configuration-metadata.json` 属性元文件：
+starter 编译后，会根据配置类自动生成对应的 `spring-configuration-metadata.json` 属性元文件：
 
 ![示例](../IMG/auto-configuration/01.png)
 
 ![示例](../IMG/auto-configuration/02.png)
 
-而这属性元文件会为配置属性提供对应的注释说明：
+该属性元文件会为配置属性提供对应的注释说明：
 
 ![示例](../IMG/auto-configuration/03.png)
 
-
 ### 使用starter
 
-在使用此starter项目的pom文件中添加依赖：
+在项目 pom 文件中添加自己创建的 starter 依赖：
 
 ```xml
 <dependency>
@@ -243,7 +246,7 @@ starter 编译后，会根据配置类生成对应的 `spring-configuration-meta
 </dependency>
 ```
 
-配置属性：
+在配置文件中添加属性：
 
 ![示例](../IMG/auto-configuration/04.png)
 
@@ -268,4 +271,6 @@ starter 编译后，会根据配置类生成对应的 `spring-configuration-meta
 
 ![示例](../IMG/auto-configuration/05.png)
 
-通过运行结果可以看到自动配置的 okHttpClient 生效了，这就完成一个简单的 `spring-boot-starter`的创建，可以帮助我们简化库的配置。
+通过运行结果可以看到自动配置的 okHttpClient 生效了。
+
+可以看到 `spring-boot-starter` 它帮助我们简化库的配置，利用 starter 的机制可以编写出一些简化配置的整合库，提高开发效率。
