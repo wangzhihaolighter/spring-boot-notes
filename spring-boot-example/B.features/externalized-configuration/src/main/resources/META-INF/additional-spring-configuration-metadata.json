@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "alone.properties",
+      "type": "java.lang.String",
+      "description": "A lonely attribute,We annotate him.",
+      "defaultValue": "alone"
+    }
+  ]
+}

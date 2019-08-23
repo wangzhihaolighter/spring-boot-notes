@@ -250,6 +250,35 @@ public class SimpleYaml3 implements InitializingBean {
 }
 ```
 
+## 8.为配置文件中的自定义属性增加注释
+
+在IDEA中，经常使用自定义属性时会出现警告，并且没有注释，就像下图：
+
+![示例](../IMG/externalized-configuration/01.png)
+
+可以在 `src/main/resources/META-INF` 路径创建additional-spring-configuration-metadata.json属性元文件，为该属性值添加说明：
+
+![示例](../IMG/externalized-configuration/02.png)
+
+文件内容：
+
+```json
+{
+  "properties": [
+    {
+      "name": "alone.properties",
+      "type": "java.lang.String",
+      "description": "A lonely attribute,We annotate him.",
+      "defaultValue": "alone"
+    }
+  ]
+}
+```
+
+查看效果：
+
+![示例](../IMG/externalized-configuration/03.png)
+
 ---
 
 **一些注意事项：**
