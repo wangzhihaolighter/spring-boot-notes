@@ -1,4 +1,4 @@
-package example.bean;
+package com.example.bean;
 
 import lombok.Data;
 import org.springframework.beans.factory.InitializingBean;
