@@ -12,3 +12,7 @@ target/
 *.classpath
 
 *.factorypath
+
+.mvn
+mvnw
+mvnw.cmd
