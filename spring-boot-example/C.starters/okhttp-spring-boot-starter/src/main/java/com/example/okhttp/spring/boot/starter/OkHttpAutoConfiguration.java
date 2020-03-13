@@ -26,7 +26,7 @@ public class OkHttpAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = OkHttpProperties.OKHTTP_PREFIX, value = OkHttpProperties.ENABLE_KEY, havingValue = "true")
+    @ConditionalOnProperty(prefix = OkHttpProperties.PREFIX, value = OkHttpProperties.ENABLE_KEY, havingValue = "true")
     OkHttpClient okHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 

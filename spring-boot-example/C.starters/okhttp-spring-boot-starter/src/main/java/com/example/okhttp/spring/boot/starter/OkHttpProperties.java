@@ -7,10 +7,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * okhttp配置类
  */
 @Data
-@ConfigurationProperties(prefix = OkHttpProperties.OKHTTP_PREFIX)
+@ConfigurationProperties(prefix = OkHttpProperties.PREFIX)
 public class OkHttpProperties {
 
-    public static final String OKHTTP_PREFIX = "okhttp";
+    public static final String PREFIX = "okhttp";
     public static final String ENABLE_KEY = "enable";
 
     /**
@@ -35,7 +35,7 @@ public class OkHttpProperties {
     private Proxy proxy;
 
     @Data
-    class Proxy {
+    static class Proxy {
         /**
          * enabled use proxy
          */
