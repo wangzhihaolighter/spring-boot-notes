@@ -29,14 +29,17 @@
 
     <modules>
         <module>A.hello/hello-world</module>
-        <module>B.features/sending-email</module>
-        <module>B.features/externalized-configuration</module>
-        <module>B.features/testing</module>
         <module>B.features/auto-configuration</module>
+        <module>B.features/externalized-configuration</module>
         <module>B.features/logging</module>
+        <module>B.features/sending-email</module>
+        <module>B.features/testing</module>
         <module>C.starters/okhttp-spring-boot-starter</module>
-        <module>D.integration/rabbitmq-provider-demo</module>
         <module>D.integration/rabbitmq-consumer-demo</module>
+        <module>D.integration/rabbitmq-provider-demo</module>
+        <module>E.tools/google-zxing</module>
+        <module>E.tools/ip2region</module>
+        <module>E.tools/p6spy</module>
     </modules>
 
     <repositories>
