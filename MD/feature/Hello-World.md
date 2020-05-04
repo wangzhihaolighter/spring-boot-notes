@@ -97,7 +97,7 @@ public class SimpleController {
 
 ---
 
-对于Spring Boot入门来说，一个Hello World只能看到它简化开发的一面，更详细准确的资料就要查询关网了。
+对于Spring Boot入门来说，一个Hello World只能看到它简化开发的一面，更详细准确的资料就要查询官网了。
 Spring官方提供的文档非常详细，每个版本和每个整合的模块都有对应的文档，可以直接通过官网进行学习。
 
 **[Spring Boot开发文档地址](https://spring.io/projects/spring-boot#learn)**：
