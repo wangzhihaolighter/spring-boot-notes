@@ -2,7 +2,7 @@
 
 建立一个Spring Boot的Hello World项目非常简单。
 
-1.使用Spring官方提供的初始化工具创建项目（<https://start.spring.io）>
+1.使用Spring官方提供的初始化工具创建项目：<https://start.spring.io>
 
 IntelliJ IDEA:
 
