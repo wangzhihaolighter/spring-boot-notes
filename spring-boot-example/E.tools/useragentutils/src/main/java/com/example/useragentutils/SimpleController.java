@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class SimpleController {
 
     @GetMapping("/")
-    public UserAgent getIpRegion(HttpServletRequest request) {
+    public UserAgent parseUserAgent(HttpServletRequest request) {
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
         Browser browser = userAgent.getBrowser();
         String browserName = browser.getName();
