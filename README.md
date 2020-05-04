@@ -48,3 +48,4 @@ Spring Boot的一些特性。
 - [**p6spy**：记录任何Java应用程序的所有JDBC事务](MD/P6Spy use.md)
 - [**ip2region**：离线IP地址定位库](MD/ip2region use.md)
 - [**UserAgentUtils**：实时解析HTTP请求或分析日志文件并收集有关用户代理的信息](MD/UserAgentUtils use.md)
+- [**browscap-java**：用于解析useragent头，以提取有关使用的浏览器、浏览器版本、平台、平台版本和设备类型的信息](MD/browscap-java use.md)
