@@ -14,17 +14,17 @@ JDK版本：8
 
 你好，Spring Boot。
 
-- [**hello**：一个简单Spring Boot的HelloWorld示例](MD/Hello World.md)
+- [**hello**：一个简单Spring Boot的HelloWorld示例](MD/feature/Hello-World.md)
 
 ## B.features
 
 Spring Boot的一些特性。
 
-- [**auto-configuration**：自动配置](MD/Creating Your Own Auto-configuration.md)
-- [**externalized-configuration**：外部化配置](MD/Externalized Configuration.md)
-- [**logging**：日志](MD/Logging.md)
-- [**sending-email**：发送邮件](MD/Sending Email.md)
-- [**testing**：测试](MD/Testing.md)
+- [**auto-configuration**：自动配置](MD/feature/Creating-Your-Own-Auto-Configuration.md)
+- [**externalized-configuration**：外部化配置](MD/feature/Externalized-Configuration.md)
+- [**logging**：日志](MD/feature/Logging.md)
+- [**sending-email**：发送邮件](MD/feature/Sending-Email.md)
+- [**testing**：测试](MD/feature/Testing.md)
 
 ## C.starters
 
@@ -45,7 +45,7 @@ Spring Boot的一些特性。
 一些常用功能框架的使用示例。
 
 - **google-zxing**：Google开源的多维码生成工具
-- [**p6spy**：记录任何Java应用程序的所有JDBC事务](MD/P6Spy use.md)
-- [**ip2region**：离线IP地址定位库](MD/ip2region use.md)
-- [**UserAgentUtils**：实时解析HTTP请求或分析日志文件并收集有关用户代理的信息](MD/UserAgentUtils use.md)
-- [**browscap-java**：用于解析useragent头，以提取有关使用的浏览器、浏览器版本、平台、平台版本和设备类型的信息](MD/browscap-java use.md)
+- [**p6spy**：记录任何Java应用程序的所有JDBC事务](MD/tool/P6Spy.md)
+- [**ip2region**：离线IP地址定位库](MD/tool/ip2region.md)
+- [**UserAgentUtils**：实时解析HTTP请求或分析日志文件并收集有关用户代理的信息](MD/tool/UserAgentUtils.md)
+- [**browscap-java**：用于解析useragent头，以提取有关使用的浏览器、浏览器版本、平台、平台版本和设备类型的信息](MD/tool/browscap-java.md)

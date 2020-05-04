@@ -6,11 +6,11 @@
 
 IntelliJ IDEA:
 
-![示例](../IMG/hello/01.png)
+![示例](../../IMG/hello/01.png)
 
 2.勾选web依赖，web依赖中包含Spring MVC和嵌入式的tomcat
 
-![示例](../IMG/hello/02.png)
+![示例](../../IMG/hello/02.png)
 
 3.创建后，Maven项目的pom.xml如下
 
@@ -60,7 +60,7 @@ IntelliJ IDEA:
 
 4.在Application类同级目录下创建Controller类
 
-![示例](../IMG/hello/03.png)
+![示例](../../IMG/hello/03.png)
 
 ```java
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,13 +78,13 @@ public class SimpleController {
 
 5.启动项目，运行Application类的main方法
 
-![示例](../IMG/hello/04.png)
+![示例](../../IMG/hello/04.png)
 
 6.查看运行结果
 
-![示例](../IMG/hello/05.png)
+![示例](../../IMG/hello/05.png)
 
-![示例](../IMG/hello/06.png)
+![示例](../../IMG/hello/06.png)
 
 运行成功，通过浏览器访问 **<http://localhost:8080/>** ，可以看到成功返回了Hello World。
 
@@ -102,8 +102,8 @@ Spring官方提供的文档非常详细，每个版本和每个整合的模块�
 
 **[Spring Boot开发文档地址](https://spring.io/projects/spring-boot#learn)**：
 
-![Spring Boot开发文档地址](../IMG/hello/07.png)
+![Spring Boot开发文档地址](../../IMG/hello/07.png)
 
 **[Spring Boot项目Github地址](https://github.com/spring-projects/spring-boot)**：
 
-![Spring Boot项目Github地址](../IMG/hello/08.png)
+![Spring Boot项目Github地址](../../IMG/hello/08.png)
