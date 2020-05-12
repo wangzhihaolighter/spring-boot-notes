@@ -40,6 +40,9 @@
         <module>E.tools/google-zxing</module>
         <module>E.tools/ip2region</module>
         <module>E.tools/p6spy</module>
+        <module>E.tools/useragentutils</module>
+        <module>E.tools/browscap-java</module>
+        <module>E.tools/oshi-core</module>
     </modules>
 
     <repositories>
