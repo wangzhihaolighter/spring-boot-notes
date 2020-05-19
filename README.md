@@ -50,3 +50,4 @@ Spring Boot的一些特性。
 - [**UserAgentUtils**：实时解析HTTP请求或分析日志文件并收集有关用户代理的信息](MD/tool/UserAgentUtils.md)
 - [**browscap-java**：用于解析useragent头，以提取有关使用的浏览器、浏览器版本、平台、平台版本和设备类型的信息](MD/tool/browscap-java.md)
 - [**oshi-core**：Java的免费基于JNA的（本机）操作系统和硬件信息库，跨平台查看服务器信息](MD/tool/oshi.md)
+- [**jjwt**：用于在JVM和Android上创建和验证JSON Web Token（JWT）](MD/tool/JSON-Web-Tokens.md)

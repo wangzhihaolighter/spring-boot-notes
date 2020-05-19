@@ -1,0 +1,7 @@
+jwt:
+  # JWT请求头参数
+  header: Authorization
+  # 令牌前缀
+  token-start-with: Bearer
+  # 签名密钥，HS256 MUST have a size >= 256 bits
+  signingKey: 2DUhGe0BUgowMJmLazY3nQ8N8Z3Q16g90sbBQ7lAXwzg385xlrUc5Z4AL1Y9Mkkp
