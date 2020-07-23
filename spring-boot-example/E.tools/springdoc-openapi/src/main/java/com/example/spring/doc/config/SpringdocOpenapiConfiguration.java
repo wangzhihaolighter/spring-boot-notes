@@ -1,5 +1,6 @@
 package com.example.spring.doc.config;
 
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -42,6 +43,7 @@ public class SpringdocOpenapiConfiguration implements WebMvcConfigurer {
         Components components = new Components();
         Map<String, Object> myHeader2extensions = new HashMap<>(2);
         myHeader2extensions.put("name", "myHeader2");
+        myHeader2extensions.put("in", ParameterIn.HEADER);
         components
                 .addSecuritySchemes("bearer-key", new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT"))
                 .addSecuritySchemes("basicScheme", new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic"))
