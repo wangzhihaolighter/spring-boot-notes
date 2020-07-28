@@ -36,9 +36,11 @@ Spring Boot的一些特性。
 
 一些常用框架的集成。
 
-- **rabbitmq**
+- **rabbitmq**：一套开源（MPL）的消息队列服务软件
   - **rabbitmq-consumer-demo**：rabbitmq消费者示例
   - **rabbitmq-provider-demo**：rabbitmq生产者示例
+- [**redis**：一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库](MD/integration/integrate-redis.md)
+- [**mongo**：一个基于分布式文件存储的数据库](MD/integration/integrate-mongodb.md)
 
 ## E.tools
 
@@ -51,3 +53,5 @@ Spring Boot的一些特性。
 - [**browscap-java**：用于解析useragent头，以提取有关使用的浏览器、浏览器版本、平台、平台版本和设备类型的信息](MD/tool/browscap-java.md)
 - [**oshi-core**：Java的免费基于JNA的（本机）操作系统和硬件信息库，跨平台查看服务器信息](MD/tool/oshi.md)
 - [**jjwt**：用于在JVM和Android上创建和验证JSON Web Token（JWT）](MD/tool/JSON-Web-Tokens.md)
+- [**springfox-swagger**：一个开源的 API doc 框架，可以将 Controller 的方法以文档的形式展现](MD/tool/springfox-swagger.md)
+- [**springdoc-openapi**：一个开源的 API doc 框架，可以将 Controller 的方法以文档的形式展现](MD/tool/springdoc-openapi.md)
