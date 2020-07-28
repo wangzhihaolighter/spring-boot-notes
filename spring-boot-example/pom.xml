@@ -35,14 +35,19 @@
         <module>B.features/sending-email</module>
         <module>B.features/testing</module>
         <module>C.starters/okhttp-spring-boot-starter</module>
+        <module>D.integration/mongodb-integration-demo</module>
         <module>D.integration/rabbitmq-consumer-demo</module>
         <module>D.integration/rabbitmq-provider-demo</module>
+        <module>D.integration/redis-integration-demo</module>
+        <module>E.tools/browscap-java</module>
         <module>E.tools/google-zxing</module>
         <module>E.tools/ip2region</module>
-        <module>E.tools/p6spy</module>
-        <module>E.tools/useragentutils</module>
-        <module>E.tools/browscap-java</module>
+        <module>E.tools/jjwt</module>
         <module>E.tools/oshi-core</module>
+        <module>E.tools/p6spy</module>
+        <module>E.tools/springdoc-openapi</module>
+        <module>E.tools/springfox-swagger</module>
+        <module>E.tools/useragentutils</module>
     </modules>
 
     <repositories>
