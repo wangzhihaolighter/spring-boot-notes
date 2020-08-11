@@ -1,14 +1,16 @@
 package com.example.bean;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EnvironmentBean implements InitializingBean {
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
+
+    public EnvironmentBean(Environment environment) {
+        this.environment = environment;
+    }
 
     @Override
     public void afterPropertiesSet() throws Exception {

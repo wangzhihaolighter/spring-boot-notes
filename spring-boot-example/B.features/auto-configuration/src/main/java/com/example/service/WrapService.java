@@ -5,8 +5,8 @@ package com.example.service;
  */
 public class WrapService {
 
-    private String prefix;
-    private String suffix;
+    private final String prefix;
+    private final String suffix;
 
     public WrapService(String prefix, String suffix) {
         this.prefix = prefix;

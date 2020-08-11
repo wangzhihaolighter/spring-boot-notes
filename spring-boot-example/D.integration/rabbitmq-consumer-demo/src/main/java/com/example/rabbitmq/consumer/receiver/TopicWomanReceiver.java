@@ -8,11 +8,11 @@ import java.util.Map;
 
 @Component
 @RabbitListener(queues = "topic.woman")
-public class TopicTotalReceiver {
+public class TopicWomanReceiver {
 
     @RabbitHandler
     public void process(Map testMessage) {
-        System.out.println("TopicTotalReceiver消费者收到消息  : " + testMessage.toString());
+        System.out.println("TopicWomanReceiver消费者收到消息  : " + testMessage.toString());
     }
 
 }

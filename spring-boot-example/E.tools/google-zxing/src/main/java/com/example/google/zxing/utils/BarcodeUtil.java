@@ -1,14 +1,6 @@
 package com.example.google.zxing.utils;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
-import com.google.zxing.WriterException;
+import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
@@ -77,8 +69,8 @@ public class BarcodeUtil {
      * @param frontColor      前景色，0x000000 表示黑色
      * @param backgroundColor 背景色，0xFFFFFF 表示白色
      * @param hints           编码提示类型
-     * @return
-     * @throws WriterException
+     * @return /
+     * @throws WriterException /
      */
     public static BufferedImage createBarcode(String codeContent, BarcodeFormat format, int codeWidth, int codeHeight, int frontColor, int backgroundColor, Map<EncodeHintType, ?> hints) throws WriterException {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -101,8 +93,8 @@ public class BarcodeUtil {
      * @param frontColor      前景色，0x000000 表示黑色
      * @param backgroundColor 背景色，0xFFFFFF 表示白色
      * @param hints           编码提示类型
-     * @return
-     * @throws WriterException
+     * @return /
+     * @throws WriterException /
      */
     public static BufferedImage createQRBarcode(String codeContent, int codeWidth, int codeHeight, int frontColor, int backgroundColor, Map<EncodeHintType, ?> hints) throws WriterException {
         return createBarcode(codeContent, BarcodeFormat.QR_CODE, codeWidth, codeHeight, frontColor, backgroundColor, hints);
@@ -118,9 +110,9 @@ public class BarcodeUtil {
      * @param backgroundColor 背景色，0xFFFFFF 表示白色
      * @param hints           编码提示类型
      * @param logoIn          logo图片输入流
-     * @return
-     * @throws WriterException
-     * @throws IOException
+     * @return /
+     * @throws WriterException /
+     * @throws IOException     /
      */
     public static BufferedImage createQRCodeWithLog(String codeContent, int codeWidth, int codeHeight, int frontColor, int backgroundColor, Map<EncodeHintType, ?> hints, InputStream logoIn) throws WriterException, IOException {
         // ===== 生成二维码 =====

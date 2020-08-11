@@ -13,7 +13,7 @@ public class DirectRabbitConfig {
     @Bean
     public Queue testDirectQueue() {
         //队列 起名：TestDirectQueue
-        return new Queue("TestDirectQueue", true);  //true 是否持久
+        return new Queue("TestDirectQueue", true); //true 是否持久
     }
 
     @Bean

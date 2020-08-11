@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SimpleController {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
+
+    public SimpleController(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
 
     @RequestMapping("/email/send")
     public String sendEmail() {

@@ -1,7 +1,6 @@
 package com.example.rabbitmq.provider.controller;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,8 +13,11 @@ import java.util.UUID;
 @RestController
 public class SendMessageController {
 
-    @Autowired
-    RabbitTemplate rabbitTemplate;  //使用RabbitTemplate,这提供了接收/发送等等方法
+    private final RabbitTemplate rabbitTemplate;  //使用RabbitTemplate,这提供了接收/发送等等方法
+
+    public SendMessageController(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     @GetMapping("/sendDirectMessage")
     public String sendDirectMessage() {

@@ -1,7 +1,6 @@
 package com.example.okhttp.spring.boot.starter;
 
 import okhttp3.OkHttpClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -21,8 +20,11 @@ import java.util.concurrent.TimeUnit;
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttpAutoConfiguration {
 
-    @Autowired
-    private OkHttpProperties properties;
+    private final OkHttpProperties properties;
+
+    public OkHttpAutoConfiguration(OkHttpProperties properties) {
+        this.properties = properties;
+    }
 
     @Bean
     @ConditionalOnMissingBean

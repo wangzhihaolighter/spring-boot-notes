@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-@RabbitListener(queues = "TestDirectQueue")//监听的队列名称 TestDirectQueue
+@RabbitListener(queues = "TestDirectQueue") //监听的队列名称 TestDirectQueue
 public class DirectReceiver implements ChannelAwareMessageListener {
 
     @RabbitHandler
