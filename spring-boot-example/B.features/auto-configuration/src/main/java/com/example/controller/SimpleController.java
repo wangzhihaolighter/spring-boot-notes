@@ -4,7 +4,6 @@ import com.example.service.WrapService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +14,13 @@ import java.util.Objects;
 @RestController
 class SimpleController {
 
-    @Autowired(required = false)
-    private WrapService wrapService;
-    @Autowired
-    private OkHttpClient okHttpClient;
+    private final WrapService wrapService;
+    private final OkHttpClient okHttpClient;
+
+    public SimpleController(WrapService wrapService, OkHttpClient okHttpClient) {
+        this.wrapService = wrapService;
+        this.okHttpClient = okHttpClient;
+    }
 
     @GetMapping("/")
     public String sayHello() {

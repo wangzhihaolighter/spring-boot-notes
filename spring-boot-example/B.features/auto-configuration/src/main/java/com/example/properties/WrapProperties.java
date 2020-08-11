@@ -3,7 +3,7 @@ package com.example.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("wrap")
-public class WrapServiceProperties {
+public class WrapProperties {
     private String prefix;
 
     private String suffix;

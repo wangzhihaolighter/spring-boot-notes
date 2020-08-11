@@ -15,7 +15,7 @@
         通过定义的值会被插入到logger上下文中，定义变量后，可以使“${}”来使用变量。
     -->
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
-    <springProperty scope="context" name="LOG_HOME" source="logging.path"/>
+    <springProperty scope="context" name="LOG_HOME" source="logging.file.path"/>
     <property name="LOG_FILE" value="${springAppName}"/>
 
     <!-- 彩色日志 -->
