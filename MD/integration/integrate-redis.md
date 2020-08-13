@@ -868,3 +868,49 @@ public class RedisListenerConfig {
 
 }
 ```
+
+## RedisTemplate 执行 lua 脚本
+
+### 方式一：lua 脚本文件
+
+新建 redis/limit.lua 脚本文件
+
+```lua
+-- KEYS[1]代表自增key值
+-- ARGV[1]代表过期时间
+local c = redis.call('incr', KEYS[1])
+if tonumber(c) == 1 then
+    c = redis.call('expire', KEYS[1], ARGV[1])
+    return c
+end
+return c
+```
+
+使用 RedisTemplate 执行lua脚本
+
+```java
+// 执行 lua 脚本
+DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+// 指定 lua 脚本
+redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("redis/limit.lua")));
+// 指定返回类型
+redisScript.setResultType(Long.class);
+// 参数一：redisScript，参数二：key列表，参数三：arg（可多个）
+Long result = redisTemplate.execute(redisScript, keys, args);
+```
+
+### 方式二：直接编写 lua 脚本（字符串）
+
+```java
+String RELEASE_LOCK_LUA_SCRIPT = "local c = redis.call('incr', KEYS[1])\n" +
+        "if tonumber(c) == 1 then\n" +
+        "    c = redis.call('expire', KEYS[1], ARGV[1])\n" +
+        "    return c\n" +
+        "end\n" +
+        "return c";
+
+// 指定 lua 脚本，并且指定返回值类型
+DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(RELEASE_LOCK_LUA_SCRIPT,Long.class);
+// 参数一：redisScript，参数二：key列表，参数三：arg（可多个）
+Long result = redisTemplate.execute(redisScript, keys, args);
+```
