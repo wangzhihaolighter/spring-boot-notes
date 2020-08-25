@@ -49,7 +49,7 @@ Spring Boot 的默认日志输出类似于以下示例：
 
 默认情况下，会记录 `ERROR-level`，`WARN-level` 和 `INFO-level` 消息。
 
-可以通过使用 `--debug` 标志启动应用程序来启用“调试”模式。
+可以通过使用 `--debug` 标志启动应用程序来启用`调试`模式。
 
 ```bash
 >$ java -jar myapp.jar --debug
@@ -296,7 +296,7 @@ Spring 官方推荐日志框架的配置文件使用 xxx-spring.xml 这种形式
         通过定义的值会被插入到logger上下文中，定义变量后，可以使“${}”来使用变量。
     -->
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
-    <springProperty scope="context" name="LOG_HOME" source="logging.path"/>
+    <springProperty scope="context" name="LOG_HOME" source="logging.file.path"/>
     <property name="LOG_FILE" value="${springAppName}"/>
 
     <!-- 彩色日志 -->
@@ -350,7 +350,7 @@ Spring 官方推荐日志框架的配置文件使用 xxx-spring.xml 这种形式
     </appender>
 
     <!-- Appender to log to file -->
-    <appender name="flatfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="flatFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建 -->
         <file>${LOG_HOME}/${LOG_FILE}.log</file>
         <!-- 当发生滚动时，决定RollingFileAppender的行为，涉及文件移动和重命名。属性class定义具体的滚动策略类 -->
@@ -387,20 +387,31 @@ Spring 官方推荐日志框架的配置文件使用 xxx-spring.xml 这种形式
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <timestamp>
-                    <timeZone>UTC</timeZone>
+                    <timeZone>GMT+8</timeZone>
                 </timestamp>
                 <pattern>
                     <pattern>
                         {
                         "severity": "%level",
                         "service": "${springAppName:-}",
+
+                        <!--sleuth自动填充参数，用于日志追踪-->
                         "trace": "%X{X-B3-TraceId:-}",
                         "span": "%X{X-B3-SpanId:-}",
                         "parent": "%X{X-B3-ParentSpanId:-}",
                         "exportable": "%X{X-Span-Export:-}",
+                        <!--sleuth自动填充参数，用于日志追踪-->
+
+                        <!--自定义参数，过滤器拦截请求填充-->
+                        "url": "%X{url:-}",
+                        "ip": "%X{ip:-}",
+                        "userId": "%X{userId:-}",
+                        <!--自定义参数，过滤器拦截请求填充-->
+
                         "pid": "${PID:-}",
                         "thread": "%thread",
                         "class": "%logger{40}",
+                        "column": "%F:%L",
                         "rest": "%message"
                         }
                     </pattern>
@@ -411,20 +422,19 @@ Spring 官方推荐日志框架的配置文件使用 xxx-spring.xml 这种形式
 
     <!--
         用来设置某一个包或者具体的某一个类的日志打印级别、以及指定<appender>。
-        <loger>仅有一个name属性，一个可选的level和一个可选的addtivity属性
+        <logger>仅有一个name属性，一个可选的level和一个可选的additivity属性
         name:
             用来指定受此logger约束的某一个包或者具体的某一个类。
         level:
             用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，
-            如果未设置此属性，那么当前logger将会继承上级的级别。
         additivity:
-            是否向上级loger传递打印信息。默认是true。
+            默认是true，子Logger是否继承父Logger的输出源（appender）的标志位
         <logger>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个logger
     -->
     <logger name="java.sql" level="info" additivity="false">
         <level value="info" />
         <appender-ref ref="console"/>
-        <appender-ref ref="flatfile"/>
+        <appender-ref ref="flatFile"/>
         <appender-ref ref="logstash"/>
     </logger>
 
@@ -435,7 +445,7 @@ Spring 官方推荐日志框架的配置文件使用 xxx-spring.xml 这种形式
     -->
     <root level="INFO">
         <appender-ref ref="console"/>
-        <appender-ref ref="flatfile"/>
+        <appender-ref ref="flatFile"/>
         <appender-ref ref="logstash"/>
     </root>
 </configuration>
