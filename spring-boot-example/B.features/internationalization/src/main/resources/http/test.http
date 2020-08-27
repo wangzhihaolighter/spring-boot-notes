@@ -1,0 +1,8 @@
+### 测试成功响应
+GET http://localhost:8080/success HTTP/1.1
+
+### 测试中文，响应码99
+GET http://localhost:8080/fail?language=zh_CN&code=99&content=我没错&content=是系统的错 HTTP/1.1
+
+### 测试英文，响应码99
+GET http://localhost:8080/fail?language=en&code=99&content=I'm not wrong&content=It's the system's fault HTTP/1.1
