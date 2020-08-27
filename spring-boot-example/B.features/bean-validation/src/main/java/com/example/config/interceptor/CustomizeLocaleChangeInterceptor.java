@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 集成修改国际化拦截器，默认国际化参数为URL参数
+ * 自定义修改国际化拦截器，默认国际化参数为URL参数
  */
 public class CustomizeLocaleChangeInterceptor extends LocaleChangeInterceptor {
 

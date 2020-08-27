@@ -11,6 +11,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,30 +26,30 @@ class GlobalExceptionHandler {
     LocaleMessage resultCodeLocaleMessage;
 
     @ExceptionHandler(BindException.class)
-    public ApiResult<Void> bindExceptionHandler(HttpServletRequest req, final BindException e) {
-        log.error(req.getServletPath() + " error", e);
+    public ApiResult<Void> handlerBindExceptionHandler(HttpServletRequest req, final BindException e) {
+        log.error(req.getServletPath() + " Bind Exception", e);
         String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(";"));
         return ApiResult.fail(ResultCodeEnum.REQUEST_PARAM_ERROR.getCode(), message);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ApiResult<Void> handlerConstraintViolationException(HttpServletRequest req, final ConstraintViolationException e) {
-        log.error(req.getServletPath() + " error", e);
+        log.error(req.getServletPath() + " ConstraintViolation Exception", e);
         String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining(";"));
         return ApiResult.fail(ResultCodeEnum.REQUEST_PARAM_ERROR.getCode(), message);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ApiResult<Void> handlerMethodArgumentNotValidException(HttpServletRequest req, final MethodArgumentNotValidException e) {
-        log.error(req.getServletPath() + " error", e);
+        log.error(req.getServletPath() + " MethodArgumentNotValid Exception", e);
         String message = e.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining(";"));
         return ApiResult.fail(ResultCodeEnum.REQUEST_PARAM_ERROR.getCode(), message);
     }
 
     @ExceptionHandler(BusinessException.class)
     public ApiResult<Void> handlerBusinessException(HttpServletRequest req, final BusinessException e) {
-        log.error(req.getServletPath() + " error", e);
-        return ApiResult.fail(e.getErrorCode(), resultCodeLocaleMessage.getMessage(e.getErrorCode()));
+        log.error(req.getServletPath() + " Business Exception", e);
+        return ApiResult.fail(e.getResultCode(), resultCodeLocaleMessage.getMessage(e.getResultCode(), e.getArgs(), RequestContextUtils.getLocale(req)));
     }
 
 }

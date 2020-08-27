@@ -1,6 +1,5 @@
 package com.example.exception;
 
-
 import com.example.response.ResultCodeEnum;
 
 /**
@@ -8,26 +7,34 @@ import com.example.response.ResultCodeEnum;
  */
 public class BusinessException extends RuntimeException {
 
-    private final String errorCode;
+    private final String resultCode;
 
-    public String getErrorCode() {
-        return errorCode;
+    private final Object[] args;
+
+    public String getResultCode() {
+        return resultCode;
     }
 
-    public BusinessException(ResultCodeEnum resultCodeEnum) {
-        this.errorCode = resultCodeEnum.getCode();
+    public Object[] getArgs() {
+        return args;
     }
 
-    public BusinessException(String code) {
-        this.errorCode = code;
+    public BusinessException(ResultCodeEnum resultCodeEnum, Object[] args) {
+        this.resultCode = resultCodeEnum.getCode();
+        this.args = args;
     }
 
-    public static void throwMessage(String errorCode) {
-        throw new BusinessException(errorCode);
+    public BusinessException(String code, Object[] args) {
+        this.resultCode = code;
+        this.args = args;
     }
 
-    public static void throwMessage(ResultCodeEnum resultCodeEnum) {
-        throw new BusinessException(resultCodeEnum.getCode());
+    public static void throwMessage(String errorCode, Object[] args) {
+        throw new BusinessException(errorCode, args);
+    }
+
+    public static void throwMessage(ResultCodeEnum resultCodeEnum, Object[] args) {
+        throw new BusinessException(resultCodeEnum.getCode(), args);
     }
 
 }

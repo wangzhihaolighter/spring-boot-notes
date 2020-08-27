@@ -1,9 +1,12 @@
 package com.example.controller;
 
 import com.example.exception.BusinessException;
+import com.example.response.ApiResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class SimpleController {
@@ -13,9 +16,15 @@ public class SimpleController {
         return "Hello,World!";
     }
 
+    @GetMapping("/success")
+    public ApiResult<String> success() {
+        return ApiResult.success("success");
+    }
+
     @GetMapping("/fail")
-    public void fail(@RequestParam(value = "code", required = false, defaultValue = "99") String code) {
-        BusinessException.throwMessage(code);
+    public void fail(@RequestParam(value = "code", required = false, defaultValue = "99") String code,
+                     @RequestParam(value = "content", required = false, defaultValue = "错了吧，说点啥吧") List<String> contentList) {
+        BusinessException.throwMessage(code, contentList.toArray());
     }
 
 }

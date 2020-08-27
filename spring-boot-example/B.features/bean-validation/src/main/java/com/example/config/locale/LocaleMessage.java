@@ -41,12 +41,12 @@ public class LocaleMessage {
     }
 
     public String getMessage(String code, Object[] args, String defaultMessage) {
-        Locale locale = LocaleContextHolder.getLocale();
-        return getMessage(code, args, defaultMessage, locale);
+        //根据应用部署的服务器系统来决定国际化
+        return getMessage(code, args, defaultMessage, LocaleContextHolder.getLocale());
     }
 
     public String getMessage(String code, Object[] args, String defaultMessage, Locale locale) {
-        return messageSource.getMessage(code, args, defaultMessage, locale);
+        return messageSource.getMessage(code, args == null ? new Object[]{} : args, defaultMessage, locale);
     }
 
 }

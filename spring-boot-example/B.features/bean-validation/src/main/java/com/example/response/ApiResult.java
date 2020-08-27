@@ -21,7 +21,7 @@ public class ApiResult<T> implements Serializable {
         this.data = data;
     }
 
-    public ApiResult<T> success(T data) {
+    public static <T> ApiResult<T> success(T data) {
         return new ApiResult<>(ResultCodeEnum.SUCCESS.getCode(), null, data);
     }
 
