@@ -30,7 +30,9 @@
     <modules>
         <module>A.hello/hello-world</module>
         <module>B.features/auto-configuration</module>
+        <module>B.features/bean-validation</module>
         <module>B.features/externalized-configuration</module>
+        <module>B.features/internationalization</module>
         <module>B.features/logging</module>
         <module>B.features/sending-email</module>
         <module>B.features/testing</module>
