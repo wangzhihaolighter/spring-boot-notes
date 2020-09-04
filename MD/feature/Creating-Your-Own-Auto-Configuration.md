@@ -55,7 +55,7 @@ Spring Boot使用标准的 `@Configuration` 类实现自动配置，使用 `@Con
 
 命名规范如下：
 
-- 自动配置模块的命名规范为：`xxx--spring-boot-autoconfigure`
+- 自动配置模块的命名规范为：`xxx-spring-boot-autoconfigure`
 - 如果只有一个模块，这个模块包含自动配置模块，则它的命名规范为：`xxx-spring-boot-starter`
 
 ### 创建一个 okhttp 库的 starter

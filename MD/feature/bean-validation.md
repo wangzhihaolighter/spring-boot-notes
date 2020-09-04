@@ -1,7 +1,5 @@
 # bean-validation
 
-Spring Boot中Bean的数据校验示例。
-
 Bean Validation 官方：[beanvalidation.org](https://beanvalidation.org/)
 
 hibernate validator 官方:[hibernate.org/validator/](http://hibernate.org/validator/)
@@ -31,7 +29,7 @@ hibernate validator 官方:[hibernate.org/validator/](http://hibernate.org/valid
   - `@NotEmpty`: 检查约束元素是否为NULL或者是EMPTY
   - `@NotBlank`: 检查约束字符串是不是Null还有被Trim的长度是否大于0，只对字符串，且会去掉前后空格
   - `@AssertTrue`: 验证 Boolean 对象是否为 true
-- Booelan检查
+- Boolean检查
   - `@AssertTrue`: 验证 Boolean 对象是否为 true
   - `@AssertFalse`: 验证 Boolean 对象是否为 false
 - 长度检查
@@ -49,7 +47,7 @@ hibernate validator 官方:[hibernate.org/validator/](http://hibernate.org/valid
   - `@Digits(integer=,fraction=)`: 验证字符串是否是符合指定格式的数字，interger指定整数精度，fraction指定小数精度。
   - `@Range(min=, max=)`: Checks whether the annotated value lies between (inclusive) the specified minimum and maximum.
 - 其他
-  -`@Valid`: 递归的对关联对象进行校验，如果关联对象是个集合或者数组，那么对其中的元素进行递归校验，如果是一个map，则对其中的值部分进行校验(是否进行递归验证)
+  - `@Valid`: 递归的对关联对象进行校验，如果关联对象是个集合或者数组，那么对其中的元素进行递归校验，如果是一个map，则对其中的值部分进行校验(是否进行递归验证)
   - `@Validated`: Spring Validator 校验机制使用
   - `@Email`: 验证是否是邮件地址，如果为null，不进行验证，算通过验证。
   - `@CreditCardNumber`: 信用卡验证

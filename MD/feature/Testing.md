@@ -1,5 +1,9 @@
 # Spring Boot项目中的单元测试
 
+junit4 Github 仓库地址：[junit-team / junit4](https://github.com/junit-team/junit4)
+
+junit5 Github 仓库地址：[junit-team / junit5](https://github.com/junit-team/junit5)
+
 ## Junit4使用
 
 ### 常用注解
@@ -329,5 +333,6 @@ public class MockMvcExampleTests {
 
 ## 参考文档
 
-- [Junit Home CN](https://github.com/junit-team/junit4/wiki/Home-CN)
 - [Spring Boot Reference/boot-features-testing](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html)
+- [Junit4 Home CN](https://github.com/junit-team/junit4/wiki/Home-CN)
+- [Junit5 wiki](https://github.com/junit-team/junit5/wiki)
