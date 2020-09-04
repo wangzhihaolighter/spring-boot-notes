@@ -48,6 +48,7 @@ Spring Boot的一些特性。
 
 一些常用功能框架的使用示例。
 
+- [**apache-poi**：一个 Java 实现的操作 Microsoft Office格式文档的工具库](MD/tool/apache-poi.md)
 - [**browscap-java**：用于解析useragent头，以提取有关使用的浏览器、浏览器版本、平台、平台版本和设备类型的信息](MD/tool/browscap-java.md)
 - **google-zxing**：Google开源的多维码生成工具
 - [**ip2region**：离线IP地址定位库](MD/tool/ip2region.md)
