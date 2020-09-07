@@ -92,6 +92,97 @@ public class SwaggerConfiguration {
 }
 ```
 
+application.yml配置
+
+```yaml
+spring:
+  application:
+    name: springfox-swagger
+server:
+  port: 8080
+
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: springfox swagger 3.0整合Demo
+  try-host: http://localhost:${server.port}
+```
+
+自定义swagger配置类SwaggerProperties
+
+```java
+@Component
+@ConfigurationProperties("swagger")
+public class SwaggerProperties {
+    /**
+     * 是否开启swagger，生产环境一般关闭，所以这里定义一个变量
+     */
+    private Boolean enable;
+
+    /**
+     * 项目应用名
+     */
+    private String applicationName;
+
+    /**
+     * 项目版本信息
+     */
+    private String applicationVersion;
+
+    /**
+     * 项目描述信息
+     */
+    private String applicationDescription;
+
+    /**
+     * 接口调试地址
+     */
+    private String tryHost;
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getApplicationVersion() {
+        return applicationVersion;
+    }
+
+    public void setApplicationVersion(String applicationVersion) {
+        this.applicationVersion = applicationVersion;
+    }
+
+    public String getApplicationDescription() {
+        return applicationDescription;
+    }
+
+    public void setApplicationDescription(String applicationDescription) {
+        this.applicationDescription = applicationDescription;
+    }
+
+    public String getTryHost() {
+        return tryHost;
+    }
+
+    public void setTryHost(String tryHost) {
+        this.tryHost = tryHost;
+    }
+}
+```
+
 一个完整详细的springfox swagger配置示例：
 
 ```java
