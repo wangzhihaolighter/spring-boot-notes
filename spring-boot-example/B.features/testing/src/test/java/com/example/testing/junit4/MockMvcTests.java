@@ -1,6 +1,6 @@
-package com.example.testing;
+package com.example.testing.junit4;
 
-import com.example.testing.controller.SimpleController;
+import com.example.testing.controller.UserController;
 import com.example.testing.entity.User;
 import com.example.testing.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,8 +36,8 @@ public class MockMvcTests {
      * 使用@MockBean模拟相应对象
      */
     @MockBean
-    private SimpleController simpleController;
-    private static ObjectMapper mapper = new ObjectMapper();
+    private UserController userController;
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     public void exampleTest() throws Exception {
@@ -47,7 +47,7 @@ public class MockMvcTests {
         user.setUsername("Github");
         user.setPassword("123456");
         users.add(user);
-        Mockito.when(simpleController.queryAll()).thenReturn(users);
+        Mockito.when(userController.queryAll()).thenReturn(users);
 
         MvcResult mvcResult = this.mvc.perform(get("/user/query/all"))
                 .andExpect(status().isOk())

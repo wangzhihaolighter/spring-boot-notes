@@ -1,15 +1,13 @@
-package com.example.testing;
+package com.example.testing.junit4;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 /**
  * junit单元测试
  */
-public class Junit4Test {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class Junit4Tests {
     /**
      * `@BeforeClass`注解的public void方法将会在所有测试方法执行之前执行。
      * `@BeforeClass`注解修饰的方法必须是静态方法。

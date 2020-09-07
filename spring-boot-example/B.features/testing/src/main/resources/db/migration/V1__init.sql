@@ -6,6 +6,6 @@ CREATE TABLE USER (
 	PRIMARY KEY (`id`)
 );
 
-insert into user (username, password) values ('Apple', '123456');
-insert into user (username, password) values ('Google', '123456');
-insert into user (username, password) values ('Microsoft', '123456');
+insert into `USER` (username, password) values ('Apple', '123456');
+insert into `USER` (username, password) values ('Google', '123456');
+insert into `USER` (username, password) values ('Microsoft', '123456');
