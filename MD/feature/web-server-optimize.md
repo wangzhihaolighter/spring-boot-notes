@@ -1,11 +1,13 @@
 # web-server-optimize
 
-Spring Boot web 服务优化分成两块：
+## 前言
+
+Spring Boot Web 服务优化分成两块：
 
 - 优化命令行JVM启动参数
-- Web容器参数的优化(默认Web容器为Tomcat)
+- Web容器参数的优化(spring-boot-starter-web中默认内嵌Web容器为Tomcat)
 
-## Web容器参数的优化
+## Web容器配置参数优化
 
 ### spring boot 内嵌 tomcat 可配置参数说明
 
@@ -27,9 +29,9 @@ Spring Boot web 服务优化分成两块：
 - server.tomcat.remote-ip-header = ＃从中提取远程ip的http标头的名称。例如`X-FORWARDED-FOR`
 - server.tomcat.uri-encoding = UTF-8 ＃用于解码URI的字符编码
 
-### 外部 Tomcat 配置优化
+### 外部 Tomcat 配置参数优化
 
-> URIEncoding=”UTF-8”
+> URIEncoding="UTF-8"
 
 使得tomcat可以解析含有中文名的文件的url，真方便，不像apache里还有搞个mod_encoding，还要手工编译。
 
@@ -91,7 +93,7 @@ if (connector.getUseURIValidationHack()) {
 
 > disableUploadTimeout
 
-允许Servlet容器，正在执行使用一个较长的连接超时值，以使Servlet有较长的时间来完成它的执行，默认值为false
+允许Servlet容器，正在执行使用一个较长的连接超时值，以使Servlet有较长的时间来完成它的执行，默认值为false。
 
 > 给Tomcat配置gzip压缩(HTTP压缩)功能
 
