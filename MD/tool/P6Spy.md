@@ -26,7 +26,7 @@ Maven项目中引入：
 ```
 
 spring boot项目中应用P6Spy需要：
-            
+
 - 替换你的JDBC Driver为`com.p6spy.engine.spy.P6SpyDriver`
 - 修改JDBC Url从 `jdbc:xxxx` 为 `jdbc:p6spy:xxxx`
 - 配置`spy.properties`
