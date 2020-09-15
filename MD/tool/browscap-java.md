@@ -1,8 +1,10 @@
 # UserAgentUtils使用
 
-Github仓库地址：[blueconic / browscap-java](https://github.com/blueconic/browscap-java)
+## 资料
 
-Maven仓库：[Home » com.blueconic » browscap-java](https://mvnrepository.com/artifact/com.blueconic/browscap-java)
+- Github仓库地址：[blueconic / browscap-java](https://github.com/blueconic/browscap-java)
+
+- Maven仓库：[Home » com.blueconic » browscap-java](https://mvnrepository.com/artifact/com.blueconic/browscap-java)
 
 ## 介绍
 

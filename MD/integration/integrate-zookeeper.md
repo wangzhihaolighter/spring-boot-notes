@@ -1,6 +1,10 @@
 # Spring Boot整合zookeeper
 
-ZooKeeper官网：[zookeeper.apache.org](https://zookeeper.apache.org/)
+## 资料
+
+- ZooKeeper官网：[zookeeper.apache.org](https://zookeeper.apache.org/)
+
+- ZooKeeper Maven 仓库：[Home » org.apache.zookeeper » zookeeper](https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper)
 
 ## zookeeper介绍
 

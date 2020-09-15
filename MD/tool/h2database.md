@@ -1,8 +1,10 @@
 # h2database使用
 
-h2数据库官网：[h2database.com/html/main.html](https://www.h2database.com/html/main.html)
+## 资料
 
-h2数据库 Maven 仓库：[Home » com.h2database » h2](https://mvnrepository.com/artifact/com.h2database/h2)
+- h2数据库官网：[h2database.com/html/main.html](https://www.h2database.com/html/main.html)
+
+- h2数据库 Maven 仓库：[Home » com.h2database » h2](https://mvnrepository.com/artifact/com.h2database/h2)
 
 ## H2数据库介绍
 

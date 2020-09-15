@@ -1,8 +1,10 @@
 # bean-validation
 
-Bean Validation 官方：[beanvalidation.org](https://beanvalidation.org/)
+## 资料
 
-hibernate validator 官方:[hibernate.org/validator/](http://hibernate.org/validator/)
+- Bean Validation 官方：[beanvalidation.org](https://beanvalidation.org/)
+
+- hibernate validator 官方：[hibernate.org/validator/](http://hibernate.org/validator/)
 
 ## 介绍
 

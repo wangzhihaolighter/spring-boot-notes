@@ -2,7 +2,9 @@
 
 Spring Boot国际化信息(i18n)示例。
 
-官方文档：[boot-features-internationalization](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-internationalization)
+## 资料
+
+- Spring Boot 官方文档：[boot-features-internationalization](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-internationalization)
 
 ## 默认国际化配置
 

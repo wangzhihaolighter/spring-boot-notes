@@ -1,8 +1,10 @@
 # OSHI使用
 
-Github仓库地址：[oshi / oshi](https://github.com/oshi/oshi)
+## 资料
 
-Maven仓库：[Home » com.github.oshi » oshi-core](https://mvnrepository.com/artifact/com.github.oshi/oshi-core)
+- Github仓库地址：[oshi / oshi](https://github.com/oshi/oshi)
+
+- Maven仓库：[Home » com.github.oshi » oshi-core](https://mvnrepository.com/artifact/com.github.oshi/oshi-core)
 
 ## 介绍
 

@@ -1,12 +1,14 @@
 # ip2region使用
 
-Github地址：[lionsoul2014 / ip2region](https://github.com/lionsoul2014/ip2region)
+## 资料
 
-码云地址：[狮子的魂 / ip2region](https://gitee.com/lionsoul/ip2region)
+- ip2region Github地址：[lionsoul2014 / ip2region](https://github.com/lionsoul2014/ip2region)
 
-Maven地址：[Home » org.lionsoul » ip2region](https://mvnrepository.com/artifact/org.lionsoul/ip2region)
+- ip2region 码云地址：[狮子的魂 / ip2region](https://gitee.com/lionsoul/ip2region)
 
-## Ip2region是什么
+- ip2region Maven地址：[Home » org.lionsoul » ip2region](https://mvnrepository.com/artifact/org.lionsoul/ip2region)
+
+## ip2region是什么
 
 ip2region - 准确率99.9%的离线IP地址定位库，0.0x毫秒级查询，ip2region.db数据库只有数MB，提供了java,php,c,python,nodejs,golang,c#等查询绑定和Binary,B树,内存三种查询算法。
 

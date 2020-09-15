@@ -1,10 +1,12 @@
 # springdoc-openapi使用
 
-springdoc-openapi官网：[springdoc.org](https://springdoc.org/)
+## 资料
 
-springdoc-openapi Github仓库：[springdoc / springdoc-openapi](https://github.com/springdoc/springdoc-openapi)
+- springdoc-openapi官网：[springdoc.org](https://springdoc.org/)
 
-springdoc-openapi Maven仓库：[Home » org.springdoc » springdoc-openapi-ui](https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui)
+- springdoc-openapi Github仓库：[springdoc / springdoc-openapi](https://github.com/springdoc/springdoc-openapi)
+
+- springdoc-openapi Maven仓库：[Home » org.springdoc » springdoc-openapi-ui](https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui)
 
 ## open api 简介
 

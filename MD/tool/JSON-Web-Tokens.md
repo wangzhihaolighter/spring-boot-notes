@@ -1,12 +1,14 @@
 # JSON Web Tokens
 
-官网地址：[jwt.io](https://jwt.io/)
+## 资料
 
-Java JWT库：[jwtk / jjwt](https://jwt.io/)，更多实现库可查看JWT官网
+- 官网地址：[jwt.io](https://jwt.io/)
 
-jjwt Github仓库：[jwtk / jjwt](https://github.com/jwtk/jjwt)
+- Java JWT库：[jwtk / jjwt](https://jwt.io/)，更多实现库可查看JWT官网
 
-jjwt Maven仓库：[Home » io.jsonwebtoken » jjwt](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt)
+- jjwt Github仓库：[jwtk / jjwt](https://github.com/jwtk/jjwt)
+
+- jjwt Maven仓库：[Home » io.jsonwebtoken » jjwt](https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt)
 
 ## 什么是JSON Web Token
 

@@ -1,6 +1,8 @@
 # 缓存抽象
 
-官方文档：[features - caching](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching)
+## 资料
+
+- 官方文档：[features - caching](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching)
 
 ## Spring Cache 概述
 

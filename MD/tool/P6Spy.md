@@ -1,8 +1,10 @@
 # P6Spy使用
 
-Github仓库地址：[p6spy/p6spy](https://github.com/p6spy/p6spy)
+## 资料
 
-Maven仓库地址：[Home » p6spy » p6spy](https://mvnrepository.com/artifact/p6spy/p6spy)
+- Github仓库地址：[p6spy/p6spy](https://github.com/p6spy/p6spy)
+
+- Maven仓库地址：[Home » p6spy » p6spy](https://mvnrepository.com/artifact/p6spy/p6spy)
 
 ## 介绍
 

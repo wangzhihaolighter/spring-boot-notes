@@ -1,6 +1,8 @@
 # Spring Boot 整合 mongodb
 
-mongodb官网：[mongodb](https://www.mongodb.com/)
+## 资料
+
+- mongodb官网：[mongodb](https://www.mongodb.com/)
 
 ## mongodb介绍
 

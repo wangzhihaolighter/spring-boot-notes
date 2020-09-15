@@ -1,8 +1,10 @@
 # UserAgentUtils使用
 
-官网：[User-agent-utils | bitwalker.eu](https://www.bitwalker.eu/software/user-agent-utils)
+## 资料
 
-Maven仓库：[Home » eu.bitwalker » UserAgentUtils](https://mvnrepository.com/artifact/eu.bitwalker/UserAgentUtils)
+- 官网：[User-agent-utils | bitwalker.eu](https://www.bitwalker.eu/software/user-agent-utils)
+
+- Maven仓库：[Home » eu.bitwalker » UserAgentUtils](https://mvnrepository.com/artifact/eu.bitwalker/UserAgentUtils)
 
 ## 介绍
 

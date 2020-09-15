@@ -1,14 +1,16 @@
 # springfox-swagger使用
 
-swagger官网：[swagger.io](https://swagger.io/)
+## 资料
 
-springfox官网：[springfox](http://springfox.github.io/springfox/)
+- swagger官网：[swagger.io](https://swagger.io/)
 
-springfox Github仓库：[springfox / springfox](https://github.com/springfox/springfox)
+- springfox官网：[springfox](http://springfox.github.io/springfox/)
 
-springfox-demos Github仓库：[springfox / springfox-demos](https://github.com/springfox/springfox-demos)
+- springfox Github仓库：[springfox / springfox](https://github.com/springfox/springfox)
 
-springfox Maven仓库：[Home » io.springfox](https://mvnrepository.com/artifact/io.springfox)
+- springfox-demos Github仓库：[springfox / springfox-demos](https://github.com/springfox/springfox-demos)
+
+- springfox Maven仓库：[Home » io.springfox](https://mvnrepository.com/artifact/io.springfox)
 
 ## swagger介绍
 
