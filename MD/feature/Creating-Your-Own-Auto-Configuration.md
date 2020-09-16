@@ -2,11 +2,11 @@
 
 Spring Boot 提供了一种自动化配置 Bean 的机制，可以根据一定的条件自动初始化 Bean。
 
-利用 Spring boot 提供的这种自动配置机制，我们可以创建 spring-boot-starter，一个自动化配置的共享库。
+利用 Spring boot 提供的这种自动配置机制，我们可以创建 `spring-boot-starter`，一个自动化配置的共享库。
 
 在日常开发中，这种自动化配置的库使用起来十分方便，通常在配置文件中添加对应配置项就可以完成这个starter的配置。
 
-这里去了解下如何创建一个标准的 spring boot starter。
+这里去了解下如何创建一个标准的 `spring-boot-starter`。
 
 ## 了解自动配置bean
 

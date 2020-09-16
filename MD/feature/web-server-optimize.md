@@ -5,7 +5,9 @@
 Spring Boot Web 服务优化分成两块：
 
 - 优化命令行JVM启动参数
-- Web容器参数的优化(spring-boot-starter-web中默认内嵌Web容器为Tomcat)
+- Web容器参数的优化
+
+注：spring-boot-starter-web中默认嵌入式Web容器为Tomcat
 
 ## Web容器配置参数优化
 

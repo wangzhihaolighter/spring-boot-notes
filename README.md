@@ -1,6 +1,6 @@
 # 说明
 
-spring-boot-notes用于记录学习、使用Spring Boot的过程。
+spring-boot-notes 用于记录学习、使用 Spring Boot 框架。
 
 主要内容是 Spring Boot 框架的一些特性、小功能的实现、常用框架的整合等。
 
@@ -44,6 +44,7 @@ Spring Boot的一些特性。
   - **rabbitmq-provider-demo**：rabbitmq生产者示例
 - [**redis**：一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库](MD/integration/integrate-redis.md)
 - [**mongo**：一个基于分布式文件存储的数据库](MD/integration/integrate-mongodb.md)
+- [**zookeeper**：一个分布式的，开放源码的分布式应用程序协调服务](MD/integration/integrate-zookeeper.md)
 
 ## E.tools
 

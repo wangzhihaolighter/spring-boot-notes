@@ -2,9 +2,9 @@
 
 ## 资料
 
-- Bean Validation 官方：[beanvalidation.org](https://beanvalidation.org/)
+- Bean Validation 官网：[beanvalidation.org](https://beanvalidation.org/)
 
-- hibernate validator 官方：[hibernate.org/validator/](http://hibernate.org/validator/)
+- hibernate validator 官网：[hibernate.org/validator/](http://hibernate.org/validator/)
 
 ## 介绍
 
