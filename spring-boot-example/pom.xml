@@ -38,9 +38,9 @@
         <module>B.features/testing</module>
         <module>C.starters/okhttp-spring-boot-starter</module>
         <module>D.integration/mongodb-integration-demo</module>
-        <module>D.integration/rabbitmq-consumer-demo</module>
-        <module>D.integration/rabbitmq-provider-demo</module>
+        <module>D.integration/rabbitmq-integration-demo</module>
         <module>D.integration/redis-integration-demo</module>
+        <module>D.integration/zookeeper-integration-demo</module>
         <module>E.tools/browscap-java</module>
         <module>E.tools/google-zxing</module>
         <module>E.tools/ip2region</module>
