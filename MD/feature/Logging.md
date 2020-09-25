@@ -131,10 +131,10 @@ logging.level.tomcat = TRACE
 
 Spring Boot包含以下预定义的日志记录组，可以直接使用：
 
-Name | Loggers
--|-
-web | `org.springframework.core.codec`, `org.springframework.http`, `org.springframework.web`
-sql | `org.springframework.jdbc.core`, `org.hibernate.SQL`
+| Name | Loggers                                                                                 |
+| ---- | --------------------------------------------------------------------------------------- |
+| web  | `org.springframework.core.codec`, `org.springframework.http`, `org.springframework.web` |
+| sql  | `org.springframework.jdbc.core`, `org.hibernate.SQL`                                    |
 
 ## 自定义日志配置
 
@@ -142,11 +142,11 @@ sql | `org.springframework.jdbc.core`, `org.hibernate.SQL`
 
 根据不同的日志记录系统，将加载以下文件：
 
-Logging System | Customization
--|-
-Logback | logback-spring.xml, logback-spring.groovy, logback.xml, or logback.groovy
-Log4j2 | log4j2-spring.xml or log4j2.xml
-JDK (Java Util Logging) | logging.properties
+| Logging System          | Customization                                                             |
+| ----------------------- | ------------------------------------------------------------------------- |
+| Logback                 | logback-spring.xml, logback-spring.groovy, logback.xml, or logback.groovy |
+| Log4j2                  | log4j2-spring.xml or log4j2.xml                                           |
+| JDK (Java Util Logging) | logging.properties                                                        |
 
 额外信息：
 
@@ -155,18 +155,18 @@ JDK (Java Util Logging) | logging.properties
 
 为了帮助进行自定义，一些其他属性从 Spring 转移 `Environment` 到 System 属性，如下表所述：
 
-Spring Environment | System Property | Comments
---|--|--
-logging.exception-conversion-word | LOG_EXCEPTION_CONVERSION_WORD | 记录异常时使用的转换字。
-logging.file | LOG_FILE | 如果已定义，则在默认日志配置中使用它。
-logging.file.max-size | LOG_FILE_MAX_SIZE | 最大日志文件大小（如果启用了LOG_FILE）。（仅支持默认的Logback设置。）
-logging.file.max-history | LOG_FILE_MAX_HISTORY | 要保留的最大归档日志文件数（如果启用了LOG_FILE）。（仅支持默认的Logback设置。）
-logging.path | LOG_PATH | 如果已定义，则在默认日志配置中使用它。
-logging.pattern.console | CONSOLE_LOG_PATTERN | 要在控制台上使用的日志模式（stdout）。（仅支持默认的Logback设置。）
-logging.pattern.dateformat | LOG_DATEFORMAT_PATTERN | 日志日期格式的Appender模式。（仅支持默认的Logback设置。）
-logging.pattern.file | FILE_LOG_PATTERN | 要在文件中使用的日志模式（如果LOG_FILE已启用）。（仅支持默认的Logback设置。）
-logging.pattern.level | LOG_LEVEL_PATTERN | 呈现日志级别时使用的格式（默认%5p）。（仅支持默认的Logback设置。）
-PID | PID | 当前进程ID（如果可能，则在未定义为OS环境变量时发现）。
+| Spring Environment                | System Property               | Comments                                                                        |
+| --------------------------------- | ----------------------------- | ------------------------------------------------------------------------------- |
+| logging.exception-conversion-word | LOG_EXCEPTION_CONVERSION_WORD | 记录异常时使用的转换字。                                                        |
+| logging.file                      | LOG_FILE                      | 如果已定义，则在默认日志配置中使用它。                                          |
+| logging.file.max-size             | LOG_FILE_MAX_SIZE             | 最大日志文件大小（如果启用了LOG_FILE）。（仅支持默认的Logback设置。）           |
+| logging.file.max-history          | LOG_FILE_MAX_HISTORY          | 要保留的最大归档日志文件数（如果启用了LOG_FILE）。（仅支持默认的Logback设置。） |
+| logging.path                      | LOG_PATH                      | 如果已定义，则在默认日志配置中使用它。                                          |
+| logging.pattern.console           | CONSOLE_LOG_PATTERN           | 要在控制台上使用的日志模式（stdout）。（仅支持默认的Logback设置。）             |
+| logging.pattern.dateformat        | LOG_DATEFORMAT_PATTERN        | 日志日期格式的Appender模式。（仅支持默认的Logback设置。）                       |
+| logging.pattern.file              | FILE_LOG_PATTERN              | 要在文件中使用的日志模式（如果LOG_FILE已启用）。（仅支持默认的Logback设置。）   |
+| logging.pattern.level             | LOG_LEVEL_PATTERN             | 呈现日志级别时使用的格式（默认%5p）。（仅支持默认的Logback设置。）              |
+| PID                               | PID                           | 当前进程ID（如果可能，则在未定义为OS环境变量时发现）。                          |
 
 所有受支持的日志记录系统在分析其配置文件时都可以查阅系统属性。有关 `spring-boot.jar` 示例，请参阅默认配置：
 
@@ -176,10 +176,13 @@ PID | PID | 当前进程ID（如果可能，则在未定义为OS环境变量时�
 
 注意事项：
 
-- 如果要在日志记录属性中使用占位符，则应使用 Spring Boot 的语法而不是底层框架的语法。值得注意的是，如果使用Logback，则应将其 `: ` 用作属性名称与其默认值之间的分隔符，而不是使用 `:-`。
+- 如果要在日志记录属性中使用占位符，则应使用 Spring Boot 的语法而不是底层框架的语法。值得注意的是，如果使用Logback，则应将其 `: (冒号空格)` 用作属性名称与其默认值之间的分隔符，而不是使用 `:-`。
 - 您可以通过仅覆盖LOG_LEVEL_PATTERN（或logging.pattern.level使用Logback）将MDC和其他临时内容添加到日志行 。例如，如果使用 logging.pattern.level=user:%X{user} %5p，则默认日志格式包含“user”的MDC条目（如果存在）
 
-> [MDC](https://logback.qos.ch/manual/mdc.html)：Mapped Diagnostic Context，简单来说就是日志的增强功能，如果配置了MDC，并添加了相应的key value，就会在打日志的时候把key对应的value打印出来。
+## MDC
+
+[MDC](https://logback.qos.ch/manual/mdc.html)：Mapped Diagnostic Context，简单来说就是日志的增强功能，如果配置了MDC，并添加了相应的key value，就会在打日志的时候把key对应的value打印出来。
+
 内部是用ThreadLocal来实现的，可以携带当前线程的context信息。
 
 ## Logback Extensions
