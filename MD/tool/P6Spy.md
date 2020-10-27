@@ -33,12 +33,13 @@ spring boot项目中应用P6Spy需要：
 - 修改JDBC Url从 `jdbc:xxxx` 为 `jdbc:p6spy:xxxx`
 - 配置`spy.properties`
 
-配置`spy.properties`：
+配置`spy.properties`（仅供参考）：
 
 ```properties
 module.log=com.p6spy.engine.logging.P6LogFactory,com.p6spy.engine.outage.P6OutageFactory
-# 自定义日志打印
-logMessageFormat=com.example.p6spy.format.MyFormat
+# 日志打印，可自定义实现
+logMessageFormat=com.p6spy.engine.spy.appender.CustomLineFormat
+customLogMessageFormat=当前时间：%(currentTime) | SQL耗时： %(executionTime) ms | 连接信息： %(category)-%(connectionId) | 执行语句： %(sql)
 # 使用日志系统记录sql
 appender=com.p6spy.engine.spy.appender.Slf4JLogger
 ## 配置记录Log例外
@@ -48,12 +49,14 @@ deregisterdrivers=true
 # 日期格式
 dateformat=yyyy-MM-dd HH:mm:ss
 # 实际驱动
-driverlist=org.h2.Driver
+driverlist=your java.sql.Driver
 # 是否开启慢SQL记录
 outagedetection=true
 # 慢SQL记录标准 秒
 outagedetectioninterval=2
 ```
+
+官方SpringBoot整合p6spy示例：[p6spy / p6spy-it-spring-boot](https://github.com/p6spy/p6spy-it-spring-boot)
 
 ## 自定义日志打印
 
