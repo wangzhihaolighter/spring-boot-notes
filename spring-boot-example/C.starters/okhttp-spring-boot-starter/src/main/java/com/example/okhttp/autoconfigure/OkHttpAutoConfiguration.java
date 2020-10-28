@@ -1,4 +1,4 @@
-package com.example.okhttp.spring.boot.starter;
+package com.example.okhttp.autoconfigure;
 
 import okhttp3.OkHttpClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -34,10 +34,10 @@ public class OkHttpAutoConfiguration {
 
         //设置代理
         if (properties.getProxy() != null && properties.getProxy().isEnable()) {
-            builder.proxy(
-                    new Proxy(Proxy.Type.valueOf(properties.getProxy().getType()),
-                            new InetSocketAddress(properties.getProxy().getIp(), properties.getProxy().getPort()))
-            );
+            builder.proxy(new Proxy(
+                    Proxy.Type.valueOf(properties.getProxy().getType()),
+                    new InetSocketAddress(properties.getProxy().getIp(), properties.getProxy().getPort())
+            ));
         }
 
         builder.retryOnConnectionFailure(true)

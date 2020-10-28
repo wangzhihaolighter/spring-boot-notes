@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.example.okhttp.spring.boot.starter.OkHttpAutoConfiguration
+com.example.okhttp.autoconfigure.OkHttpAutoConfiguration
