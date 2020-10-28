@@ -62,7 +62,10 @@ Spring Boot使用标准的 `@Configuration` 类实现自动配置，使用 `@Con
 
 这里选择一个常用的http库 `okhttp` 来创建 `okhttp-spring-boot-starter`。
 
-创建一个标准的starter需要有`spring-boot-starter`、`spring-boot-autoconfigure`和`spring-boot-configuration-processor`依赖，用于提供自动化配置支持。
+创建一个标准的starter需要：
+
+- 有`spring-boot-starter`、`spring-boot-autoconfigure`和`spring-boot-configuration-processor`依赖，用于提供自动化配置支持。
+- 包名一般以`autoconfigure`结尾。
 
 pom文件如下：
 
@@ -75,13 +78,18 @@ pom文件如下：
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
@@ -90,73 +98,90 @@ pom文件如下：
     </dependencies>
 ```
 
-### 创建自动化配置类
+### 自动化配置
 
-1.创建配置类
+配置属性类
 
 ```java
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
- * okhttp配置类
+ * okhttp配置属性类
  */
 @Data
-@ConfigurationProperties(prefix = OkHttpProperties.OKHTTP_PREFIX)
+@ConfigurationProperties(prefix = OkHttpProperties.PREFIX)
 public class OkHttpProperties {
 
-    public static final String OKHTTP_PREFIX = "okhttp";
+    /**
+     * 配置属性前缀
+     */
+    public static final String PREFIX = "okhttp";
+
+    /**
+     * 用于标记是否自动化配置
+     */
     public static final String ENABLE_KEY = "enable";
 
     /**
      * enabled config OkHttpClient
      */
     private boolean enable = true;
+
     /**
      * connectTimeout,unit seconds
      */
     private int connectTimeout;
+
     /**
      * writeTimeout,unit seconds
      */
     private int writeTimeout;
+
     /**
      * readTimeout,unit seconds
      */
     private int readTimeout;
+
     /**
      * proxy config
      */
+    @NestedConfigurationProperty
     private Proxy proxy;
 
     @Data
-    class Proxy {
+    static class Proxy {
+
         /**
          * enabled use proxy
          */
         private boolean enable = false;
+
         /**
          * proxy type
          */
         private String type = "HTTP";
+
         /**
          * proxy ip
          */
         private String ip;
+
         /**
          * proxy port
          */
         private int port;
+
     }
 
 }
 ```
 
-2.创建配置类
+自动化配置类
 
 ```java
 import okhttp3.OkHttpClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -176,21 +201,24 @@ import java.util.concurrent.TimeUnit;
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttpAutoConfiguration {
 
-    @Autowired
-    private OkHttpProperties properties;
+    private final OkHttpProperties properties;
+
+    public OkHttpAutoConfiguration(OkHttpProperties properties) {
+        this.properties = properties;
+    }
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = OkHttpProperties.OKHTTP_PREFIX, value = OkHttpProperties.ENABLE_KEY, havingValue = "true")
+    @ConditionalOnProperty(prefix = OkHttpProperties.PREFIX, value = OkHttpProperties.ENABLE_KEY, havingValue = "true")
     OkHttpClient okHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         //设置代理
         if (properties.getProxy() != null && properties.getProxy().isEnable()) {
-            builder.proxy(
-                    new Proxy(Proxy.Type.valueOf(properties.getProxy().getType()),
-                            new InetSocketAddress(properties.getProxy().getIp(), properties.getProxy().getPort()))
-            );
+            builder.proxy(new Proxy(
+                    Proxy.Type.valueOf(properties.getProxy().getType()),
+                    new InetSocketAddress(properties.getProxy().getIp(), properties.getProxy().getPort())
+            ));
         }
 
         builder.retryOnConnectionFailure(true)
@@ -221,7 +249,7 @@ public class OkHttpAutoConfiguration {
 
 ```properties
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.example.okhttp.spring.boot.starter.OkHttpAutoConfiguration
+OkHttpAutoConfiguration
 ```
 
 starter 编译后，会根据配置类自动生成对应的 `spring-configuration-metadata.json` 属性元文件：
