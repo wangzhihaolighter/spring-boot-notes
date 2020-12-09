@@ -31,26 +31,38 @@
         <module>A.hello/hello-world</module>
         <module>B.features/auto-configuration</module>
         <module>B.features/bean-validation</module>
+        <!--TODO 基于Spring Schedule动态定时任务实现-->
+        <module>B.features/dynamic-scheduling</module>
         <module>B.features/externalized-configuration</module>
         <module>B.features/internationalization</module>
         <module>B.features/logging</module>
         <module>B.features/sending-email</module>
         <module>B.features/testing</module>
+        <module>C.starters/kaptcha-spring-boot-starter</module>
         <module>C.starters/okhttp-spring-boot-starter</module>
         <module>D.integration/mongodb-integration-demo</module>
         <module>D.integration/rabbitmq-integration-demo</module>
         <module>D.integration/redis-integration-demo</module>
         <module>D.integration/zookeeper-integration-demo</module>
+        <module>E.tools/apache-poi</module>
         <module>E.tools/browscap-java</module>
+        <module>E.tools/caffeine</module>
+        <module>E.tools/flyway</module>
         <module>E.tools/google-zxing</module>
+        <module>E.tools/h2database</module>
         <module>E.tools/ip2region</module>
         <module>E.tools/jjwt</module>
         <module>E.tools/jsch</module>
+        <module>E.tools/kaptcha</module>
         <module>E.tools/oshi-core</module>
         <module>E.tools/p6spy</module>
         <module>E.tools/springdoc-openapi</module>
         <module>E.tools/springfox-swagger</module>
         <module>E.tools/useragentutils</module>
+        <!--TODO 文件管理服务-->
+        <module>F.service/file-manager</module>
+        <!--TODO 简单的权限管理系统-->
+        <module>F.service/security-admin</module>
     </modules>
 
     <repositories>
