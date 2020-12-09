@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>login</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="login" class="login-container">
+    <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
+        <h2 class="title">LOGIN</h2>
+        <el-form-item prop="username">
+            <el-input type="text"
+                      v-model="loginForm.username"
+                      auto-complete="off"
+                      placeholder="用户名"
+            >
+                <i slot="prefix" class="el-input__icon el-icon-user"></i>
+            </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+            <el-input type="password"
+                      v-model="loginForm.password"
+                      auto-complete="off"
+                      placeholder="密码"
+            >
+                <i slot="prefix" class="el-input__icon el-icon-lock"></i>
+            </el-input>
+        </el-form-item>
+        <el-form-item prop="captcha">
+            <el-input
+                    v-model="loginForm.captcha"
+                    style="width: 63%"
+                    auto-complete="off"
+                    placeholder="验证码"
+            >
+                <i slot="prefix" class="el-input__icon el-icon-key"></i>
+            </el-input>
+            <div class="login-code">
+                <img alt="验证码" :src="captchaBase64" @click="refreshCode" class="login-code-img"/>
+            </div>
+        </el-form-item>
+        <el-checkbox style="margin:0 0 25px 0;" checked>记住密码</el-checkbox>
+        <el-form-item>
+            <el-button type="primary" @click="handleLogin('loginForm')">登 录</el-button>
+            <el-button @click="resetForm('loginForm')">重置</el-button>
+        </el-form-item>
+    </el-form>
+    <!--  底部  -->
+    <div class="el-login-footer">
+        <span>Copyright © 2017-2020 lighter All Rights Reserved.</span>
+    </div>
+</div>
+</body>
+
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="text/javascript">
+    var Main = {
+        data() {
+            return {
+                captchaBase64: "",
+                loginForm: {
+                    username: '',
+                    password: '',
+                    captcha: '',
+                    uuid: ''
+                },
+                rules: {
+                    username: [
+                        {required: true, message: '用户名不得为空', trigger: 'blur'}
+                    ],
+                    password: [
+                        {required: true, message: '请输入密码', trigger: 'blur'}
+                    ],
+                    captcha: [
+                        {required: true, message: '请输入验证码', trigger: 'blur'}
+                    ]
+                },
+            };
+        },
+        methods: {
+            handleLogin(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (!valid) {
+                        console.log('error submit!!');
+                        return false;
+                    } else {
+                        const userInfo = {
+                            username: this.loginForm.username,
+                            password: this.loginForm.password,
+                            captchaText: this.loginForm.captcha,
+                            captchaUuid: this.loginForm.uuid
+                        }
+
+                        let that = this;
+                        axios({
+                            method: 'post',
+                            url: '/auth/login',
+                            data: userInfo
+                        })
+                            .then(response => {
+                                window.location.replace("?token=" + response.data);
+                            })
+                            .catch(function (error) {
+                                alert(error.response.data);
+                                that.refreshCode();
+                                that.loginForm.captcha = "";
+                                that.loginForm.uuid = "";
+                            });
+                    }
+                });
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            refreshCode() {
+                axios
+                    .get('/auth/captcha')
+                    .then(response => {
+                        this.captchaBase64 = response.data.imgBase64;
+                        this.loginForm.uuid = response.data.uuid;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                ;
+            }
+        },
+        mounted() {
+            this.refreshCode();
+        },
+    };
+
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#login')
+</script>
+
+<style lang="css">
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+    }
+
+    html {
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background-image: url("/img/loginBackground.jpg");
+        background-size: cover;
+    }
+
+    .title {
+        margin: 0 auto 30px auto;
+        text-align: center;
+        color: #707070;
+    }
+
+    .login-form {
+        border-radius: 6px;
+        background: #ffffff;
+        width: 350px;
+        padding: 25px 25px 5px 25px;
+    }
+
+    .login-form .el-input {
+        height: 38px;
+    }
+
+    .login-form .el-input input {
+        height: 38px;
+    }
+
+    .login-form .input-icon {
+        height: 39px;
+        width: 14px;
+        margin-left: 2px;
+    }
+
+    .login-code {
+        width: 33%;
+        display: inline-block;
+        height: 38px;
+        float: right;
+    }
+
+    .login-code img {
+        cursor: pointer;
+        vertical-align: middle;
+    }
+
+    .el-login-footer {
+        height: 40px;
+        line-height: 40px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-family: Arial, serif;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .login-code-img {
+        height: 38px;
+    }
+</style>
+
+</html>

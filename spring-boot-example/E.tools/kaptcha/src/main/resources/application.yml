@@ -1,0 +1,11 @@
+#Kaptcha验证码工具
+kaptcha:
+  enable: true
+  text-producer:
+    char-length: 4
+    char-string: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+  image:
+    width: 100
+    height: 35
+server:
+  port: 8963
