@@ -10,14 +10,14 @@
 <body>
 <div id="login" class="login-container">
     <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
-        <h2 class="title">LOGIN</h2>
+        <h2 class="title">XXX平台</h2>
         <el-form-item prop="username">
             <el-input type="text"
                       v-model="loginForm.username"
                       auto-complete="off"
                       placeholder="用户名"
             >
-                <i slot="prefix" class="el-input__icon el-icon-user"></i>
+                <em slot="prefix" class="el-input__icon el-icon-user"></em>
             </el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -26,7 +26,7 @@
                       auto-complete="off"
                       placeholder="密码"
             >
-                <i slot="prefix" class="el-input__icon el-icon-lock"></i>
+                <em slot="prefix" class="el-input__icon el-icon-lock"></em>
             </el-input>
         </el-form-item>
         <el-form-item prop="captcha">
@@ -36,7 +36,7 @@
                     auto-complete="off"
                     placeholder="验证码"
             >
-                <i slot="prefix" class="el-input__icon el-icon-key"></i>
+                <em slot="prefix" class="el-input__icon el-icon-key"></em>
             </el-input>
             <div class="login-code">
                 <img alt="验证码" :src="captchaBase64" @click="refreshCode" class="login-code-img"/>
@@ -44,13 +44,12 @@
         </el-form-item>
         <el-checkbox style="margin:0 0 25px 0;" checked>记住密码</el-checkbox>
         <el-form-item>
-            <el-button type="primary" @click="handleLogin('loginForm')">登 录</el-button>
-            <el-button @click="resetForm('loginForm')">重置</el-button>
+            <el-button style="width: 100%" type="primary" @click="handleLogin('loginForm')">登 录</el-button>
         </el-form-item>
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-        <span>Copyright © 2017-2020 lighter All Rights Reserved.</span>
+        <span>Copyright © 2020 xxx All Rights Reserved.</span>
     </div>
 </div>
 </body>
@@ -65,8 +64,8 @@
             return {
                 captchaBase64: "",
                 loginForm: {
-                    username: '',
-                    password: '',
+                    username: 'admin',
+                    password: '123456',
                     captcha: '',
                     uuid: ''
                 },
@@ -188,21 +187,18 @@
     }
 
     .login-form .input-icon {
-        height: 39px;
+        height: 38px;
         width: 14px;
         margin-left: 2px;
     }
 
     .login-code {
-        width: 33%;
-        display: inline-block;
-        height: 38px;
+        height: 40px;
         float: right;
     }
 
-    .login-code img {
-        cursor: pointer;
-        vertical-align: middle;
+    .login-code-img {
+        margin-top: 2px;
     }
 
     .el-login-footer {
@@ -218,9 +214,6 @@
         letter-spacing: 1px;
     }
 
-    .login-code-img {
-        height: 38px;
-    }
 </style>
 
 </html>
