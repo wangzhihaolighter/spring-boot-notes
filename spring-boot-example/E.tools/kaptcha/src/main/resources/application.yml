@@ -8,4 +8,4 @@ kaptcha:
     width: 110
     height: 36
 server:
-  port: 8963
+  port: 8080

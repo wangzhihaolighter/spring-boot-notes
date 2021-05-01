@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 @Configuration
 public class CacheConfig {
+
     @Resource
     private Caffeine<Object, Object> caffeine;
 

@@ -58,3 +58,12 @@ These values are stored in the `com.google.code.kaptcha.Constants` class.
     <version>2.3.2</version>
 </dependency>
 ```
+
+使用
+
+```java
+DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
+defaultKaptcha.setConfig(new Config(prop));
+String text = defaultKaptcha.createText();
+BufferedImage image = defaultKaptcha.createImage(text);
+```

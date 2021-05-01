@@ -6,23 +6,28 @@ import com.example.kaptcha.config.dto.CaptchaDto;
 import com.example.kaptcha.entity.User;
 import com.example.kaptcha.service.AuthorizationService;
 import com.example.kaptcha.util.CaptchaUtil;
-import com.example.kaptcha.util.UuidUtil;
+import com.example.kaptcha.util.IdUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.image.BufferedImage;
 
-@RequiredArgsConstructor
 @CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class AuthorizationController {
+
     private final AuthorizationService authorizationService;
     private final CacheService cacheService;
     private final DefaultKaptcha defaultKaptcha;
+
+    public AuthorizationController(AuthorizationService authorizationService, CacheService cacheService, DefaultKaptcha defaultKaptcha) {
+        this.authorizationService = authorizationService;
+        this.cacheService = cacheService;
+        this.defaultKaptcha = defaultKaptcha;
+    }
 
     /**
      * 获取验证码
@@ -32,7 +37,7 @@ public class AuthorizationController {
         //生成验证码
         String text = defaultKaptcha.createText();
         BufferedImage image = defaultKaptcha.createImage(text);
-        String uuid = UuidUtil.generatorCaptchaUuid();
+        String uuid = IdUtil.generatorCaptchaUuid();
 
         //验证码信息存入缓存
         cacheService.putValue(uuid, text);
@@ -56,8 +61,9 @@ public class AuthorizationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("用户名或密码错误！");
         }
 
-        String token = UuidUtil.generatorLoginTokenUuid();
+        String token = IdUtil.generatorLoginTokenUuid();
         cacheService.putValue(token, user.getId());
         return ResponseEntity.ok(token);
     }
+
 }

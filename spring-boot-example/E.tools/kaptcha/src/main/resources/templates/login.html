@@ -4,13 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>login</title>
-
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
-<div id="login" class="login-container">
+<div id="login" class="login-container video-container">
+
+    <div :style="fixStyle" class="filter"></div>
+    <video :style="fixStyle" autoplay loop muted class="fillWidth" v-on:canplay="canplay">
+        <!--by https://coverr.co/videos/the-mountains-ncFMIJ5yHJ-->
+        <source src="/video/loginBackground.mp4" type="video/mp4"/>
+        浏览器不支持 video 标签，建议升级浏览器。
+    </video>
+    <div class="poster hidden" v-if="!videoCanPlay">
+        <img :style="fixStyle" src="/img/loginBackground.jpg" alt="">
+    </div>
+
     <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
-        <h2 class="title">XXX平台</h2>
+        <h2 class="title">LOGIN</h2>
         <el-form-item prop="username">
             <el-input type="text"
                       v-model="loginForm.username"
@@ -32,7 +42,7 @@
         <el-form-item prop="captcha">
             <el-input
                     v-model="loginForm.captcha"
-                    style="width: 63%"
+                    style="width: 66%"
                     auto-complete="off"
                     placeholder="验证码"
             >
@@ -44,22 +54,23 @@
         </el-form-item>
         <el-checkbox style="margin:0 0 25px 0;" checked>记住密码</el-checkbox>
         <el-form-item>
-            <el-button style="width: 100%" type="primary" @click="handleLogin('loginForm')">登 录</el-button>
+            <el-button style="width: 100%" type="primary" @click="handleLogin">登 录</el-button>
         </el-form-item>
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-        <span>Copyright © 2020 xxx All Rights Reserved.</span>
+        <span>Copyright © 2020 lighter All Rights Reserved.</span>
     </div>
 </div>
 </body>
 
-<script src="//unpkg.com/vue/dist/vue.js"></script>
-<script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
-    var Main = {
+    new Vue({
+        el: '#login',
         data() {
             return {
                 captchaBase64: "",
@@ -80,11 +91,17 @@
                         {required: true, message: '请输入验证码', trigger: 'blur'}
                     ]
                 },
+                //动态背景参数
+                videoCanPlay: false,
+                fixStyle: ''
             };
         },
+        created: function () {
+            this.refreshCode();
+        },
         methods: {
-            handleLogin(formName) {
-                this.$refs[formName].validate((valid) => {
+            handleLogin() {
+                this.$refs['loginForm'].validate((valid) => {
                     if (!valid) {
                         console.log('error submit!!');
                         return false;
@@ -95,27 +112,20 @@
                             captchaText: this.loginForm.captcha,
                             captchaUuid: this.loginForm.uuid
                         }
-
-                        let that = this;
                         axios({
                             method: 'post',
                             url: '/auth/login',
                             data: userInfo
-                        })
-                            .then(response => {
-                                window.location.replace("?token=" + response.data);
-                            })
-                            .catch(function (error) {
-                                alert(error.response.data);
-                                that.refreshCode();
-                                that.loginForm.captcha = "";
-                                that.loginForm.uuid = "";
-                            });
+                        }).then(response => {
+                            window.location.replace("?token=" + response.data);
+                        }).catch(error => {
+                            this.$message.error(error.response.data);
+                            this.refreshCode();
+                            this.loginForm.captcha = "";
+                            this.loginForm.uuid = "";
+                        });
                     }
                 });
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
             },
             refreshCode() {
                 axios
@@ -128,15 +138,41 @@
                         console.log(error);
                     })
                 ;
+            },
+            canplay() {
+                this.videoCanPlay = true
             }
         },
-        mounted() {
-            this.refreshCode();
-        },
-    };
-
-    var Ctor = Vue.extend(Main)
-    new Ctor().$mount('#login')
+        mounted: function () {
+            window.onresize = () => {
+                const windowWidth = document.body.clientWidth
+                const windowHeight = document.body.clientHeight
+                const windowAspectRatio = windowHeight / windowWidth
+                let videoWidth
+                let videoHeight
+                if (windowAspectRatio < 0.5625) {
+                    videoWidth = windowWidth
+                    videoHeight = videoWidth * 0.5625
+                    this.fixStyle = {
+                        height: windowWidth * 0.5625 + 'px',
+                        width: windowWidth + 'px',
+                        'margin-bottom': (windowHeight - videoHeight) / 2 + 'px',
+                        'margin-left': 'initial'
+                    }
+                } else {
+                    videoHeight = windowHeight
+                    videoWidth = videoHeight / 0.5625
+                    this.fixStyle = {
+                        height: windowHeight + 'px',
+                        width: windowHeight / 0.5625 + 'px',
+                        'margin-left': (windowWidth - videoWidth) / 2 + 'px',
+                        'margin-bottom': 'initial'
+                    }
+                }
+            }
+            window.onresize()
+        }
+    });
 </script>
 
 <style lang="css">
@@ -161,8 +197,23 @@
         justify-content: center;
         align-items: center;
         height: 100%;
-        background-image: url("/img/loginBackground.jpg");
-        background-size: cover;
+    }
+
+    .login-container, .video-container {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .video-container .poster img, .video-container video {
+        z-index: 0;
+        position: absolute;
+    }
+
+    .video-container .filter {
+        z-index: 1;
+        position: absolute;
+        background: rgba(0, 0, 0, 0);
     }
 
     .title {
@@ -176,6 +227,8 @@
         background: #ffffff;
         width: 350px;
         padding: 25px 25px 5px 25px;
+        z-index: 2;
+        position: absolute;
     }
 
     .login-form .el-input {
