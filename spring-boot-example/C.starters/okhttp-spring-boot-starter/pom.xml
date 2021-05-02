@@ -6,11 +6,10 @@
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>okhttp-spring-boot-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>okhttp-spring-boot-starter</name>
     <description>Demo project for Spring Boot</description>
 
@@ -36,7 +35,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

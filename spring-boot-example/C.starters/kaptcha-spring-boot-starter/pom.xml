@@ -5,11 +5,10 @@
 	<parent>
 		<artifactId>spring-boot-example</artifactId>
 		<groupId>com.example</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0.0</version>
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 	<artifactId>kaptcha-spring-boot-starter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>kaptcha-spring-boot-starter</name>
 	<description>Demo project for Spring Boot</description>
 

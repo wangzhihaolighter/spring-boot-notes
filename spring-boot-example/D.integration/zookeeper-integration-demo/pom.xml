@@ -5,16 +5,14 @@
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>zookeeper-integration-demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>zookeeper-integration-demo</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
         <zookeeper.version>3.6.1</zookeeper.version>
     </properties>
 

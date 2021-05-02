@@ -5,17 +5,12 @@
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>file-manager</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>file-manager</name>
     <description>Demo project for Spring Boot</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
     <dependencies>
         <dependency>

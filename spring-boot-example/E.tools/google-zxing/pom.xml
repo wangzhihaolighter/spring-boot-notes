@@ -5,16 +5,14 @@
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>google-zxing</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>google-zxing</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
         <google-zxing.version>3.4.0</google-zxing.version>
     </properties>
 

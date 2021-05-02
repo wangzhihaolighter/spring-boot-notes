@@ -5,16 +5,14 @@
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>p6spy</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>p6spy</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
         <p6spy.version>3.8.7</p6spy.version>
     </properties>
 
