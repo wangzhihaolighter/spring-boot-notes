@@ -11,8 +11,4 @@ public interface LocalFileService {
     void download(HttpServletRequest request, HttpServletResponse response, Long id);
 
     Boolean remove(Long id);
-
-    Long breakpointResumeUpload(HttpServletRequest request, MultipartFile file);
-
-    Long shardUpload(HttpServletRequest request, MultipartFile file);
 }

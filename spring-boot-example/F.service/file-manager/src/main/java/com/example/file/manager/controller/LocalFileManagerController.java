@@ -1,4 +1,4 @@
-package com.example.file.manager.web;
+package com.example.file.manager.controller;
 
 import com.example.file.manager.service.LocalFileService;
 import lombok.extern.slf4j.Slf4j;
@@ -57,32 +57,6 @@ public class LocalFileManagerController {
     @ResponseBody
     public Boolean download(@RequestParam("id") Long id) {
         return localFileService.remove(id);
-    }
-
-    /**
-     * 断点续传
-     *
-     * @param file 上传文件
-     * @return 文件记录id
-     */
-    @PostMapping(value = "/upload/breakpointResume")
-    @ResponseBody
-    public Long breakpointResumeUpload(HttpServletRequest request,
-                                       @RequestParam("file") MultipartFile file) {
-        return localFileService.breakpointResumeUpload(request, file);
-    }
-
-    /**
-     * 分片上传
-     *
-     * @param file 上传文件
-     * @return 文件记录id
-     */
-    @PostMapping(value = "/upload/shard")
-    @ResponseBody
-    public Long shardUpload(HttpServletRequest request,
-                            @RequestParam("file") MultipartFile file) {
-        return localFileService.shardUpload(request, file);
     }
 
 }

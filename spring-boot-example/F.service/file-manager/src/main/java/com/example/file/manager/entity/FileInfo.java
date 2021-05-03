@@ -32,4 +32,8 @@ public class FileInfo implements Serializable {
      * 相对路径
      */
     private String relativePath;
+    /**
+     * 绝对路径
+     */
+    private String absolutePath;
 }

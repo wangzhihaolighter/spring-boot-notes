@@ -35,22 +35,21 @@ public class LocalFileServiceImpl implements LocalFileService {
         // 文件新名字
         String fileNewName = UUID.randomUUID().toString().replace("-", "") + suffixName;
         // 生成文件路径
-        String fileRelativePath = now.getYear()
+        String fileRelativePath = File.separator + now.getYear()
                 + File.separator + now.getMonthValue()
                 + File.separator + now.getDayOfMonth()
                 + File.separator + now.getHour();
-        String fileFullPath = fileProperties.getUploadBasePath() + File.separator + fileRelativePath;
+        String fileFullPath = fileProperties.getUploadBasePath() + fileRelativePath;
         File destFile = new File(fileFullPath + File.separator + fileNewName);
         if (!destFile.getParentFile().exists()) {
             destFile.getParentFile().mkdirs();
         }
 
         if (!file.isEmpty()) {
-            BufferedOutputStream out = null;
             try {
                 //方式一：BufferedOutputStream
                 //byte[] bytes = file.getBytes();
-                //out = new BufferedOutputStream(new FileOutputStream(destFile));
+                //@Cleanup BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(destFile));
                 //out.write(bytes);
 
                 //方式二：transferTo
@@ -62,20 +61,13 @@ public class LocalFileServiceImpl implements LocalFileService {
                 fileInfo.setOriginFileName(fileName);
                 fileInfo.setExt(suffixName);
                 fileInfo.setRelativePath(fileRelativePath);
+                fileInfo.setAbsolutePath(destFile.getAbsolutePath());
                 fileInfo.setCreateTime(now);
                 fileInfoRepository.saveAndFlush(fileInfo);
                 return fileInfo.getId();
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("You failed to upload " + fileName + " => " + e.getMessage());
-            } finally {
-                if (null != out) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
         } else {
             System.out.println("You failed to upload " + fileName + " because the file was empty.");
@@ -140,15 +132,4 @@ public class LocalFileServiceImpl implements LocalFileService {
         return false;
     }
 
-    @Override
-    public Long breakpointResumeUpload(HttpServletRequest request, MultipartFile file) {
-        //TODO
-        return null;
-    }
-
-    @Override
-    public Long shardUpload(HttpServletRequest request, MultipartFile file) {
-        //TODO
-        return null;
-    }
 }
