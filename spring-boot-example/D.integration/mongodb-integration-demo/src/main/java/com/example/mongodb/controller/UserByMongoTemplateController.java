@@ -1,4 +1,4 @@
-package com.example.mongodb.web;
+package com.example.mongodb.controller;
 
 import com.example.mongodb.dao.UserDao;
 import com.example.mongodb.dto.PageInfoDTO;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/user/mt")
+public class UserByMongoTemplateController {
 
     private final UserDao userDao;
 
-    public UserController(UserDao userDao) {
+    public UserByMongoTemplateController(UserDao userDao) {
         this.userDao = userDao;
     }
 

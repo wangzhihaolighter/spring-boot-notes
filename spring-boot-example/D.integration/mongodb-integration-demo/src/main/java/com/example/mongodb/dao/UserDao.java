@@ -5,6 +5,7 @@ import com.example.mongodb.entity.User;
 import com.mongodb.bulk.BulkWriteResult;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.BulkOperations;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserDao {
@@ -31,21 +32,13 @@ public class UserDao {
     /* insert */
 
     public String save(User user) {
-        String id = UUID.randomUUID().toString();
-        user.setId(id);
         mongoTemplate.save(user);
-        return id;
+        return user.getId().toString();
     }
 
     public List<String> batchSave(List<User> users) {
-        List<String> ids = new ArrayList<>();
-        users.forEach(user -> {
-            String id = UUID.randomUUID().toString();
-            user.setId(id);
-            ids.add(id);
-        });
         mongoTemplate.insert(users, User.class);
-        return ids;
+        return users.stream().map(user -> user.getId().toString()).collect(Collectors.toList());
     }
 
     /* select */
@@ -55,12 +48,13 @@ public class UserDao {
     }
 
     public User findById(String id) {
-        return mongoTemplate.findById(id, User.class);
+        return mongoTemplate.findById(new ObjectId(id), User.class);
     }
 
     public List<User> findByUsername(String username) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("username").is(username));
+        //模糊查询
+        query.addCriteria(Criteria.where("username").regex(username));
         return mongoTemplate.find(query, User.class);
     }
 
