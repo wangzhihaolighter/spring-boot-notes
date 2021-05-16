@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>spring-boot-example</artifactId>
+        <groupId>com.example</groupId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>E.tools</artifactId>
+    <packaging>pom</packaging>
+
+    <name>starters</name>
+    <description>Spring Boot 与一些框架工具的集成示例</description>
+
+    <modules>
+        <module>apache-poi</module>
+        <module>browscap-java</module>
+        <module>caffeine</module>
+        <module>flyway</module>
+        <module>google-zxing</module>
+        <module>h2database</module>
+        <module>ip2region</module>
+        <module>jjwt</module>
+        <module>jsch</module>
+        <module>kaptcha</module>
+        <module>oshi-core</module>
+        <module>p6spy</module>
+        <module>springdoc-openapi</module>
+        <module>springfox-swagger</module>
+        <module>useragentutils</module>
+    </modules>
+
+</project>

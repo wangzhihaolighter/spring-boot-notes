@@ -4,19 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>D.integration</artifactId>
+        <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>rabbitmq-integration-demo</artifactId>
+    <artifactId>F.services</artifactId>
     <packaging>pom</packaging>
-    <name>rabbitmq-integration-demo</name>
-    <description>Demo project for Spring Boot</description>
+
+    <name>services</name>
+    <description>利用 Spring Boot 实现的一些功能服务示例</description>
 
     <modules>
-        <module>rabbitmq-consumer-demo</module>
-        <module>rabbitmq-provider-demo</module>
+        <!--TODO 文件管理服务-->
+        <module>file-manager</module>
+        <!--TODO 简单的RBAC权限管理系统-->
+        <module>security-admin</module>
     </modules>
 
 </project>

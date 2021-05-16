@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>spring-boot-example</artifactId>
+        <artifactId>B.features</artifactId>
         <groupId>com.example</groupId>
-        <version>1.0.0</version>
-        <relativePath>../../pom.xml</relativePath>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>internationalization</artifactId>
     <name>internationalization</name>

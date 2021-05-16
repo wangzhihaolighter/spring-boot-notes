@@ -4,19 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>D.integration</artifactId>
+        <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>rabbitmq-integration-demo</artifactId>
+    <artifactId>A.hello</artifactId>
     <packaging>pom</packaging>
-    <name>rabbitmq-integration-demo</name>
-    <description>Demo project for Spring Boot</description>
+
+    <name>hello</name>
+    <description>Spring Boot 快速起步项目</description>
 
     <modules>
-        <module>rabbitmq-consumer-demo</module>
-        <module>rabbitmq-provider-demo</module>
+        <module>hello-world</module>
     </modules>
 
 </project>
