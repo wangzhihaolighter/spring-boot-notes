@@ -16,10 +16,6 @@
     <description>利用 Spring Boot 实现的一些功能服务示例</description>
 
     <modules>
-        <!--TODO 文件管理服务-->
-        <module>file-manager</module>
-        <!--TODO 简单的RBAC权限管理系统-->
-        <module>security-admin</module>
     </modules>
 
 </project>
