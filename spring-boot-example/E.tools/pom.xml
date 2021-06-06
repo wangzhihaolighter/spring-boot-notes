@@ -23,6 +23,7 @@
         <module>google-zxing</module>
         <module>h2database</module>
         <module>ip2region</module>
+        <module>jasypt</module>
         <module>jjwt</module>
         <module>jsch</module>
         <module>kaptcha</module>

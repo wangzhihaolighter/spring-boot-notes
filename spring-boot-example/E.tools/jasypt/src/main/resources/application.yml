@@ -1,0 +1,6 @@
+jasypt:
+  encryptor:
+    password: 1qaz@WSX
+
+test:
+  enc-property: ENC(EDKs7jXf2ukmiwQl59P4DS+7vVKNjBReJLSfIizuYV+8haE6tZyEp/zLZiRTKWiD)
