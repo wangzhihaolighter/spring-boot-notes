@@ -29,7 +29,7 @@ JWT由三部分组成，依次如下: header(头)、payload(载体)、signature(
 Header.Payload.Signature
 ```
 
-![示例](/IMG/JWT/01.jpg)
+![示例](../../IMG/jwt/01.jpg)
 
 它们按照 A.B.C 的格式拼接起来，其中C由A和B生成，他们之间的格式为 Base64(header).Base64(payload).H256(A.B)。
 

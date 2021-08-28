@@ -14,7 +14,7 @@ H2不仅提供了JDBC、ODBC访问接口，还提供了非常友好的基于web�
 
 ## 对比其他开源数据库
 
-![示例](/IMG/h2database/001.png)
+![示例](../..../../IMG/h2database/001.png)
 
 - Pure Java : 纯Java
 - Memory Mode : 支持内存模式
@@ -41,7 +41,7 @@ H2数据库支持如下三种连接方式：
 
 在嵌入式模式下，I / O操作可以由执行SQL命令的应用程序线程执行。应用程序可能不会中断这些线程，它可能导致数据库损坏，因为JVM在线程中断期间会关闭I / O句柄。考虑其他方法来控制应用程序的执行。当可能发生中断时，可以将 `async:` 文件系统用作解决方法，但不能保证完全安全。建议改用客户端-服务器模型，客户端可能会中断自己的线程。
 
-![example](/IMG/h2database/002.png)
+![example](../../IMG/h2database/002.png)
 
 ### 服务器模式
 
@@ -49,7 +49,7 @@ H2数据库支持如下三种连接方式：
 
 服务器模式比嵌入式模式慢，因为所有数据都是通过TCP / IP传输的。与所有模式一样，持久性数据库和内存数据库均受支持。每个服务器并发打开的数据库数或打开的连接数没有限制。
 
-![example](/IMG/h2database/003.png)
+![example](../../IMG/h2database/003.png)
 
 ### 混合模式
 
@@ -57,13 +57,13 @@ H2数据库支持如下三种连接方式：
 
 可以从应用程序内部（使用服务器API）启动或停止服务器，也可以自动（自动混合模式）启动和停止服务器。使用自动混合模式时，所有要连接到数据库的客户端（无论是本地连接还是远程连接）都可以使用完全相同的数据库URL进行连接。
 
-![example](/IMG/h2database/004.png)
+![example](../../IMG/h2database/004.png)
 
 ### H2数据库JDBC URL格式
 
 H2数据库支持多种连接方式和连接设置，连接URL格式如下，URL中的设置大小写不敏感。
 
-![example](/IMG/h2database/007.png)
+![example](../../IMG/h2database/007.png)
 
 ## H2连接字符串参数
 
@@ -109,9 +109,9 @@ h2 web数据库管理页面默认路径为`/h2-console`，通过 <http://localho
 
 注意修改`JDBC URL`为配置的url连接后连接h2数据库。
 
-![example](/IMG/h2database/005.png)
+![example](../../IMG/h2database/005.png)
 
-![example](/IMG/h2database/006.png)
+![example](../../IMG/h2database/006.png)
 
 ## 参考
 

@@ -32,9 +32,9 @@ Apache POI 项目组件对应的格式文档
 
 Component Map (组件对应文档及Maven仓库项目)：
 
-![example](/IMG/POI/001.png)
+![example](../../IMG/poi/001.png)
 
-![example](/IMG/POI/002.png)
+![example](../../IMG/poi/002.png)
 
 ## 整合使用
 

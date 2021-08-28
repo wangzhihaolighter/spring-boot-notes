@@ -113,7 +113,7 @@ CREATE OR REPLACE VIEW blue_cars AS
 
 为了由Flyway接管，SQL迁移必须符合以下命名模式：
 
-![example](/IMG/flyway/001.png)
+![example](../../IMG/flyway/001.png)
 
 文件名由以下部分组成：
 
@@ -134,7 +134,7 @@ Flyway可以在文件系统和Java类路径上发现基于SQL的迁移。迁移�
 - `filesystem:`前缀的位置以文件系统为目标。
 - `classpath:`前缀的位置或带有前缀的位置以Java类路径为目标。
 
-![example](/IMG/flyway/002.png)
+![example](../../IMG/flyway/002.png)
 
 新的基于SQL的迁移是在运行时通过文件系统和Java类路径扫描自动发现的。一旦配置locations好要使用的SQL，只要新的SQL迁移符合配置的命名约定，Flyway就会自动选择它们。
 

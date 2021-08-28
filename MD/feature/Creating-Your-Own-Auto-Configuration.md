@@ -254,13 +254,13 @@ OkHttpAutoConfiguration
 
 starter 编译后，会根据配置类自动生成对应的 `spring-configuration-metadata.json` 属性元文件：
 
-![示例](/IMG/auto-configuration/01.png)
+![示例](../../IMG/auto-configuration/01.png)
 
-![示例](/IMG/auto-configuration/02.png)
+![示例](../../IMG/auto-configuration/02.png)
 
 该属性元文件会为配置属性提供对应的注释说明：
 
-![示例](/IMG/auto-configuration/03.png)
+![示例](../../IMG/auto-configuration/03.png)
 
 ### 使用starter
 
@@ -276,7 +276,7 @@ starter 编译后，会根据配置类自动生成对应的 `spring-configuratio
 
 在配置文件中添加属性：
 
-![示例](/IMG/auto-configuration/04.png)
+![示例](../../IMG/auto-configuration/04.png)
 
 使用该 okhttp 实例
 
@@ -297,7 +297,7 @@ starter 编译后，会根据配置类自动生成对应的 `spring-configuratio
 
 运行，查看结果
 
-![示例](/IMG/auto-configuration/05.png)
+![示例](../../IMG/auto-configuration/05.png)
 
 通过运行结果可以看到自动配置的 okHttpClient 生效了。
 

@@ -6,17 +6,17 @@
 
 > 新建一个Spring Initializr项目
 
-![示例](/IMG/hello/01.png)
+![示例](../../IMG/hello/01.png)
 
 > 勾选web依赖，完成项目创建
 
 web依赖中包含Spring MVC和嵌入式的tomcat
 
-![示例](/IMG/hello/02.png)
+![示例](../../IMG/hello/02.png)
 
 > 完成项目创建后，在Application类同级目录下创建Controller类
 
-![示例](/IMG/hello/03.png)
+![示例](../../IMG/hello/03.png)
 
 ```java
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,13 +34,13 @@ public class SimpleController {
 
 > 启动项目，运行Application类的main方法
 
-![示例](/IMG/hello/04.png)
+![示例](../../IMG/hello/04.png)
 
 > 运行结果
 
-![示例](/IMG/hello/05.png)
+![示例](../../IMG/hello/05.png)
 
-![示例](/IMG/hello/06.png)
+![示例](../../IMG/hello/06.png)
 
 运行成功，通过浏览器访问 **<http://localhost:8080/>** ，可以看到成功返回了Hello World。
 
@@ -58,8 +58,8 @@ Spring官方提供的文档非常详细，每个版本和每个整合的模块�
 
 - [Spring Boot 开发文档地址](https://spring.io/projects/spring-boot#learn)
 
-![Spring Boot 开发文档地址](/IMG/hello/07.png)
+![Spring Boot 开发文档地址](../../IMG/hello/07.png)
 
 - [Spring Boot 项目 Github 地址](https://github.com/spring-projects/spring-boot)
 
-![Spring Boot 项目 Github 地址](/IMG/hello/08.png)
+![Spring Boot 项目 Github 地址](../../IMG/hello/08.png)

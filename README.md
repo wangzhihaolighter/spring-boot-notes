@@ -14,7 +14,7 @@ JDK版本：8
 
 你好，Spring Boot。
 
-- [**hello**：一个简单Spring Boot的HelloWorld示例](MD/feature/Hello-World.md)
+- [**hello**：一个简单Spring Boot的HelloWorld示例](MD/hello/Hello-World.md)
 
 ## B.features
 
