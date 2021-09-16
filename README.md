@@ -27,7 +27,6 @@ Spring Boot的一些特性。
 - [**logging**：日志](MD/feature/Logging.md)
 - [**sending-email**：发送邮件](MD/feature/Sending-Email.md)
 - [**testing**：测试](MD/feature/Testing.md)
-- [**web-server-optimize**：Spring Boot Web 服务优化](MD/feature/web-server-optimize.md)
 
 ## C.starters
 

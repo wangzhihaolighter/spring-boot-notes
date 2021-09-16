@@ -1,0 +1,29 @@
+### 正常 - 中文响应信息
+GET /success HTTP/1.1
+Host: localhost:8080
+Accept-Language: zh
+
+### 失败 - 中文响应信息
+GET /fail HTTP/1.1
+Host: localhost:8080
+Accept-Language: zh
+
+### 校验异常 - 中文响应信息
+GET /valid HTTP/1.1
+Host: localhost:8080
+Accept-Language: zh
+
+### 正常 - 英文响应信息
+GET /success HTTP/1.1
+Host: localhost:8080
+Accept-Language: en
+
+### 失败 - 英文响应信息
+GET /fail HTTP/1.1
+Host: localhost:8080
+Accept-Language: en
+
+### 校验异常 - 英文响应信息
+GET /valid HTTP/1.1
+Host: localhost:8080
+Accept-Language: en

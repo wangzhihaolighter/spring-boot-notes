@@ -5,7 +5,7 @@
     scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
     debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
 -->
-<configuration  scan="true" scanPeriod="10 seconds">
+<configuration scan="true" scanPeriod="10 seconds">
 
     <!-- 引入默认的logback配置文件 -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
@@ -14,9 +14,90 @@
         Environment Properties
         通过定义的值会被插入到logger上下文中，定义变量后，可以使“${}”来使用变量。
     -->
-    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- ThresholdFilter:阀值过滤器，过滤阈值水平以下的事件。 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- Minimum logging level to be presented in the console logs-->
+            <level>DEBUG</level>
+        </filter>
+        <!-- 对记录事件进行格式化 -->
+        <encoder>
+            <pattern>${COLOR_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
     <springProperty scope="context" name="LOG_HOME" source="logging.file.path"/>
-    <property name="LOG_FILE" value="${springAppName}"/>
+    <appender name="flatFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建 -->
+        <file>${LOG_HOME}/${LOG_FILE}.log</file>
+        <!-- 当发生滚动时，决定RollingFileAppender的行为，涉及文件移动和重命名。属性class定义具体的滚动策略类 -->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <!-- 用于配置符合过滤条件的操作 ACCEPT：匹配该级别及以上，日志会被立即处理，不再经过剩余过滤器 -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 用于配置不符合过滤条件的操作 DENY：不匹配该级别以下，日志将立即被抛弃，不再经过其他过滤器 -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- LevelFilter： 级别过滤器，根据日志级别进行过滤 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 必要节点，包含文件名及"%d"转换符，"%d"可以包含一个java.text.SimpleDateFormat指定的时间格式，默认格式是 yyyy-MM-dd -->
+            <fileNamePattern>${LOG_HOME}/${LOG_FILE}.log.%i.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，如果是6，则只保存最近6个月的文件，删除之前的旧文件 -->
+            <maxHistory>7</maxHistory>
+            <!-- 最多10GB -->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--重启清理日志文件-->
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
+    <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc/>
+                <timestamp>
+                    <timeZone>GMT+8</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "log_severity": "%level",
+                        "log_service": "${SPRING_APPLICATION_NAME:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "column": "%F:%L",
+                        "log_message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <file>${LOG_HOME}/${LOG_FILE}.json.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 必要节点，包含文件名及"%d"转换符，"%d"可以包含一个java.text.SimpleDateFormat指定的时间格式，默认格式是 yyyy-MM-dd -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <fileNamePattern>${LOG_HOME}/${LOG_FILE}.json.log.%i.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，如果是6，则只保存最近6个月的文件，删除之前的旧文件 -->
+            <maxHistory>7</maxHistory>
+            <!-- 最多10GB -->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--重启清理日志文件-->
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
 
     <!-- 彩色日志 -->
     <!-- 彩色日志依赖的渲染类 -->
@@ -40,12 +121,7 @@
     -->
 
     <!-- 彩色日志格式 -->
-    <property name="CONSOLE_LOG_PATTERN"
-              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
-
-    <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
-    <property name="pattern"
-              value="%d{yyyyMMdd:HH:mm:ss.SSS} [%thread] %-5level  %msg%n"/>
+    <logger level="info" name="java.sql"/>
 
     <!--
         Appender: 设置日志信息的去向,常用的有以下几个
@@ -55,89 +131,14 @@
     -->
 
     <!-- Appender to log to console -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <!-- ThresholdFilter:阀值过滤器，过滤阈值水平以下的事件。 -->
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <!-- Minimum logging level to be presented in the console logs-->
-            <level>DEBUG</level>
-        </filter>
-        <!-- 对记录事件进行格式化 -->
-        <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
+    <logger level="warn" name="org.springframework"/>
 
     <!-- Appender to log to file -->
-    <appender name="flatFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建 -->
-        <file>${LOG_HOME}/${LOG_FILE}.log</file>
-        <!-- 当发生滚动时，决定RollingFileAppender的行为，涉及文件移动和重命名。属性class定义具体的滚动策略类 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 必要节点，包含文件名及"%d"转换符，"%d"可以包含一个java.text.SimpleDateFormat指定的时间格式，默认格式是 yyyy-MM-dd -->
-            <fileNamePattern>${LOG_HOME}/${LOG_FILE}.log.%i.%d{yyyy-MM-dd}.gz</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>20MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件。假设设置每个月滚动，如果是6，则只保存最近6个月的文件，删除之前的旧文件 -->
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${pattern}</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <!-- LevelFilter： 级别过滤器，根据日志级别进行过滤 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <!-- 用于配置符合过滤条件的操作 ACCEPT：日志会被立即处理，不再经过剩余过滤器 -->
-            <onMatch>ACCEPT</onMatch>
-            <!-- 用于配置不符合过滤条件的操作 DENY：日志将立即被抛弃不再经过其他过滤器 -->
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
+    <property name="LOG_FILE" value="${SPRING_APPLICATION_NAME}"/>
 
     <!-- Appender to log to file in a JSON format -->
-    <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_HOME}/${LOG_FILE}.json</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_HOME}/${LOG_FILE}.json.%d{yyyy-MM-dd}.gz</fileNamePattern>
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
-        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-            <providers>
-                <timestamp>
-                    <timeZone>GMT+8</timeZone>
-                </timestamp>
-                <pattern>
-                    <pattern>
-                        {
-                        "severity": "%level",
-                        "service": "${springAppName:-}",
-
-                        <!--sleuth自动填充参数，用于日志追踪-->
-                        "trace": "%X{X-B3-TraceId:-}",
-                        "span": "%X{X-B3-SpanId:-}",
-                        "parent": "%X{X-B3-ParentSpanId:-}",
-                        "exportable": "%X{X-Span-Export:-}",
-                        <!--sleuth自动填充参数，用于日志追踪-->
-
-                        <!--自定义参数，过滤器拦截请求填充-->
-                        "url": "%X{url:-}",
-                        "ip": "%X{ip:-}",
-                        "userId": "%X{userId:-}",
-                        <!--自定义参数，过滤器拦截请求填充-->
-
-                        "pid": "${PID:-}",
-                        "thread": "%thread",
-                        "class": "%logger{40}",
-                        "column": "%F:%L",
-                        "rest": "%message"
-                        }
-                    </pattern>
-                </pattern>
-            </providers>
-        </encoder>
-    </appender>
+    <property name="LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%15.15t] %-40.40logger{39} : %msg%n"/>
 
     <!--
         用来设置某一个包或者具体的某一个类的日志打印级别、以及指定<appender>。
@@ -150,12 +151,9 @@
             默认是true，子Logger是否继承父Logger的输出源（appender）的标志位
         <logger>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个logger
     -->
-    <logger name="java.sql" level="info" additivity="false">
-        <level value="info" />
-        <appender-ref ref="console"/>
-        <appender-ref ref="flatFile"/>
-        <appender-ref ref="logstash"/>
-    </logger>
+    <property name="COLOR_LOG_PATTERN"
+              value="${COLOR_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <springProperty name="SPRING_APPLICATION_NAME" scope="context" source="spring.application.name"/>
 
     <!--
         也是<logger>元素，但是它是根logger。默认debug

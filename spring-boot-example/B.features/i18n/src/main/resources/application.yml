@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: i18n
+  web:
+    locale: zh
+    locale-resolver: accept_header
+  messages:
+    basename: i18n/message
