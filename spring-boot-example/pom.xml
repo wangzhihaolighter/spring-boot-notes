@@ -32,7 +32,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>A.hello</module>
+        <module>A.using</module>
         <module>B.features</module>
         <module>C.starters</module>
         <module>D.integration</module>

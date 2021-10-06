@@ -10,11 +10,13 @@ JDK版本：8
 
 开发工具：IntelliJ IDEA
 
-## A.hello
+代码风格：[google-java-format](https://github.com/google/google-java-format)
 
-你好，Spring Boot。
+## A.using
 
-- [**hello**：一个简单Spring Boot的HelloWorld示例](MD/hello/Hello-World.md)
+Spring Boot的一些使用。
+
+- [**hello-world**：一个简单Spring Boot的HelloWorld示例](MD/hello/Hello-World.md)
 
 ## B.features
 
