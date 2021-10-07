@@ -3,17 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>D.integration</artifactId>
+    <packaging>pom</packaging>
+    <name>starters</name>
+    <description>Spring Boot 与一些外部服务组件的集成示例</description>
+
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>D.integration</artifactId>
-    <packaging>pom</packaging>
-
-    <name>starters</name>
-    <description>Spring Boot 与一些开源服务组件的集成示例</description>
 
     <modules>
         <module>mongodb-integration-demo</module>

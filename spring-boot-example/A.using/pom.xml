@@ -3,17 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>A.using</artifactId>
+    <packaging>pom</packaging>
+    <name>using</name>
+    <description>Spring Boot 使用示例</description>
+
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>A.using</artifactId>
-    <packaging>pom</packaging>
-
-    <name>hello</name>
-    <description>Spring Boot 快速起步项目</description>
 
     <modules>
         <module>hello-world</module>

@@ -3,17 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>C.starters</artifactId>
+    <packaging>pom</packaging>
+    <name>starters</name>
+    <description>一些框架或功能整合后的Spring Boot Starter</description>
+
     <parent>
         <artifactId>spring-boot-example</artifactId>
         <groupId>com.example</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>C.starters</artifactId>
-    <packaging>pom</packaging>
-
-    <name>starters</name>
-    <description>一些框架或功能整合后的Spring Boot Starter</description>
 
     <modules>
         <module>kaptcha-spring-boot-starter</module>
