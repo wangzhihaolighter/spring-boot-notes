@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>package-war</artifactId>
-  <version>${revision</version>
+  <version>${revision}</version>
 
   <name>package-war</name>
   <description>构建war格式部署包</description>
