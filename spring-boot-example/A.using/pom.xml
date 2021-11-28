@@ -18,6 +18,7 @@
 
     <modules>
         <module>hello-world</module>
+        <module>package-war</module>
     </modules>
 
 </project>
