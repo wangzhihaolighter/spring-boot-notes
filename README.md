@@ -17,6 +17,7 @@ JDK版本：8
 Spring Boot的一些使用。
 
 - [**hello-world**：一个简单Spring Boot的HelloWorld示例](DOC/A.using/hello-world/Hello-World.md)
+- **package war**：构建war格式部署包示例
 
 ## B.features
 
