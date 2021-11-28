@@ -18,6 +18,7 @@ Spring Boot的一些使用。
 
 - [**hello-world**：一个简单Spring Boot的HelloWorld示例](DOC/A.using/hello-world/Hello-World.md)
 - **package war**：构建war格式部署包示例
+- **package zip**：构建zip格式部署包示例，zip包中包含jar和各个环境配置文件
 
 ## B.features
 

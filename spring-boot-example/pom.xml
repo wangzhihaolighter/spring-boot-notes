@@ -19,6 +19,8 @@
     <revision>1.0.0</revision>
     <spring-boot.version>2.5.5</spring-boot.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+    <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
   </properties>
 
   <dependencyManagement>
