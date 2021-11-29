@@ -17,6 +17,7 @@ JDK版本：8
 Spring Boot的一些使用。
 
 - [**hello-world**：一个简单Spring Boot的HelloWorld示例](DOC/A.using/hello-world/Hello-World.md)
+- **devtools**：热部署插件整合示例
 - **package image**：构建部署镜像示例
 - **package war**：构建war格式部署包示例
 - **package zip**：构建zip格式部署包示例，zip包中包含jar和各个环境配置文件

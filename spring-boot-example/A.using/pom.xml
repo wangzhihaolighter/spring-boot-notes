@@ -17,6 +17,7 @@
     </parent>
 
     <modules>
+        <module>devtools</module>
         <module>hello-world</module>
         <module>package-image</module>
         <module>package-war</module>
