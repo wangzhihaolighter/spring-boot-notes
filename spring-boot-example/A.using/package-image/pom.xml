@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>package-image</artifactId>
+  <version>${revision}</version>
+
+  <name>package-image</name>
+  <description>构建部署镜像</description>
+
+  <parent>
+    <artifactId>A.using</artifactId>
+    <groupId>com.example</groupId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- 生成可执行JAR包 -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- 构建部署镜像的maven插件，官方文档：http://dmp.fabric8.io/ -->
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker-maven-plugin.version}</version>
+        <!--全局配置-->
+        <configuration>
+          <!-- 构建参数 -->
+          <buildArgs>
+            <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+          <!-- 镜像相关配置,支持多镜像 -->
+          <images>
+            <!-- 单个镜像配置 -->
+            <image>
+              <!--镜像名(含版本号)-->
+              <name>example/${project.name}:${project.version}</name>
+              <!-- 别名:用于容器命名配置 -->
+              <alias>${project.name}</alias>
+              <!-- registry地址,用于推送,拉取镜像 -->
+              <registry>localhost</registry>
+              <!-- 镜像build相关配置 -->
+              <build>
+                <!-- 用于生成上下文的目录路径 -->
+                <contextDir>${project.basedir}</contextDir>
+                <!-- dockerFile文件路径 -->
+                <dockerFile>Dockerfile</dockerFile>
+              </build>
+            </image>
+          </images>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -18,6 +18,7 @@
 
     <modules>
         <module>hello-world</module>
+        <module>package-image</module>
         <module>package-war</module>
         <module>package-zip</module>
     </modules>
