@@ -36,3 +36,4 @@ build/
 
 ### Other ###
 *.log
+h2database_data/

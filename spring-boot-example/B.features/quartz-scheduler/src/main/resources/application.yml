@@ -1,0 +1,48 @@
+server:
+  port: 0 # 随机接口，可用于启动多实例
+spring:
+  application:
+    name: quartz-scheduler-integration-demo
+  # 配置数据源用于 quartz initialize
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./spring-boot-example/B.features/quartz-scheduler/h2database_data/quartz_db
+    username: admin
+    password: 123456
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true
+        web-allow-others: true
+  quartz:
+    job-store-type: JDBC
+    jdbc:
+      # 一般使用NEVER，这里用于演示，实际初始化使用`org.quartz.impl.jdbcjobstore`包下相应数据库类型的初始化SQL
+      # 注意：这里的初始化配置并不会初始化`spring.quartz.properties`参数中配置的数据源
+      initialize-schema: ALWAYS
+    # 配置参数见官方文档说明（选择使用的quartz版本）：http://www.quartz-scheduler.org/documentation/quartz-2.3.0/configuration/index.html
+    properties:
+      # 调度器配置
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.scheduler.instancName: QuartzScheduler
+      # 线程池配置
+      org.quartz.threadPool.class: org.quartz.simpl.SimpleThreadPool
+      org.quartz.threadPool.threadNamePrefix: QuartzScheduler_Worker
+      org.quartz.threadPool.threadCount: 20
+      org.quartz.threadPool.threadPriority: 5
+      # 数据源配置 - 持久化
+      org.quartz.dataSource.quartzDB.provider: hikaricp # 见 org.quartz.utils.PoolingConnectionProvider
+      org.quartz.dataSource.quartzDB.driver: org.h2.Driver
+      org.quartz.dataSource.quartzDB.URL: jdbc:h2:file:./spring-boot-example/B.features/quartz-scheduler/h2database_data/quartz_db
+      org.quartz.dataSource.quartzDB.user: admin
+      org.quartz.dataSource.quartzDB.password: 123456
+      # JobStore配置
+      org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
+      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate # StdJDBCDelegate支持集群
+      org.quartz.jobStore.dataSource: quartzDB # 使用org.quartz.dataSource定义的数据源
+      org.quartz.jobStore.tablePrefix: QRTZ_
+      org.quartz.jobStore.isClustered: true
+      org.quartz.jobStore.clusterCheckinInterval: 1000
+      org.quartz.jobStore.useProperties: false
