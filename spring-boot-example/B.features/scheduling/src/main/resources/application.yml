@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: scheduling
+  task:
+    scheduling:
+      pool:
+        size: 5
+      thread-name-prefix: scheduling-
+      shutdown:
+        await-termination: true
+        await-termination-period: PT60S

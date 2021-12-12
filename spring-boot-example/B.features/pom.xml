@@ -27,6 +27,7 @@
     <module>externalized-configuration</module>
     <module>i18n</module>
     <module>logging</module>
+    <module>scheduling</module>
     <module>sending-email</module>
     <module>testing</module>
   </modules>
