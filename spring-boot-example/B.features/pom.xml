@@ -22,6 +22,7 @@
     <module>auto-configuration</module>
     <module>bean-validation</module>
     <module>dynamic-scheduling</module>
+    <module>event-listener</module>
     <module>externalized-configuration</module>
     <module>i18n</module>
     <module>logging</module>
