@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: async
+  task:
+    execution:
+      thread-name-prefix: task-
+      pool:
+        core-size: 8
+        keep-alive: 120s
+      shutdown:
+        await-termination: true
+        await-termination-period: 60s
