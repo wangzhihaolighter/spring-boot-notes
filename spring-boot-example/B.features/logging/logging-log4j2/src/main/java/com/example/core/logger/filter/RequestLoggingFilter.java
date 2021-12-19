@@ -1,6 +1,5 @@
-package com.example.filter;
+package com.example.core.logger.filter;
 
-import cn.hutool.extra.servlet.ServletUtil;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.AbstractRequestLoggingFilter;
 
 /**
- * 将日志所需参数填充至MDC，然后由logback打印
+ * 将日志所需参数填充至MDC
  *
  * @author wangzhihao
  */
@@ -22,7 +21,11 @@ public class RequestLoggingFilter extends AbstractRequestLoggingFilter {
 
   @Override
   protected void beforeRequest(HttpServletRequest request, String message) {
-    MDC.put("request_ip", ServletUtil.getClientIP(request));
+    String ipAddress = request.getHeader("X-FORWARDED-FOR");
+    if (ipAddress == null) {
+      ipAddress = request.getRemoteAddr();
+    }
+    MDC.put("request_ip", ipAddress);
     MDC.put("request_url", request.getRequestURI());
     MDC.put("request_user_id", "<get userId from service>");
   }

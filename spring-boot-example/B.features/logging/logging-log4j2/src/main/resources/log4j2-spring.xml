@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 官方配置说明：https://logging.apache.org/log4j/2.x/manual/index.html -->
+<!-- Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出 -->
+<!-- monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数 -->
+<!-- 日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<configuration monitorInterval="5">
+  <!-- 变量配置 -->
+  <Properties>
+    <!-- 定义日志存储的路径，不要配置相对路径 -->
+    <property name="FILE_PATH">${spring:logging.file.path}</property>
+    <!-- 定义日志存储的文件名称 -->
+    <property name="FILE_NAME">${spring:spring.application.name}</property>
+    <!--
+      格式化输出：
+        %date表示日期
+        %thread表示线程名
+        %-5level：级别从左显示5个字符宽度
+        %msg：日志消息，%n是换行符
+        %logger{36} 表示 Logger 名字最长36个字符
+    -->
+    <!-- 常规格式化输出 -->
+    <property name="LOG_PATTERN"
+      value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%15.15t] %-40.40logger{39} : %msg%n"/>
+    <!--
+    MDC填充日志：这里使用 %X{paramKey} 获取MDC填充的参数：%X{request_uri} %X{request_ip} %X{request_user_id}
+    -->
+    <property name="MDC_LOG_PATTERN"
+      value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%15.15t] %X{request_uri} %X{request_ip} %X{request_user_id} %-40.40logger{39} : %msg%n"/>
+    <!-- 彩色格式化输出 -->
+    <property name="COLOR_LOG_PATTERN"
+      value="%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx"/>
+  </Properties>
+
+  <!--
+  定义Filters（https://logging.apache.org/log4j/2.x/manual/filters.html）：
+    过滤器允许对日志事件进行评估，以确定是否或如何发布它们。
+    Filter 将在其中一个过滤器方法上被调用，并返回 Result，它是一个 Enum，具有三个值之一：ACCEPT、 DENY 或 NEUTRAL。
+    过滤器可以配置在以下四个位置之一:
+        上下文过滤器直接配置在配置中。这些过滤器拒绝的事件将不会传递给记录器以进行进一步处理。一旦通过上下文过滤器接受了事件，它将不会被任何其他上下文范围的过滤器（也不会评估Logger的级别来过滤事件。然而，该事件将由记录器和Appender过滤器进行评估。
+        日志记录器筛选器配置在指定的日志记录器上。在使用上下文范围筛选器和记录器的日志级别之后，将对它们进行评估。被这些筛选器拒绝的事件将被丢弃，无论添加性设置如何，事件都不会传递给父日志记录器。
+        Appender Filters 用于确定特定的 Appender 是否应该处理事件的格式化和发布。
+        Appender Reference Filters 用于确定日志记录器是否应该将事件路由到一个 Appender。
+
+  Filters：
+    BurstFilter：BurstFilter 提供了一种机制，通过在达到最大限制后默默地丢弃事件来控制 LogEvents 处理的速度。
+    CompositeFilter：CompositeFilter 提供了一种指定多个筛选器的方法。它作为筛选器元素添加到配置中，并包含要求值的其他筛选器。Filters 元素不接受任何参数。
+    DynamicThresholdFilter：DynamicThresholdFilter 允许基于特定属性按日志级别进行筛选。例如，如果在 ThreadContext Map 中捕获了用户的 loginId，那么就可以只为该用户启用调试日志记录。如果日志事件不包含指定的 ThreadContext 项 NEUTRAL，则返回。
+    MapFilter：MapFilter 允许对 MapMessage 中的数据元素进行筛选。
+    MarkerFilter：MarkerFilter 将配置的 Marker 值与 LogEvent 中包含的 Marker 进行比较。当标记名称与日志事件的标记或其父标记之一匹配时，就会发生匹配。
+    NoMarkerFilter：NoMarkerFilter 检查 LogEvent 中是否包含任何标记。如果日志事件中没有标记，则发生匹配。
+    RegexFilter：RegexFilter 允许将格式化或未格式化的消息与正则表达式进行比较。
+    Script：ScriptFilter 执行返回 true 或 false 的脚本。
+    StructuredDataFilter：StructuredDataFilter 是一个 MapFilter，它还允许对事件 id、类型和消息进行筛选。
+    ThreadContextMapFilter (or ContextMapFilter)：ThreadContextMapFilter 或 ContextMapFilter 允许对当前上下文中的数据元素进行筛选。默认情况下，这是 ThreadContext 映射。
+    ThresholdFilter：如果 LogEvent 中的级别与配置的级别相同或者比配置的级别更具体，则此筛选器返回 onMatch 结果。例如，如果使用 Level ERROR 配置了 ThresholdFilter，而 LogEvent 包含 Level DEBUG，那么将返回 onMismatch 值，因为 ERROR 事件比 DEBUG 更具体。
+    TimeFilter：时间过滤器可用于将过滤器限制在一天中的某一部分。
+  -->
+
+  <!--
+  定义appender
+
+  默认的滚动策略同时接受日期/时间模式和 RollingFileAppender 本身指定的 filePattern 属性中的整数。
+  如果存在日期/时间模式，则将替换为当前日期和时间值。
+  如果模式包含一个整数，它将在每次滚动时递增。
+  如果模式同时包含模式中的日期/时间和整数，则该整数将递增，直到日期/时间模式的结果发生变化。
+  如果文件模式以“.gz”、“.zip”、“.bz2”、“.deflate”、“.pack200”或“.xz”结尾，则生成的存档将使用与后缀匹配的压缩方案进行压缩。
+    bzip2、Deflate、Pack200 和 XZ 格式需要 Apache Commons Compress。
+  -->
+  <appenders>
+    <!-- 输出控制台配置 -->
+    <console name="Console" target="SYSTEM_OUT">
+      <!-- 输出日志的格式 -->
+      <PatternLayout pattern="${COLOR_LOG_PATTERN}"/>
+      <!-- 阀值过滤器，过滤阈值水平以下的事件 -->
+      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+    </console>
+
+    <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
+    <RollingFile name="RollingFileInfo"
+      fileName="${FILE_PATH}/${FILE_NAME}-info.log"
+      filePattern="${FILE_PATH}/${date:yyyy-MM}/${FILE_NAME}-info-%d{yyyy-MM-dd-HH-mm}-%i.log.zip">
+      <!-- 阀值过滤器，过滤阈值水平以下的事件 -->
+      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      <!-- 格式化输出 -->
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <!-- 组合多个触发策略 -->
+      <Policies>
+        <!-- JVM启动 -->
+        <OnStartupTriggeringPolicy/>
+        <!--
+          时间模式
+          interval属性用来指定多久滚动一次，默认是 1 hour。
+          如果filePattern 是%d{yyyy-MM-dd}，则interval="1"表示1天。
+          如果是%d{yyyy-MM-dd-HH-mm}，则interval="1"表示1分钟。
+          如果设置 size="10MB" ，则一个interval单位内，日志超过10m，则也会滚动压缩
+        -->
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <!-- 文件达到指定的大小，大小可以以字节为单位指定，后缀为 KB、 MB 或 GB -->
+        <SizeBasedTriggeringPolicy size="1KB"/>
+      </Policies>
+      <!--
+        DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖
+        配置文件中的DefaultRolloverStrategy标签的max特性是配置压缩文件名中的 i 来决定同一存档周期内（这个说法不严谨）所保存最大数量，即 i 的最大数值。
+
+        log4j-2.5开始引入了删除操作，使得用户更有效的的控制在rollover时间内删除文件，而不是使用DefaultRolloverStrategy max属性进行删除。
+            删除操作允许用户配置一个或多个条件，选择要删除相对于基本目录的文件。
+          注意：删除任何文件这是允许的操作。不仅仅是rollover时的文件。所以使用这个操作时，一定要小心。
+          使用testMode参数可以测试您的配置，而不会意外删除错误的文件。
+
+        Delete参数
+            basePath：必参。从哪里扫描要删除的文件的基本路径。
+            maxDepth：要访问的目录的最大级别数。值为0表示仅访问起始文件（基本路径本身），除非被安全管理者拒绝。
+                    Integer.MAX_VALUE的值表示应该访问所有级别。默认为1，意思是指定基本目录中的文件。
+            followLinks：
+            testMode：默认false。如果为true，文件将不会被删除，而是将信息打印到info级别的status logger,
+                    可以利用这个来测试，配置是否和我们预期的一样
+        IfFileName条件参数
+            glob：如果regex没有指定的话，则必须。使用类似于正则表达式但是又具有更简单的有限模式语言来匹配相对路径（相对于基本路径）
+            regex：如果glob没有指定的话，则必须。使用由Pattern类定义的正则表达式来匹配相对路径（相对于基本路径）
+
+          IfLastModified条件参数
+            age：必须。指定持续时间duration。该条件接受比指定持续时间更早或更旧的文件。即保留从当前时间至age时间之前这段时间范围内的数据,
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm-ss}.log.gz，interval="5"，IfLastModified age="1m"
+        意思是每5秒新建一个历史文件，历史文件总保留时长1分钟，则总共有60秒/5=12个文件。
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm}.log.gz，interval="2"，IfLastModified age="10m"
+        意思是每2分钟新建一个历史文件，历史文件总保留时长10分钟，则总共有10分钟/2=5个文件。
+
+        这里我们设置filePattern="info-%d{yyyy-MM-dd}.log.gz，interval="1"，IfLastModified age="30d"
+        即每天滚动压缩一次，总保留30天内压缩文件
+      -->
+      <DefaultRolloverStrategy max="30">
+        <Delete basePath="${FILE_PATH}" maxDepth="2">
+          <IfFileName glob="*/${FILE_NAME}-info-*.log.zip"/>
+          <IfLastModified age="5m"/>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+
+    <!-- 这个会打印出所有的error及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
+    <RollingFile name="RollingFileError"
+      fileName="${FILE_PATH}/${FILE_NAME}-error.log"
+      filePattern="${FILE_PATH}/${date:yyyy-MM}/${FILE_NAME}-error-%d{yyyy-MM-dd-HH-mm}-%i.log.zip">
+      <!-- 阀值过滤器，过滤阈值水平以下的事件 -->
+      <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+      <!-- 格式化输出 -->
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <!-- 组合多个触发策略 -->
+      <Policies>
+        <!-- JVM启动 -->
+        <OnStartupTriggeringPolicy/>
+        <!--
+          时间模式
+          interval属性用来指定多久滚动一次，默认是 1 hour。
+          如果filePattern 是%d{yyyy-MM-dd}，则interval="1"表示1天。
+          如果是%d{yyyy-MM-dd-HH-mm}，则interval="1"表示1分钟。
+          如果设置 size="10MB" ，则一个interval单位内，日志超过10m，则也会滚动压缩
+        -->
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <!-- 文件达到指定的大小，大小可以以字节为单位指定，后缀为 KB、 MB 或 GB -->
+        <SizeBasedTriggeringPolicy size="1KB"/>
+      </Policies>
+      <!--
+        DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖
+        配置文件中的DefaultRolloverStrategy标签的max特性是配置压缩文件名中的 i 来决定同一存档周期内（这个说法不严谨）所保存最大数量，即 i 的最大数值。
+
+        log4j-2.5开始引入了删除操作，使得用户更有效的的控制在rollover时间内删除文件，而不是使用DefaultRolloverStrategy max属性进行删除。
+            删除操作允许用户配置一个或多个条件，选择要删除相对于基本目录的文件。
+          注意：删除任何文件这是允许的操作。不仅仅是rollover时的文件。所以使用这个操作时，一定要小心。
+          使用testMode参数可以测试您的配置，而不会意外删除错误的文件。
+
+        Delete参数
+            basePath：必参。从哪里扫描要删除的文件的基本路径。
+            maxDepth：要访问的目录的最大级别数。值为0表示仅访问起始文件（基本路径本身），除非被安全管理者拒绝。
+                    Integer.MAX_VALUE的值表示应该访问所有级别。默认为1，意思是指定基本目录中的文件。
+            followLinks：
+            testMode：默认false。如果为true，文件将不会被删除，而是将信息打印到info级别的status logger,
+                    可以利用这个来测试，配置是否和我们预期的一样
+        IfFileName条件参数
+            glob：如果regex没有指定的话，则必须。使用类似于正则表达式但是又具有更简单的有限模式语言来匹配相对路径（相对于基本路径）
+            regex：如果glob没有指定的话，则必须。使用由Pattern类定义的正则表达式来匹配相对路径（相对于基本路径）
+
+          IfLastModified条件参数
+            age：必须。指定持续时间duration。该条件接受比指定持续时间更早或更旧的文件。即保留从当前时间至age时间之前这段时间范围内的数据,
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm-ss}.log.gz，interval="5"，IfLastModified age="1m"
+        意思是每5秒新建一个历史文件，历史文件总保留时长1分钟，则总共有60秒/5=12个文件。
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm}.log.gz，interval="2"，IfLastModified age="10m"
+        意思是每2分钟新建一个历史文件，历史文件总保留时长10分钟，则总共有10分钟/2=5个文件。
+
+        这里我们设置filePattern="info-%d{yyyy-MM-dd}.log.gz，interval="1"，IfLastModified age="30d"
+        即每天滚动压缩一次，总保留30天内压缩文件
+      -->
+      <DefaultRolloverStrategy max="30">
+        <Delete basePath="${FILE_PATH}" maxDepth="2">
+          <IfFileName glob="*/${FILE_NAME}-error-*.log.zip"/>
+          <IfLastModified age="5m"/>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+
+    <RollingFile name="RollingFileBiz"
+      fileName="${FILE_PATH}/${FILE_NAME}-biz.log"
+      filePattern="${FILE_PATH}/${date:yyyy-MM}/${FILE_NAME}-biz-%d{yyyy-MM-dd-HH-mm}-%i.log.zip">
+      <!-- 阀值过滤器，过滤阈值水平以下的事件 -->
+      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      <!-- 格式化输出 -->
+      <PatternLayout pattern="${MDC_LOG_PATTERN}"/>
+      <!-- 组合多个触发策略 -->
+      <Policies>
+        <!-- JVM启动 -->
+        <OnStartupTriggeringPolicy/>
+        <!--
+          时间模式
+          interval属性用来指定多久滚动一次，默认是 1 hour。
+          如果filePattern 是%d{yyyy-MM-dd}，则interval="1"表示1天。
+          如果是%d{yyyy-MM-dd-HH-mm}，则interval="1"表示1分钟。
+          如果设置 size="10MB" ，则一个interval单位内，日志超过10m，则也会滚动压缩
+        -->
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <!-- 文件达到指定的大小，大小可以以字节为单位指定，后缀为 KB、 MB 或 GB -->
+        <SizeBasedTriggeringPolicy size="1KB"/>
+      </Policies>
+      <!--
+        DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖
+        配置文件中的DefaultRolloverStrategy标签的max特性是配置压缩文件名中的 i 来决定同一存档周期内（这个说法不严谨）所保存最大数量，即 i 的最大数值。
+
+        log4j-2.5开始引入了删除操作，使得用户更有效的的控制在rollover时间内删除文件，而不是使用DefaultRolloverStrategy max属性进行删除。
+            删除操作允许用户配置一个或多个条件，选择要删除相对于基本目录的文件。
+          注意：删除任何文件这是允许的操作。不仅仅是rollover时的文件。所以使用这个操作时，一定要小心。
+          使用testMode参数可以测试您的配置，而不会意外删除错误的文件。
+
+        Delete参数
+            basePath：必参。从哪里扫描要删除的文件的基本路径。
+            maxDepth：要访问的目录的最大级别数。值为0表示仅访问起始文件（基本路径本身），除非被安全管理者拒绝。
+                    Integer.MAX_VALUE的值表示应该访问所有级别。默认为1，意思是指定基本目录中的文件。
+            followLinks：
+            testMode：默认false。如果为true，文件将不会被删除，而是将信息打印到info级别的status logger,
+                    可以利用这个来测试，配置是否和我们预期的一样
+        IfFileName条件参数
+            glob：如果regex没有指定的话，则必须。使用类似于正则表达式但是又具有更简单的有限模式语言来匹配相对路径（相对于基本路径）
+            regex：如果glob没有指定的话，则必须。使用由Pattern类定义的正则表达式来匹配相对路径（相对于基本路径）
+
+          IfLastModified条件参数
+            age：必须。指定持续时间duration。该条件接受比指定持续时间更早或更旧的文件。即保留从当前时间至age时间之前这段时间范围内的数据,
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm-ss}.log.gz，interval="5"，IfLastModified age="1m"
+        意思是每5秒新建一个历史文件，历史文件总保留时长1分钟，则总共有60秒/5=12个文件。
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm}.log.gz，interval="2"，IfLastModified age="10m"
+        意思是每2分钟新建一个历史文件，历史文件总保留时长10分钟，则总共有10分钟/2=5个文件。
+
+        这里我们设置filePattern="info-%d{yyyy-MM-dd}.log.gz，interval="1"，IfLastModified age="30d"
+        即每天滚动压缩一次，总保留30天内压缩文件
+      -->
+      <DefaultRolloverStrategy max="30">
+        <Delete basePath="${FILE_PATH}" maxDepth="2">
+          <IfFileName glob="*/${FILE_NAME}-biz-*.log.zip"/>
+          <IfLastModified age="5m"/>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+  </appenders>
+
+  <!--
+    定义loggers，只有定义了logger并引入的appender，appender才会生效。
+    Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。
+    若是additivity设为false，则子Logger 只会在自己的appender里输出，而不会在 父Logger 的appender里输出。
+  -->
+  <loggers>
+    <!-- spring日志 -->
+    <Logger name="org.springframework" level="INFO" additivity="false">
+      <AppenderRef ref="Console"/>
+    </Logger>
+
+    <!-- 业务日志 -->
+    <Logger name="BIZ" level="INFO" additivity="false">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingFileBiz"/>
+    </Logger>
+
+    <root level="ALL">
+      <appender-ref ref="Console"/>
+      <appender-ref ref="RollingFileInfo"/>
+      <appender-ref ref="RollingFileError"/>
+    </root>
+  </loggers>
+
+</configuration>

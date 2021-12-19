@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>logging</artifactId>
+    <groupId>com.example</groupId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>logging-log4j2</artifactId>
+
+  <name>logging-log4j2</name>
+  <description>spring boot 整合 log4j2</description>
+
+  <properties>
+    <!--
+      指定log4j2版本，覆盖spring boot parent中的log4j2版本
+
+      由于log4j2安全漏洞，这里使用Java8的漏洞修复版本
+      从版本 2.16.0 开始，此功能已完全删除。请注意，此漏洞特定于 log4j-core，不会影响 log4net、log4cxx 或其他 Apache 日志服务项目。
+
+      log4j2官网说明（https://logging.apache.org/log4j/2.x/）：
+        Important: Security Vulnerability CVE-2021-45046
+        The Log4j team has been made aware of a security vulnerability, CVE-2021-45046, that has been addressed in Log4j 2.12.2 for Java 7 and 2.16.0 for Java 8 and up.
+        Summary: Apache Log4j2 Thread Context Message Pattern and Context Lookup Pattern vulnerable to a denial of service attack.
+    -->
+    <log4j2.version>2.16.0</log4j2.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <!-- 排除logback依赖 -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- log4j2 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j2</artifactId>
+    </dependency>
+    <!-- log4j2 spring boot，可在log4j2-spring.xml日志配置文件中获取spring环境中的配置参数 -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-spring-boot</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+</project>

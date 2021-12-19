@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: logging-log4j2
+server:
+  port: 8080
+logging:
+  config: classpath:log4j2-spring.xml
+  file:
+    path: ./spring-boot-example/B.features/logging/logging-log4j2/temp/service/logs

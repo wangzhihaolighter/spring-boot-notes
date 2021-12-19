@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: logging-logback
+server:
+  port: 8080
+logging:
+  config: classpath:logback-spring.xml
+  file:
+    path: ./spring-boot-example/B.features/logging/logging-logback/temp/service/logs

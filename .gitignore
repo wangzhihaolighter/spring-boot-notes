@@ -35,5 +35,7 @@ build/
 .vscode/
 
 ### Other ###
-*.log
+temp/
 h2database_data/
+logs/
+*.log
