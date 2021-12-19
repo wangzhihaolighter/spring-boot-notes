@@ -1,0 +1,285 @@
+############################################################
+# 切面是有优先级，默认：Retry ( CircuitBreaker ( RateLimiter ( TimeLimiter ( Bulkhead ( Function ) ) ) ) )
+# 可以通过 aspect-order 属性修改优先级
+############################################################
+
+
+# Metrics endpoint
+# GET request to /actuator/metrics
+# GET request to /actuator/metrics/{metric.name}.
+# For example: /actuator/metrics/resilience4j.circuitbreaker.calls
+
+
+# Health endpoint
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
+
+
+# Events endpoint
+# For example: /actuator/circuitbreakers
+# For example: /actuator/circuitbreakerevents
+
+
+# Aspect order
+resilience4j:
+  retry.retry-aspect-order: 2147483643
+  circuitbreaker.circuit-breaker-aspect-order: 2147483644
+  ratelimiter.rate-limiter-aspect-order: 2147483645
+  timelimiter.time-limiter-aspect-order: 2147483646
+  # bulkhead aspect order 2147483647
+
+
+# 舱壁模式 - 信号量舱壁，默认
+# 可配置参数见：io.github.resilience4j.common.bulkhead.configuration.BulkheadConfigurationProperties
+resilience4j.bulkhead:
+  configs:
+    default:
+      # 舱壁允许的最大并行执行量
+      # 必须大于等于1
+      maxConcurrentCalls: 5
+      # 当试图进入一个饱和舱壁时，线程应该被阻塞的最大时间量。
+      # 必须大于等于0
+      maxWaitDuration: 10ms
+      # 是否打印异常堆栈信息
+      writableStackTraceEnabled: true
+      # 事件消费者缓冲区大小
+      eventConsumerBufferSize: 100
+  instances:
+    backendA:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendB:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+      maxConcurrentCalls: 3
+
+
+# 舱壁模式 - 固定线程池舱壁，只对CompletableFuture方法有效
+# 可配置参数见：io.github.resilience4j.common.bulkhead.configuration.ThreadPoolBulkheadConfigurationProperties
+resilience4j.thread-pool-bulkhead:
+  configs:
+    default:
+      # 配置最大线程池大小
+      maxThreadPoolSize: 1
+      # 配置核心线程池的大小
+      coreThreadPoolSize: 1
+      # 配置队列的容量
+      queueCapacity: 3
+      # 当线程数量大于核心时，这是多余的空闲线程在终止前等待新任务的最大时间
+      keepAliveDuration: 20ms
+      # 是否打印异常堆栈信息
+      writableStackTraceEnabled: true
+      # 事件消费者缓冲区大小
+      eventConsumerBufferSize: 100
+  instances:
+    backendC:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+
+
+# 超时控制器
+# 限制服务调用的时间，超时则返回异常或执行fallback方法
+# 可配置参数见：io.github.resilience4j.common.timelimiter.configuration.TimeLimiterConfigurationProperties
+resilience4j.timelimiter:
+  configs:
+    default:
+      # 超时持续时间
+      timeoutDuration: 1s
+      # 是否应该在运行的future上调用cancel
+      cancelRunningFuture: true
+      # 事件消费者缓冲区大小
+      eventConsumerBufferSize: 100
+  instances:
+    backendA:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendB:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+      timeoutDuration: 3s
+
+
+# 限流器
+# 可配置参数见：io.github.resilience4j.common.ratelimiter.configuration.RateLimiterConfigurationProperties
+resilience4j.ratelimiter:
+  configs:
+    default:
+      # 线程等待权限的默认等待时间
+      timeoutDuration: 1s
+      # 限制刷新的周期。
+      # 在每个周期之后，速率限制器将其权限计数返回到limitForPeriod值
+      limitRefreshPeriod: 5s
+      # 在一个限制刷新周期内可用的权限数
+      limitForPeriod: 3
+      # 开启事件订阅
+      subscribeForEvents: true
+      # 控制是否允许健康指示器失败
+      # 当设置为 true 时，它允许健康指示器进入失败(DOWN)状态。
+      # 默认情况下，速率限制器的健康指标永远不会进入不健康状态。
+      allowHealthIndicatorToFail: false
+      # 是否注册健康指示器
+      registerHealthIndicator: true
+      # 事件消费者缓冲区大小
+      eventConsumerBufferSize: 100
+      # 是否打印异常堆栈信息
+      writableStackTraceEnabled: true
+  instances:
+    backendA:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendB:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+      timeoutDuration: 0s
+      limitRefreshPeriod: 5000ms
+      limitForPeriod: 5
+
+
+# 断路器
+# 可配置参数见：io.github.resilience4j.common.circuitbreaker.configuration.CircuitBreakerConfigurationProperties
+# 断路器通过一个有限状态机实现，有三种正常状态: CLOSED（关闭状态）、OPEN（开放状态）和HALF_OPEN（半开放状态），以及两种特殊状态 DISABLED（禁用状态） 和 FORCED_OPEN（强制开放状态）
+# CLOSED: 关闭状态，代表正常情况下的状态，允许所有请求通过，能通过状态转换为OPEN
+# HALF_OPEN: 半开状态，即允许一部分请求通过，能通过状态转换为CLOSED和OPEN
+# OPEN: 熔断状态，即不允许请求通过，能通过状态转为为HALF_OPEN
+# DISABLED: 禁用状态，即允许所有请求通过，出现失败率达到给定的阈值也不会熔断，不会发生状态转换
+# FORCED_OPEN: 与DISABLED状态正好相反，启用CircuitBreaker，但是不允许任何请求通过，不会发生状态转换。
+resilience4j.circuitbreaker:
+  configs:
+    # 配置组名
+    default:
+      # 以百分比的形式配置失败率阈值。
+      # 当故障率等于或大于阈值时，断路器转换为打开并开始短路调用。
+      failureRateThreshold: 50
+      # 以百分比为单位配置阈值。当调用持续时间大于 slowCallDurationThreshold 时，CircuitBreaker 认为调用是慢的
+      # 当慢调用的百分比等于或大于阈值时，“迂回断路器”转换为打开并开始短路调用。
+      slowCallRateThreshold: 50
+      # 配置高于该值的调用被视为慢调用的持续时间阈值，并提高慢调用的速率。
+      slowCallDurationThreshold: 3000ms
+      # 配置在迂回断路器半开时允许的调用数
+      permittedNumberOfCallsInHalfOpenState: 10
+      # 配置一个最大等待时间，该等待时间控制断路器在切换到开启状态之前可以保持半开启状态的最长时间。
+      # 值 0 意味着断路器将在半开状态下无限等待，直到所有允许的呼叫完成。
+      # spring boot 配置中必须大于等于 1
+      maxWaitDurationInHalfOpenState: 1000ms
+      # 配置滑动窗口的类型，该窗口用于在关闭迂回断路器时记录调用的结果。
+      # 滑动窗口可以是基于计数的或基于时间的。
+      # 如果滑动窗口是 COUNT_BASED，则记录并聚合最后的 slidingWindowSize 调用。
+      # 如果滑动窗口是 TIME_BASED，则记录并聚合最后一次滑动窗口大小秒的调用。
+      slidingWindowType: TIME_BASED
+      # 配置滑动窗口的大小，该窗口用于在关闭迂回断路器时记录调用的结果。
+      slidingWindowSize: 10
+      # 配置需要的最小调用数量(每个滑动窗口期) ，然后 CircuitBreaker 才能计算错误率或慢调用率。
+      # 例如，如果最小调用数量为10，那么在计算故障率之前，必须记录至少10个调用。
+      # 如果只记录了9个调用，即使所有9个调用都失败了，该电路断路器也不会转换到打开状态。
+      minimumNumberOfCalls: 10
+      # 在从开启状态过渡到半开启状态之前应该等待的时间
+      waitDurationInOpenState: 60000ms
+      # 如果设置为 true，则意味着该 CircuitBreaker 将自动从开启状态转换为半开启状态，并且不需要调用来触发转换。
+      # 一旦 waitDurationInOpenState 通过，创建一个线程来监视所有的 CircuitBreaker 实例，以将它们转换为 HALF_OPEN。
+      # 然而，如果设置为 false，则只有在调用时才会转换为 HALF_OPEN，即使在传递 waitDurationInOpenState 之后也是如此。
+      # 这样做的好处是没有线程监视所有断路器的状态。
+      automaticTransitionFromOpenToHalfOpenEnabled: false
+      # 被记录为故障并因此增加故障率的异常的列表。
+      # 任何匹配或继承列表的异常都被视为失败，除非通过 ignoreExceptions 显式忽略。
+      # 如果您指定了一个异常列表，那么所有其他异常都算作成功，除非 ignoreExceptions 显式地忽略它们。
+      recordExceptions:
+        - com.example.core.exception.BusinessRecordException
+      # 一个被忽略的异常列表，这些异常既不算失败也不算成功。
+      # 任何匹配或继承列表中某一个的异常都不算作失败或成功，即使这些异常是 recordExceptions 的一部分。
+      ignoreExceptions:
+        - com.example.core.exception.BusinessIgnoreException
+      # 一个自定义 Predicate，它评估是否应将异常记录为失败。
+      # 如果异常被视为失败，Predicate 必须返回 true。如果发生异常，Predicate 必须返回 false
+      # 应该被视为成功，除非 ignoreExceptions 显式地忽略异常。
+      recordFailurePredicate: com.example.core.resilience4j.circuitbreaker.RecordFailurePredicate
+      # 是否打印异常堆栈信息
+      writableStackTraceEnabled: true
+      # 是否注册健康指示器
+      registerHealthIndicator: true
+      # 事件消费者缓冲区大小
+      eventConsumerBufferSize: 100
+  instances:
+    backendA:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendB:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+      slidingWindowSize: 200
+      minimumNumberOfCalls: 200
+    backendC:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+
+
+# 重试器
+# 可配置参数见：io.github.resilience4j.common.retry.configuration.RetryConfigurationProperties
+# 注意：调整重试等待时间的策略同时只能使用一个
+# 1.waitDuration
+# 2.waitDuration、intervalBiFunction
+# 3.waitDuration、enableExponentialBackoff
+# 4.waitDuration、enableRandomizedWait
+resilience4j.retry:
+  configs:
+    # 配置组名
+    default:
+      # 尝试的最大次数(包括作为第一次尝试的初始调用)
+      maxAttempts: 3
+      # 【重试时间间隔 - 固定等待时间】两次重试之间的固定等待时间
+      waitDuration: 500ms
+      # 【重试时间间隔 - 自定义间隔策略】根据尝试次数、结果或异常修改失败后等待时间间隔的函数。
+      intervalBiFunction:
+      # 【重试时间间隔 - 指数退避抖动】表示是否开启指数退避抖动算法，当一次调用失败后，如果在相同的时间间隔内发起重试，有可能发生连续的调用失败，因此可以开启指数退避抖动算法
+      enableExponentialBackoff: false
+      # 【重试时间间隔 - 指数退避抖动】表示重试时间指数退避间隔乘数
+      exponentialBackoffMultiplier:
+      # 【重试时间间隔 - 随机延迟】表示是否启用随机延迟策略
+      enableRandomizedWait: false
+      # 【重试时间间隔 - 随机延迟】随机延迟因子值（0.0 ~ 1.0）
+      randomizedWaitFactor:
+      # 配置一个断言判断异常是否需要重试
+      retryExceptionPredicate: com.example.core.resilience4j.retry.RetryExceptionPredicate
+      # 配置一个断言判断结果是否需要重试
+      resultPredicate: com.example.core.resilience4j.retry.RetryResultPredicate
+      # 需要重试的异常
+      retry-exceptions:
+        - com.example.core.exception.BusinessRecordException
+      # 重试忽略的异常
+      ignore-exceptions:
+        - com.example.core.exception.BusinessIgnoreException
+      # 事件消费者缓冲区大小
+      eventConsumerBufferSize: 100
+  instances:
+    # 组名
+    backendA:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendB:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendC:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendD:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+    backendE:
+      # 基础配置，使用配置组名指定
+      baseConfig: default
+      intervalBiFunction: com.example.core.resilience4j.retry.RetryIntervalBiFunction
+    backendF:
+      maxAttempts: 5
+      waitDuration: 1000ms
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      eventConsumerBufferSize: 100
+    backendG:
+      maxAttempts: 5
+      waitDuration: 5000ms
+      enableRandomizedWait: true
+      randomizedWaitFactor: 0.75
+      eventConsumerBufferSize: 100

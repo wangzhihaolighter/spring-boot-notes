@@ -30,6 +30,7 @@
         <module>kaptcha</module>
         <module>oshi-core</module>
         <module>p6spy</module>
+        <module>resilience4j</module>
         <module>springdoc-openapi</module>
         <module>springfox-swagger</module>
         <module>user-agent-utils</module>
