@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SchedulingApplication {
+public class SpringTaskApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(SchedulingApplication.class, args);
+    SpringApplication.run(SpringTaskApplication.class, args);
   }
 }

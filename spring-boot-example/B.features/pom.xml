@@ -4,18 +4,18 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>B.features</artifactId>
-  <packaging>pom</packaging>
-
-  <name>features</name>
-  <description>Spring Boot 中的一些功能特性</description>
-
   <parent>
     <artifactId>spring-boot-example</artifactId>
     <groupId>com.example</groupId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+
+  <artifactId>B.features</artifactId>
+  <packaging>pom</packaging>
+
+  <name>features</name>
+  <description>Spring Boot 中的一些功能特性</description>
 
   <modules>
     <module>aop</module>
@@ -26,7 +26,6 @@
     <module>externalized-configuration</module>
     <module>i18n</module>
     <module>logging</module>
-    <module>quartz-scheduler</module>
     <module>scheduling</module>
     <module>sending-email</module>
     <module>testing</module>
