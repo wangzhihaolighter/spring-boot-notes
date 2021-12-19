@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: sending-email
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: xxx@qq.com
+    password: xxx
+    default-encoding: utf-8
+    properties:
+      mail.debug: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.starttls.required: false
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 3000
+      mail.smtp.writetimeout: 5000
+      # 网络代理
+      # proxySet:
+      # mail.smtp.socks.host:
+      # mail.smtp.socks.port:
+
+# 官方代码仓库：https://javaee.github.io/javamail/
