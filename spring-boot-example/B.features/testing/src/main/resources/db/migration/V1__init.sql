@@ -1,11 +1,13 @@
-DROP TABLE IF EXISTS `USER`;
-CREATE TABLE USER (
-	id bigint(20) NOT NULL AUTO_INCREMENT,
-	username varchar(255) not null,
-	password varchar(255) not null,
-	PRIMARY KEY (`id`)
+drop table if exists user;
+create table user
+(
+    id       bigint(20)   not null auto_increment,
+    username varchar(255) not null,
+    password varchar(255) not null,
+    primary key (id)
 );
 
-insert into `USER` (username, password) values ('Apple', '123456');
-insert into `USER` (username, password) values ('Google', '123456');
-insert into `USER` (username, password) values ('Microsoft', '123456');
+insert into user (username, password)
+values ('apple', '123456'),
+       ('google', '123456'),
+       ('microsoft', '123456');
