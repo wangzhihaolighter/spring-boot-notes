@@ -13,9 +13,12 @@ public class LoggerController {
 
   @GetMapping("/test")
   public String test() {
-    log.info("常规info日志输出");
-    log.error("常规error日志输出");
-    LoggerConstant.BIZ.info("指定业务日志输出");
+    for (int i = 0; i < 100000; i++) {
+      log.info("常规info日志输出");
+      log.error("常规error日志输出");
+      LoggerConstant.BIZ.info("指定业务info日志输出");
+      LoggerConstant.BIZ.error("指定业务error日志输出");
+    }
     return "ok";
   }
 }
