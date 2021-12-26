@@ -1,0 +1,7 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: resilience4j-ratelimiter-demo
+  profiles:
+    active: resilience4j
