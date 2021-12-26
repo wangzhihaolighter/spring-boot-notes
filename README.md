@@ -25,12 +25,22 @@ Spring Boot的一些使用。
 ## B.features
 
 Spring Boot的一些特性。
-
+- aop：面向切面编程
+  - aspect：面向切面
+  - filter：过滤器
+  - interceptor：拦截器
+- async：异步调用
 - [**auto-configuration**：自动配置](DOC/B.feature/auto-configuration/Creating-Your-Own-Auto-Configuration.md)
 - [**bean-validation**：Bean数据验证(常用注解、校验模式配置、国际化、自定义验证器)](DOC/B.feature/bean-validation/bean-validation.md)
+- event-listener：事件监听
 - [**externalized-configuration**：外部化配置](DOC/B.feature/externalized-configuration/Externalized-Configuration.md)
-- [**internationalization**：国际化消息提示](DOC/B.feature/i18n/Internationalization.md)
+- [**i18n**：国际化消息提示](DOC/B.feature/i18n/Internationalization.md)
 - [**logging**：日志](DOC/B.feature/logging/Logging.md)
+  - logging-logback：整合logback
+  - logging-log4j2：整合log4j2
+- scheduling：定时任务调度
+  - spring-task：基于spring task实现定时任务调度
+  - quartz-scheduler：基于quartz实现定时任务调度
 - [**sending-email**：发送邮件](DOC/B.feature/mail/Sending-Email.md)
 - [**testing**：测试](DOC/B.feature/testing/Testing.md)
 
@@ -38,6 +48,7 @@ Spring Boot的一些特性。
 
 一些整合的spring boot starter。
 
+- **kaptcha-spring-boot-starter**：整合kaptcha 
 - **okhttp-spring-boot-starter**：整合okhttp
 
 ## D.integration
@@ -62,10 +73,12 @@ Spring Boot的一些特性。
 - [**google-zxing**：Google开源的多维码生成工具](DOC/E.tool/google-zxing/google-zxing.md)
 - [**h2database**：一个开源的嵌入式（非嵌入式设备）数据库引擎](DOC/E.tool/h2database/h2database.md)
 - [**ip2region**：离线IP地址定位库](DOC/E.tool/ip2region/ip2region.md)
+- **jasypt**：Jasypt是一个java库，它允许开发人员以最小的工作量将基本的加密功能添加到他/她的项目中，而无需深入了解加密的工作原理。
 - [**jjwt**：用于在JVM和Android上创建和验证JSON Web Token（JWT）](DOC/E.tool/jwt/JSON-Web-Tokens.md)
 - [**jsch**：SSH2的一个纯Java实现](DOC/E.tool/jsch/JSch.md)
 - [**oshi-core**：Java的免费基于JNA的（本机）操作系统和硬件信息库，跨平台查看服务器信息](DOC/E.tool/oshi/oshi.md)
 - [**p6spy**：记录任何Java应用程序的所有JDBC事务](DOC/E.tool/p6spy/P6Spy.md)
+- [**resilience4j**：Resilience4j是一个轻量级、易于使用的容错库，其灵感来自Netflix Hystrix，但专为Java 8和函数式编程设计。](DOC/E.tool/resilience4j/resilience4j.md)
 - [**springdoc-openapi**：一个开源的 API doc 框架，可以将 Controller 的方法以文档的形式展现](DOC/E.tool/springdoc-openapi/springdoc-openapi.md)
 - [**springfox-swagger**：一个开源的 API doc 框架，可以将 Controller 的方法以文档的形式展现](DOC/E.tool/springfox-swagger/springfox-swagger.md)
 - [**UserAgentUtils**：实时解析HTTP请求或分析日志文件并收集有关用户代理的信息](DOC/E.tool/user-agent-utils/UserAgentUtils.md)

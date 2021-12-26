@@ -3,7 +3,12 @@
 ## 资料
 
 官方文档：https://resilience4j.readme.io/
+
+官方仓库：https://github.com/resilience4j/resilience4j
+
 官方 resilience4j 整合 spring boot 2 文档：https://resilience4j.readme.io/docs/getting-started-3
+
+官方 resilience4j 整合 spring cloud 文档：https://resilience4j.readme.io/docs/getting-started-6
 
 ## 介绍
 
@@ -11,13 +16,15 @@ Resilience4j是一个轻量级、易于使用的容错库，其灵感来自Netfl
 
 Resilience4j提供高阶函数（decorators）来增强任何功能接口、lambda表达式或方法引用，包括断路器、速率限制器、重试或舱壁。可以在任何函数接口、lambda表达式或方法引用上使用多个装饰器。优点是您可以选择所需的装饰器，而无需其他任何东西。
 
-## 功能
+自从 Hystrix 停止维护之后，官方推荐大家使用 Resilience4j 来代替 Hystrix，Spring Cloud Circuit Breaker 使用 spring-cloud-starter-circuitbreaker-resilience4j。
+
+## 核心功能
 
 - 断路器：CircuitBreaker - 错误率过高开启断路器
 - 重试器：Retry - 调用失败后发起重试
 - 舱壁模式：Bulkhead - 限制并发执行的次数
-    - SemaphoreBulkhead（信号量舱壁，默认），基于Java并发库中的Semaphore实现。
-    - FixedThreadPoolBulkhead（固定线程池舱壁），它使用一个有界队列和一个固定线程池。
+  - SemaphoreBulkhead（信号量舱壁，默认），基于Java并发库中的Semaphore实现。
+  - FixedThreadPoolBulkhead（固定线程池舱壁），它使用一个有界队列和一个固定线程池。
 - 限流器：RateLimiter - 限制调用速率
 - 超时控制器：TimeLimiter - 限制调用时长
 - 缓存 - cache
@@ -765,6 +772,166 @@ public class TimeLimiterService {
 }
 ```
 
+### controller
+
+```java
+@RestController
+@RequestMapping("/bulkhead")
+public class BulkheadController {
+  private final BulkheadService bulkheadService;
+
+  public BulkheadController(BulkheadService bulkheadService) {
+    this.bulkheadService = bulkheadService;
+  }
+
+  @GetMapping("/backendA")
+  public ResponseEntity<Object> backendA() {
+    return ResponseEntity.ok(bulkheadService.backendA());
+  }
+
+  @GetMapping("/backendB")
+  public ResponseEntity<Object> backendB() {
+    return ResponseEntity.ok(bulkheadService.backendB());
+  }
+}
+```
+
+```java
+@RestController
+@RequestMapping("/circuitBreaker")
+public class CircuitBreakerController {
+  private final CircuitBreakerService circuitBreakerService;
+
+  public CircuitBreakerController(CircuitBreakerService circuitBreakerService) {
+    this.circuitBreakerService = circuitBreakerService;
+  }
+
+  @GetMapping("/backendA")
+  public ResponseEntity<Object> backendA() {
+    return ResponseEntity.ok(circuitBreakerService.backendA());
+  }
+
+  @GetMapping("/backendB")
+  public ResponseEntity<Object> backendB() {
+    return ResponseEntity.ok(circuitBreakerService.backendB());
+  }
+
+  @GetMapping("/backendC")
+  public ResponseEntity<Object> backendC() {
+    return ResponseEntity.ok(circuitBreakerService.backendC());
+  }
+}
+```
+
+```java
+@RestController
+@RequestMapping("/rateLimiter")
+public class RateLimiterController {
+  private final RateLimiterService rateLimiterService;
+
+  public RateLimiterController(RateLimiterService rateLimiterService) {
+    this.rateLimiterService = rateLimiterService;
+  }
+
+  @GetMapping("/backendA")
+  public ResponseEntity<Object> backendA() {
+    return ResponseEntity.ok(rateLimiterService.backendA());
+  }
+
+  @GetMapping("/backendB")
+  public ResponseEntity<Object> backendB() {
+    return ResponseEntity.ok(rateLimiterService.backendB());
+  }
+}
+```
+
+```java
+@RestController
+@RequestMapping("/retry")
+public class RetryController {
+  private final RetryService retryService;
+
+  public RetryController(RetryService retryService) {
+    this.retryService = retryService;
+  }
+
+  @GetMapping("/backendA")
+  public ResponseEntity<Object> backendA() {
+    return ResponseEntity.ok(retryService.backendA());
+  }
+
+  @GetMapping("/backendB")
+  public ResponseEntity<Object> backendB() {
+    return ResponseEntity.ok(retryService.backendB());
+  }
+
+  @GetMapping("/backendC")
+  public ResponseEntity<Object> backendC() {
+    return ResponseEntity.ok(retryService.backendC());
+  }
+
+  @GetMapping("/backendD")
+  public ResponseEntity<Object> backendD() {
+    return ResponseEntity.ok(retryService.backendD());
+  }
+
+  @GetMapping("/backendE")
+  public ResponseEntity<Object> backendE() {
+    return ResponseEntity.ok(retryService.backendE());
+  }
+
+  @GetMapping("/backendF")
+  public ResponseEntity<Object> backendF() {
+    return ResponseEntity.ok(retryService.backendF());
+  }
+
+  @GetMapping("/backendG")
+  public ResponseEntity<Object> backendG() {
+    return ResponseEntity.ok(retryService.backendG());
+  }
+}
+```
+
+```java
+@RestController
+@RequestMapping("/threadPoolBulkhead")
+public class ThreadPoolBulkheadController {
+  private final ThreadPoolBulkheadService threadPoolBulkheadService;
+
+  public ThreadPoolBulkheadController(ThreadPoolBulkheadService threadPoolBulkheadService) {
+    this.threadPoolBulkheadService = threadPoolBulkheadService;
+  }
+
+  @SneakyThrows
+  @GetMapping("/backendC")
+  public ResponseEntity<Object> backendC() {
+    return ResponseEntity.ok(threadPoolBulkheadService.backendC());
+  }
+}
+```
+
+```java
+@RestController
+@RequestMapping("/timeLimiter")
+public class TimeLimiterController {
+  private final TimeLimiterService timeLimiterService;
+
+  public TimeLimiterController(TimeLimiterService timeLimiterService) {
+    this.timeLimiterService = timeLimiterService;
+  }
+
+  @GetMapping("/backendA")
+  public ResponseEntity<Object> backendA() {
+    return ResponseEntity.ok(timeLimiterService.backendA());
+  }
+
+  @GetMapping("/backendB")
+  public ResponseEntity<Object> backendB() {
+    return ResponseEntity.ok(timeLimiterService.backendB());
+  }
+}
+```
+
 ## 单元测试
 
 resources/junit-platform.properties
@@ -905,8 +1072,7 @@ class ThreadPoolBulkheadTest extends Resilience4JApplicationTests {
 
   @RepeatedTest(10) // 表示重复执行10次
   void testBackendC() throws ExecutionException, InterruptedException {
-    CompletableFuture<JsonNode> future = threadPoolBulkheadService.backendC();
-    future.get();
+    threadPoolBulkheadService.backendC();
   }
 }
 ```
@@ -930,3 +1096,114 @@ class TimeLimiterTest extends Resilience4JApplicationTests {
   }
 }
 ```
+
+## 整合Prometheus
+
+整合Prometheus实现容错指标监控
+
+pom.xml
+
+```xml
+  <properties>
+    <java.version>1.8</java.version>
+    <resilience4j.version>1.7.1</resilience4j.version>
+  </properties>
+
+  <dependencies>
+    <!-- web -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- aop - resilience4j依赖aop实现功能 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+
+    <!-- resilience4j -->
+    <dependency>
+      <groupId>io.github.resilience4j</groupId>
+      <artifactId>resilience4j-spring-boot2</artifactId>
+      <version>${resilience4j.version}</version>
+    </dependency>
+
+    <!-- 健康检查 - resilience4j提供了监控端口 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <!-- Prometheus -->
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Prometheus PushGateway -->
+    <dependency>
+      <groupId>io.prometheus</groupId>
+      <artifactId>simpleclient_pushgateway</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+```
+
+application.yml
+
+```yaml
+server:
+  port: 8099
+spring:
+  application:
+    name: resilience4j-prometheus-demo
+  profiles:
+    active: actuator,log,resilience4j,prometheus
+```
+
+application-log.yml
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+```
+
+application-prometheus.yml
+
+```yaml
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name} # 暴露的数据中添加application label
+    export:
+      prometheus:
+        pushgateway:
+          enabled: true
+          base-url: http://127.0.0.1:9091
+          job: ${spring.application.name}
+          push-rate: 15s
+```
+
+application-resilience4j.yml相同
+
+### Grafana导入监控大盘
+
+Resilience4j Grafana dashboard：https://github.com/resilience4j/resilience4j/blob/master/grafana_dashboard.json
