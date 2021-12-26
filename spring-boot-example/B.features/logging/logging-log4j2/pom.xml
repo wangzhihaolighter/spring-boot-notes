@@ -19,16 +19,10 @@
   <properties>
     <!--
       指定log4j2版本，覆盖spring boot parent中的log4j2版本
-
+      log4j2官网（https://logging.apache.org/log4j/2.x/）
       由于log4j2安全漏洞，这里使用Java8的漏洞修复版本
-      从版本 2.16.0 开始，此功能已完全删除。请注意，此漏洞特定于 log4j-core，不会影响 log4net、log4cxx 或其他 Apache 日志服务项目。
-
-      log4j2官网说明（https://logging.apache.org/log4j/2.x/）：
-        Important: Security Vulnerability CVE-2021-45046
-        The Log4j team has been made aware of a security vulnerability, CVE-2021-45046, that has been addressed in Log4j 2.12.2 for Java 7 and 2.16.0 for Java 8 and up.
-        Summary: Apache Log4j2 Thread Context Message Pattern and Context Lookup Pattern vulnerable to a denial of service attack.
     -->
-    <log4j2.version>2.16.0</log4j2.version>
+    <log4j2.version>2.17.0</log4j2.version>
   </properties>
 
   <dependencies>
@@ -48,11 +42,38 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-log4j2</artifactId>
+
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j2.version}</version>
     </dependency>
     <!-- log4j2 spring boot，可在log4j2-spring.xml日志配置文件中获取spring环境中的配置参数 -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-spring-boot</artifactId>
+      <version>${log4j2.version}</version>
+    </dependency>
+    <!-- log4j2 JSON Template Layout：https://logging.apache.org/log4j/2.x/manual/json-template-layout.html -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-layout-template-json</artifactId>
       <version>${log4j2.version}</version>
     </dependency>
 

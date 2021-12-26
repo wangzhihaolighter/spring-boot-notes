@@ -201,6 +201,69 @@
       </DefaultRolloverStrategy>
     </RollingFile>
 
+    <!-- 输出json格式日志 -->
+    <RollingFile name="RollingFileJson"
+      fileName="${FILE_PATH}/${FILE_NAME}-json.log"
+      filePattern="${FILE_PATH}/${date:yyyy-MM}/${FILE_NAME}-json-%d{yyyy-MM-dd-HH-mm}-%i.log.zip">
+      <!-- 阀值过滤器，过滤阈值水平以下的事件 -->
+      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+      <!-- 格式化输出，这里使用  JSON Template Layout -->
+      <JsonTemplateLayout eventTemplateUri="classpath:LogstashJsonEventLayoutV1.json"/>
+      <!-- 组合多个触发策略 -->
+      <Policies>
+        <!-- JVM启动 -->
+        <OnStartupTriggeringPolicy/>
+        <!--
+          时间模式
+          interval属性用来指定多久滚动一次，默认是 1 hour。
+          如果filePattern 是%d{yyyy-MM-dd}，则interval="1"表示1天。
+          如果是%d{yyyy-MM-dd-HH-mm}，则interval="1"表示1分钟。
+          如果设置 size="10MB" ，则一个interval单位内，日志超过10m，则也会滚动压缩
+        -->
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <!-- 文件达到指定的大小，大小可以以字节为单位指定，后缀为 KB、 MB 或 GB -->
+        <SizeBasedTriggeringPolicy size="1KB"/>
+      </Policies>
+      <!--
+        DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖
+        配置文件中的DefaultRolloverStrategy标签的max特性是配置压缩文件名中的 i 来决定同一存档周期内（这个说法不严谨）所保存最大数量，即 i 的最大数值。
+
+        log4j-2.5开始引入了删除操作，使得用户更有效的的控制在rollover时间内删除文件，而不是使用DefaultRolloverStrategy max属性进行删除。
+            删除操作允许用户配置一个或多个条件，选择要删除相对于基本目录的文件。
+          注意：删除任何文件这是允许的操作。不仅仅是rollover时的文件。所以使用这个操作时，一定要小心。
+          使用testMode参数可以测试您的配置，而不会意外删除错误的文件。
+
+        Delete参数
+            basePath：必参。从哪里扫描要删除的文件的基本路径。
+            maxDepth：要访问的目录的最大级别数。值为0表示仅访问起始文件（基本路径本身），除非被安全管理者拒绝。
+                    Integer.MAX_VALUE的值表示应该访问所有级别。默认为1，意思是指定基本目录中的文件。
+            followLinks：
+            testMode：默认false。如果为true，文件将不会被删除，而是将信息打印到info级别的status logger,
+                    可以利用这个来测试，配置是否和我们预期的一样
+        IfFileName条件参数
+            glob：如果regex没有指定的话，则必须。使用类似于正则表达式但是又具有更简单的有限模式语言来匹配相对路径（相对于基本路径）
+            regex：如果glob没有指定的话，则必须。使用由Pattern类定义的正则表达式来匹配相对路径（相对于基本路径）
+
+          IfLastModified条件参数
+            age：必须。指定持续时间duration。该条件接受比指定持续时间更早或更旧的文件。即保留从当前时间至age时间之前这段时间范围内的数据,
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm-ss}.log.gz，interval="5"，IfLastModified age="1m"
+        意思是每5秒新建一个历史文件，历史文件总保留时长1分钟，则总共有60秒/5=12个文件。
+
+        如filePattern="info-%d{yyyy-MM-dd-HH-mm}.log.gz，interval="2"，IfLastModified age="10m"
+        意思是每2分钟新建一个历史文件，历史文件总保留时长10分钟，则总共有10分钟/2=5个文件。
+
+        这里我们设置filePattern="info-%d{yyyy-MM-dd}.log.gz，interval="1"，IfLastModified age="30d"
+        即每天滚动压缩一次，总保留30天内压缩文件
+      -->
+      <DefaultRolloverStrategy max="30">
+        <Delete basePath="${FILE_PATH}" maxDepth="2">
+          <IfFileName glob="*/${FILE_NAME}-json-*.log.zip"/>
+          <IfLastModified age="5m"/>
+        </Delete>
+      </DefaultRolloverStrategy>
+    </RollingFile>
+
     <RollingFile name="RollingFileBiz"
       fileName="${FILE_PATH}/${FILE_NAME}-biz.log"
       filePattern="${FILE_PATH}/${date:yyyy-MM}/${FILE_NAME}-biz-%d{yyyy-MM-dd-HH-mm}-%i.log.zip">
@@ -285,6 +348,7 @@
       <appender-ref ref="Console"/>
       <appender-ref ref="RollingFileInfo"/>
       <appender-ref ref="RollingFileError"/>
+      <appender-ref ref="RollingFileJson"/>
     </root>
   </loggers>
 
