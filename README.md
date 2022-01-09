@@ -30,12 +30,16 @@ Spring Boot的一些特性。
   - **aspect**：面向切面
   - **filter**：过滤器
   - **interceptor**：拦截器
-- async：异步调用
+- **async**：异步调用
 - [**auto-configuration**：自动配置](DOC/B.feature/auto-configuration/Creating-Your-Own-Auto-Configuration.md)
 - [**bean-validation**：Bean数据验证(常用注解、校验模式配置、国际化、自定义验证器)](DOC/B.feature/bean-validation/bean-validation.md)
 - **event-listener**：事件监听
 - [**externalized-configuration**：外部化配置](DOC/B.feature/externalized-configuration/Externalized-Configuration.md)
 - [**i18n**：国际化消息提示](DOC/B.feature/i18n/Internationalization.md)
+- **JDBC**：Java 连接、操作数据库
+  - **spring-jdbc**：通过Spring JdbcTemplate 操作数据库
+  - **spring-data-jdbc**：通过 Spring Data JDBC 操作数据库
+  - **spring-data-jpa**：通过 Spring Data JPA 操作数据库
 - [**logging**：日志](DOC/B.feature/logging/logging.md)
   - **logging-logback**：整合logback
   - **logging-log4j2**：整合log4j2

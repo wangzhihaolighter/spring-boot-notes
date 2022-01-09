@@ -1,0 +1,75 @@
+### 查询所有
+GET /user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### id查询
+GET /user/1 HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 条件查询
+GET /user/and?username=user1&password=123456 HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 模糊查询
+GET /user/like?username=user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 字段排序
+GET /user/order HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 数量查询
+GET /user/count HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 分页查询
+GET /user/page?pageNum=2&pageSize=2&username=user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 排序查询
+GET /user/sort?username=user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### @Query查询
+GET /user/query/like?username=user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### @Query查询
+GET /user/query/and?username=user1&password=123456 HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 新增
+POST /user HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "username": "失落的老菜根",
+  "password": "123456"
+}
+
+### 更新
+PUT /user HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "id": 4,
+  "username": "坚强的老菜根",
+  "password": "123456"
+}
+
+### 更新
+PUT /user/native HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "id": 4,
+  "username": "乐观的老菜根",
+  "password": "123456"
+}
+
+### id删除
+DELETE /user/1 HTTP/1.1
+Host: 127.0.0.1:8080

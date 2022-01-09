@@ -1,0 +1,32 @@
+### 查询所有
+GET /user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### id查询
+GET /user/1 HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 新增
+POST /user HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "username": "失落的老菜根",
+  "password": "123456"
+}
+
+### 更新
+PUT /user HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "id": 4,
+  "username": "乐观的老菜根",
+  "password": "123456"
+}
+
+### id删除
+DELETE /user/1 HTTP/1.1
+Host: 127.0.0.1:8080

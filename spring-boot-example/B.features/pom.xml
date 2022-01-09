@@ -25,6 +25,7 @@
     <module>event-listener</module>
     <module>externalized-configuration</module>
     <module>i18n</module>
+    <module>jdbc</module>
     <module>logging</module>
     <module>scheduling</module>
     <module>sending-email</module>
