@@ -153,4 +153,5 @@ Spring Boot的一些特性。
 一些实现相应功能的服务示例。
 
 - [**api-data-codec**](spring-boot-example/F.services/api-data-codec)：api 接口请求/响应数据编解码
-- [**simple-distributed-scheduling-service**](spring-boot-example/F.services/simple-distributed-scheduling-service)：简单的分布式定时任务调度服务
+- **distributed-scheduling-service**：分布式定时任务调度服务
+  - [**spring-task-distributed-scheduling-service**](spring-boot-example/F.services/distributed-scheduling-service/spring-task-distributed-scheduling-service)：通过 spring task 实现简单的分布式定时任务调度服务
