@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: h2database-integration-demo
+  datasource:
+    driver-class-name: org.h2.Driver
+    # 嵌入式数据库（本地）连接：jdbc:h2:file:/path/h2database
+    # 内存数据库（本地）连接：jdbc:h2:mem:<databaseName>
+    # MODE=MySQL：兼容模式，H2兼容多种数据库，该值可以为：DB2、Derby、HSQLDB、MSSQLServer、MySQL、Oracle、PostgreSQL
+    # 嵌入式h2数据库用户名密码自行填写，启动后会自动创建这个管理员账号
+    url: jdbc:h2:file:./temp/h2database_data/test_db;MODE=MYSQL
+    username: admin
+    password: 123456
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true
+
+# 官方仓库：https://github.com/h2database/h2database

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>login</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="login" class="login-container video-container">
+
+  <div :style="fixStyle" class="filter"></div>
+  <video :style="fixStyle" autoplay loop muted class="fillWidth" v-on:canplay="canplay">
+    <!--by https://coverr.co/videos/the-mountains-ncFMIJ5yHJ-->
+    <source src="/video/loginBackground.mp4" type="video/mp4"/>
+    浏览器不支持 video 标签，建议升级浏览器。
+  </video>
+  <div class="poster hidden" v-if="!videoCanPlay">
+    <img :style="fixStyle" src="/img/loginBackground.jpg" alt="">
+  </div>
+
+  <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
+    <h2 class="title">LOGIN</h2>
+    <el-form-item prop="username">
+      <el-input type="text"
+                v-model="loginForm.username"
+                auto-complete="off"
+                placeholder="用户名"
+      >
+        <em slot="prefix" class="el-input__icon el-icon-user"></em>
+      </el-input>
+    </el-form-item>
+    <el-form-item prop="password">
+      <el-input type="password"
+                v-model="loginForm.password"
+                auto-complete="off"
+                placeholder="密码"
+      >
+        <em slot="prefix" class="el-input__icon el-icon-lock"></em>
+      </el-input>
+    </el-form-item>
+    <el-form-item prop="captcha">
+      <el-input
+          v-model="loginForm.captcha"
+          style="width: 66%"
+          auto-complete="off"
+          placeholder="验证码"
+      >
+        <em slot="prefix" class="el-input__icon el-icon-key"></em>
+      </el-input>
+      <div class="login-code">
+        <img alt="验证码" :src="captchaBase64" @click="refreshCode" class="login-code-img"/>
+      </div>
+    </el-form-item>
+    <el-checkbox style="margin:0 0 25px 0;" checked>记住密码</el-checkbox>
+    <el-form-item>
+      <el-button style="width: 100%" type="primary" @click="handleLogin">登 录</el-button>
+    </el-form-item>
+  </el-form>
+  <!--  底部  -->
+  <div class="el-login-footer">
+    <span>Copyright © 2020 lighter All Rights Reserved.</span>
+  </div>
+</div>
+</body>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="text/javascript">
+  new Vue({
+    el: '#login',
+    data() {
+      return {
+        captchaBase64: "",
+        loginForm: {
+          username: 'admin',
+          password: '123456',
+          captcha: '',
+          uuid: ''
+        },
+        rules: {
+          username: [
+            {required: true, message: '用户名不得为空', trigger: 'blur'}
+          ],
+          password: [
+            {required: true, message: '请输入密码', trigger: 'blur'}
+          ],
+          captcha: [
+            {required: true, message: '请输入验证码', trigger: 'blur'}
+          ]
+        },
+        //动态背景参数
+        videoCanPlay: false,
+        fixStyle: ''
+      };
+    },
+    created: function () {
+      this.refreshCode();
+    },
+    mounted: function () {
+      window.onresize = () => {
+        const windowWidth = document.body.clientWidth
+        const windowHeight = document.body.clientHeight
+        const windowAspectRatio = windowHeight / windowWidth
+        let videoWidth
+        let videoHeight
+        if (windowAspectRatio < 0.5625) {
+          videoWidth = windowWidth
+          videoHeight = videoWidth * 0.5625
+          this.fixStyle = {
+            height: windowWidth * 0.5625 + 'px',
+            width: windowWidth + 'px',
+            'margin-bottom': (windowHeight - videoHeight) / 2 + 'px',
+            'margin-left': 'initial'
+          }
+        } else {
+          videoHeight = windowHeight
+          videoWidth = videoHeight / 0.5625
+          this.fixStyle = {
+            height: windowHeight + 'px',
+            width: windowHeight / 0.5625 + 'px',
+            'margin-left': (windowWidth - videoWidth) / 2 + 'px',
+            'margin-bottom': 'initial'
+          }
+        }
+      }
+      window.onresize();
+    },
+    methods: {
+      handleLogin() {
+        this.$refs['loginForm'].validate((valid) => {
+          if (!valid) {
+            console.log('error submit!!');
+            return false;
+          } else {
+            const userInfo = {
+              username: this.loginForm.username,
+              password: this.loginForm.password,
+              captchaText: this.loginForm.captcha,
+              captchaUuid: this.loginForm.uuid
+            }
+            axios({
+              method: 'post',
+              url: '/auth/login',
+              data: userInfo
+            }).then(response => {
+              window.location.replace("?token=" + response.data);
+            }).catch(error => {
+              this.$message.error(error.response.data);
+              this.refreshCode();
+              this.loginForm.captcha = "";
+              this.loginForm.uuid = "";
+            });
+          }
+        });
+      },
+      refreshCode() {
+        axios
+        .get('/auth/captcha')
+        .then(response => {
+          this.captchaBase64 = response.data.imgBase64;
+          this.loginForm.uuid = response.data.uuid;
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+        ;
+      },
+      canplay() {
+        this.videoCanPlay = true
+      }
+    },
+  });
+</script>
+
+<style lang="css">
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  }
+
+  html {
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .login-container, .video-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .video-container .poster img, .video-container video {
+    z-index: 0;
+    position: absolute;
+  }
+
+  .video-container .filter {
+    z-index: 1;
+    position: absolute;
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .title {
+    margin: 0 auto 30px auto;
+    text-align: center;
+    color: #707070;
+  }
+
+  .login-form {
+    border-radius: 6px;
+    background: #ffffff;
+    width: 350px;
+    padding: 25px 25px 5px 25px;
+    z-index: 2;
+    position: absolute;
+  }
+
+  .login-form .el-input {
+    height: 38px;
+  }
+
+  .login-form .el-input input {
+    height: 38px;
+  }
+
+  .login-form .input-icon {
+    height: 38px;
+    width: 14px;
+    margin-left: 2px;
+  }
+
+  .login-code {
+    height: 40px;
+    float: right;
+  }
+
+  .login-code-img {
+    margin-top: 2px;
+  }
+
+  .el-login-footer {
+    height: 40px;
+    line-height: 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: Arial, serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+</style>
+
+</html>

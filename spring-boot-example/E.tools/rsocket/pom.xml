@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>E.tools</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>rsocket</artifactId>
+  <packaging>pom</packaging>
+
+  <name>rsocket</name>
+  <description>RSocket是一种二进制的点对点通信协议,是一种新的网络通信第七层协议。</description>
+
+  <modules>
+    <module>rsocket-client</module>
+    <module>rsocket-server</module>
+  </modules>
+
+</project>

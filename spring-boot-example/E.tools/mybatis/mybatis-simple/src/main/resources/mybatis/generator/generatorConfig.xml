@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+  "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+  <!-- 引入配置文件 -->
+  <properties resource="mybatis/generator/generatorConfig.properties"/>
+
+  <!--
+  context 生成一组对象的环境
+  id 必选，上下文id，用于在生成错误时提示
+  defaultModelType 指定生成对象的样式
+      1. conditional：这个模型类似于分层模型，只是如果一个单独的类只包含一个字段，那么将不会生成一个单独的类。因此，如果一个表只有一个主键字段，那么该字段将合并到基记录类中。
+      2. flat：该模型仅为任何表生成一个域类。类将保存表中的所有字段。
+      3. hierarchical：如果表有一个主键，则该模型将生成一个主键类、另一个类(保存表中的任何BLOB列)和另一个类(保存其余字段)。类之间有适当的继承关系。
+  targetRuntime
+      1. MyBatis3：使用该值，MBG 将生成与 MyBatis 3.0 及更高版本和 JSE 5.0 及更高版本兼容的对象（例如，Java 模型和映射器接口将使用泛型类型）。 这些生成对象中的“示例”方法支持几乎无限的动态 where 子句。 此外，使用这些生成器生成的 Java 对象支持许多 JSE 5.0 特性，包括参数化类型和注释。
+      2. MyBatis3Simple：使用该值，MBG 将生成与 MyBatis 3.0 及更高版本和 JSE 5.0 及更高版本兼容的对象（例如，Java 模型和映射器接口将使用泛型类型）。 使用此目标运行时生成的映射器是非常基本的 CRUD 操作，仅没有“示例”方法和很少的动态 SQL。 使用这些生成器生成的 Java 对象支持许多 JSE 5.0 特性，包括参数化类型和注释。
+      3. MyBatis3DynamicSql：使用该值，MBG将生成与MyBatis 3.4.2及更高版本兼容的对象，以及与Java 8及更高版本兼容的对象(例如，Java模型和映射器接口将使用泛型类型和其他Java 8特性，如接口中的默认方法)。
+  introspectedColumnImpl 类全限定名，用于扩展MBG
+  -->
+  <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <property name="autoDelimitKeywords" value="true"/>
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
+    <property name="javaFileEncoding" value="utf-8"/>
+    <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+    <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+    <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+    <!-- 注释 -->
+    <commentGenerator>
+      <!-- 是否去除自动生成的注释 -->
+      <property name="suppressAllComments" value="false"/>
+      <!-- 是否去除注释代时间戳 -->
+      <property name="suppressDate" value="true"/>
+      <!-- 此属性用于指定MBG是否将在生成的注释中包含db表中的表和列注释 -->
+      <property name="addRemarkComments" value="true"/>
+    </commentGenerator>
+
+    <!-- jdbc连接 -->
+    <jdbcConnection
+      driverClass="${driver-class-name}"
+      connectionURL="${url}"
+      userId="${username}"
+      password="${password}"
+    />
+
+    <!-- 类型转换 -->
+    <javaTypeResolver>
+      <!-- 该属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal -->
+      <property name="forceBigDecimals" value="false"/>
+      <!-- 该属性用于指定MyBatis Generator是否应该强制使用JSR-310数据类型的DATE、TIME和TIMESTAMP字段，而不是使用java.util.Date。 -->
+      <property name="useJSR310Types" value="true"/>
+    </javaTypeResolver>
+
+    <!-- Java实体类生成 -->
+    <javaModelGenerator
+      targetPackage="${javaModel.targetPackage}"
+      targetProject="${javaModel.targetProject}"
+    >
+      <!-- 是否在当前路径下新加一层schema，如果true，MBG会根据catalog和schema来生成子包。如果false就会直接用targetPackage属性。 -->
+      <property name="enableSubPackages" value="false"/>
+      <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+
+    <!-- mapper.xml文件生成 -->
+    <sqlMapGenerator
+      targetPackage="${sqlMap.targetPackage}"
+      targetProject="${sqlMap.targetProject}"
+    >
+      <!-- 是否在当前路径下新加一层schema，如果true，MBG会根据catalog和schema来生成子包。如果false就会直接用targetPackage属性。 -->
+      <property name="enableSubPackages" value="false"/>
+    </sqlMapGenerator>
+
+    <!--
+    生成mapper.xml对应javaClient，也就是dao类
+      type="ANNOTATEDMAPPER" 生成Java Model和基于注解的Mapper对象
+      type="MIXEDMAPPER" 生成基于注解的Java Model和相应的Mapper对象
+      type="XMLMAPPER" 生成SQLMap XML文件和独立的Mapper接口
+    -->
+    <javaClientGenerator
+      targetPackage="${javaClient.targetPackage}"
+      targetProject="${javaClient.targetProject}"
+      type="XMLMAPPER"
+    >
+      <!-- 是否在当前路径下新加一层schema，如果true，MBG会根据catalog和schema来生成子包。如果false就会直接用targetPackage属性。 -->
+      <property name="enableSubPackages" value="false"/>
+    </javaClientGenerator>
+
+    <!-- 选择对哪些数据库表进行代码生成操作 -->
+    <table
+      tableName="t_user"
+      domainObjectName="User"
+      enableCountByExample="true"
+      enableSelectByExample="true"
+      enableUpdateByExample="true"
+      enableDeleteByExample="true"
+      selectByExampleQueryId="true"
+    >
+      <!-- 数据库表主键 -->
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+    </table>
+
+  </context>
+</generatorConfiguration>

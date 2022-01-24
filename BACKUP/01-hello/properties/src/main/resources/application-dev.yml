@@ -1,4 +1,0 @@
-#自定义属性，yml默认编码格式则是utf-8
-user:
-  name: 大白菜
-  description: 飞翔的${user.name}

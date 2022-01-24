@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>D.integration</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>prometheus</artifactId>
+  <packaging>pom</packaging>
+
+  <name>prometheus</name>
+  <description>一个开源的系统监控和报警系统</description>
+
+  <modules>
+    <module>prometheus-pushgateway</module>
+    <module>prometheus-simple</module>
+  </modules>
+
+</project>

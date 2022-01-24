@@ -1,0 +1,15 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: liquibase-demo
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./temp/h2database_data/test_db;MODE=MYSQL
+    username: admin
+    password: 123456
+  jpa:
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/master.xml

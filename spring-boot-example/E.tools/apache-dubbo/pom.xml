@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>E.tools</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>apache-dubbo</artifactId>
+  <packaging>pom</packaging>
+
+  <name>apache-dubbo</name>
+  <description>一款高性能、轻量级的开源服务框架</description>
+
+  <modules>
+    <module>dubbo-common</module>
+    <module>dubbo-provider</module>
+    <module>dubbo-consumer</module>
+  </modules>
+</project>

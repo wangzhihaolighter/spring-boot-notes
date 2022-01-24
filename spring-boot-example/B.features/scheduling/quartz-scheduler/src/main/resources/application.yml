@@ -6,7 +6,7 @@ spring:
   # 配置数据源用于 quartz initialize
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./spring-boot-example/B.features/quartz-scheduler/h2database_data/quartz_db
+    url: jdbc:h2:file:./temp/h2database_data/quartz_db
     username: admin
     password: 123456
   h2:
@@ -35,7 +35,7 @@ spring:
       # 数据源配置 - 持久化
       org.quartz.dataSource.quartzDB.provider: hikaricp # 见 org.quartz.utils.PoolingConnectionProvider
       org.quartz.dataSource.quartzDB.driver: org.h2.Driver
-      org.quartz.dataSource.quartzDB.URL: jdbc:h2:file:./spring-boot-example/B.features/quartz-scheduler/h2database_data/quartz_db
+      org.quartz.dataSource.quartzDB.URL: jdbc:h2:file:./temp/h2database_data/quartz_db
       org.quartz.dataSource.quartzDB.user: admin
       org.quartz.dataSource.quartzDB.password: 123456
       # JobStore配置

@@ -2,96 +2,91 @@ package com.example.kaptcha.config.cache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.stats.CacheStats;
-import org.springframework.stereotype.Component;
-
 import java.util.Map;
 import java.util.Set;
+import org.springframework.stereotype.Component;
 
-/**
- * @author wangzhihao
- */
+/** @author wangzhihao */
 @Component
 public class CacheService {
 
-    private final Cache<String, Object> cache;
+  private final Cache<String, Object> cache;
 
-    public CacheService(Cache<String, Object> cache) {
-        this.cache = cache;
+  public CacheService(Cache<String, Object> cache) {
+    this.cache = cache;
+  }
+
+  public Object getValue(String key) {
+    if (key == null) {
+      return null;
     }
 
-    public Object getValue(String key) {
-        if (key == null) {
-            return null;
-        }
-
-        if (cache != null) {
-            return cache.getIfPresent(key);
-        }
-
-        return null;
+    if (cache != null) {
+      return cache.getIfPresent(key);
     }
 
-    public Map<String, Object> getAll() {
-        if (cache != null) {
-            return cache.asMap();
-        }
+    return null;
+  }
 
-        return null;
+  public Map<String, Object> getAll() {
+    if (cache != null) {
+      return cache.asMap();
     }
 
-    public Map<String, Object> get(Set<String> keySet) {
-        if (keySet == null || keySet.isEmpty()) {
-            return null;
-        }
+    return null;
+  }
 
-        if (cache != null) {
-            return cache.getAllPresent(keySet);
-        }
-
-        return null;
+  public Map<String, Object> get(Set<String> keySet) {
+    if (keySet == null || keySet.isEmpty()) {
+      return null;
     }
 
-
-    public void putValue(String key, Object value) {
-        if (key == null || value == null) {
-            return;
-        }
-
-        if (cache != null) {
-            cache.put(key, value);
-        }
+    if (cache != null) {
+      return cache.getAllPresent(keySet);
     }
 
-    public void removeKey(String key) {
-        if (key == null) {
-            return;
-        }
+    return null;
+  }
 
-        if (cache != null) {
-            cache.invalidate(key);
-        }
+  public void putValue(String key, Object value) {
+    if (key == null || value == null) {
+      return;
     }
 
-    public void removeKey(Set<String> keySet) {
-        if (keySet == null || keySet.isEmpty()) {
-            return;
-        }
+    if (cache != null) {
+      cache.put(key, value);
+    }
+  }
 
-        if (cache != null) {
-            cache.invalidate(keySet);
-        }
+  public void removeKey(String key) {
+    if (key == null) {
+      return;
     }
 
-    public boolean existKey(String key) {
-        return getValue(key) != null;
+    if (cache != null) {
+      cache.invalidate(key);
+    }
+  }
+
+  public void removeKey(Set<String> keySet) {
+    if (keySet == null || keySet.isEmpty()) {
+      return;
     }
 
-    public CacheStats cacheStats() {
-        if (cache != null) {
-            return cache.stats();
-        }
+    if (cache != null) {
+      cache.invalidate(keySet);
+    }
+  }
 
-        return null;
+  public boolean existKey(String key) {
+    return getValue(key) != null;
+  }
+
+  public CacheStats cacheStats() {
+    if (cache != null) {
+      return cache.stats();
     }
 
+    return null;
+  }
 }

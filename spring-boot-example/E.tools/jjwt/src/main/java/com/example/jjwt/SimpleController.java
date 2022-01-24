@@ -21,7 +21,7 @@ public class SimpleController {
     private JwtProperties jwtProperties;
 
     @GetMapping("/")
-    public String sayHello() {
+    public String hello() {
         return "Hello,JWT!";
     }
 

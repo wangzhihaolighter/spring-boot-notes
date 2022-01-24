@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: prometheus-integration-demo
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus' # 暴露/actuator/prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name} # 暴露的数据中添加application label
+
+# Grafana SLS JVM监控大盘：https://grafana.com/grafana/dashboards/12856

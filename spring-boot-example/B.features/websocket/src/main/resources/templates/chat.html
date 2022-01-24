@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>chat</title>
+    <!-- Import style -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css"/>
+    <!-- Import Vue 3 -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- Import component library -->
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/axios"></script>
+</head>
+<body>
+
+<div id="app">
+    <el-row :gutter="10">
+        <el-col :span="16">
+            <el-card style="height: 100vh;width: 100%;overflow-y: auto">
+                <div v-for="message in messages">
+                    <el-row :gutter="10" align="middle" class="message" v-if="message.username === customUsername">
+                        <el-col :span="8">
+                        </el-col>
+                        <el-col :span="13">
+                            <span class="custom_message">{{ message.msg }}</span>
+                        </el-col>
+                        <el-col :span="3">
+                            <span class="custom_username">{{ message.username }}</span>
+                        </el-col>
+                    </el-row>
+                    <el-row :gutter="10" align="middle" class="message" v-else>
+                        <el-col :span="3">
+                            <span class="other_username">{{ message.username }}</span>
+                        </el-col>
+                        <el-col :span="13">
+                            <span class="other_message">{{ message.msg }}</span>
+                        </el-col>
+                    </el-row>
+                </div>
+
+            </el-card>
+        </el-col>
+
+        <el-col :span="8">
+            <span>当前用户：{{customUsername}}</span>
+            <el-card style="margin-top: 10px">
+                <el-input
+                        v-model="inputMessage"
+                        :autosize="{ minRows: 4}"
+                        type="textarea"
+                        placeholder="请输入聊天内容"
+                >
+                </el-input>
+                <el-button size="medium"
+                           style="width: 100%;margin-top: 10px;"
+                           type="primary"
+                           @click="onSubmit"
+                >发送
+                </el-button>
+            </el-card>
+        </el-col>
+    </el-row>
+</div>
+
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    const room = [[${room}]];
+    const username = [[${username}]];
+    console.log("room: " + room);
+    console.log("username: " + username);
+
+    const Main = {
+        data() {
+            return {
+                wsUri: "ws://localhost:8090/websocket/" + room + "/" + username,
+                messages: [],
+                inputMessage: "",
+                customUsername: username,
+            }
+        },
+        created() {
+            this.initWebSocket();
+            this.getHistoryMsg();
+        },
+        methods: {
+            initWebSocket() {
+                this.webSocket = new WebSocket(this.wsUri);
+                this.webSocket.onerror = this.webSocketOnError;
+                this.webSocket.onmessage = this.webSocketOnMessage;
+            },
+            webSocketOnError(e) {
+                this.$notify({
+                    title: "WebSocket连接发生错误",
+                    type: "error",
+                    duration: 0,
+                });
+            },
+            webSocketOnMessage(e) {
+                const data = JSON.parse(e.data);
+                this.messages.push(data);
+            },
+            closeWebSocket() {
+                if (!!this.webSocket) {
+                    this.webSocket.close();
+                }
+            },
+            getHistoryMsg() {
+                axios({
+                    method: 'get',
+                    url: "/webSocket",
+                    params: {
+                        room: room,
+                    }
+                }).then(response => {
+                    if (response.data) {
+                        this.messages = this.messages.concat(response.data);
+                    }
+                });
+            },
+            onSubmit() {
+                if (!this.inputMessage) {
+                    return;
+                }
+
+                axios({
+                    method: 'post',
+                    url: "/websocket",
+                    params: {
+                        room: room,
+                        username: this.customUsername,
+                        msg: this.inputMessage,
+                    }
+                }).then(response => {
+                    this.inputMessage = null
+                });
+            },
+        },
+    };
+
+    const app = Vue.createApp(Main);
+    app.use(ElementPlus);
+    app.mount("#app");
+</script>
+
+<style>
+    .message {
+        margin-bottom: 10px;
+    }
+
+    .custom_username {
+        border: 1px solid black;
+        font-size: 20px;
+        font-weight: bold;
+        float: right;
+    }
+
+    .other_username {
+        border: 1px solid black;
+        font-size: 20px;
+        font-weight: bold;
+        float: left;
+    }
+
+    .custom_message {
+        border-radius: 5px;
+        border: 1px solid gray;
+        background-color: lightskyblue;
+        color: dimgray;
+        float: right;
+        padding: 5px 5px 5px 5px;
+    }
+
+    .other_message {
+        border-radius: 5px;
+        border: 1px solid gray;
+        background-color: ghostwhite;
+        color: dimgray;
+        float: left;
+        padding: 5px 5px 5px 5px;
+    }
+</style>
+
+</html>

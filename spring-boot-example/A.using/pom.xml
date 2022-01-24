@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>A.using</artifactId>
-    <packaging>pom</packaging>
-    <name>using</name>
-    <description>Spring Boot 使用示例</description>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>spring-boot-example</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <parent>
-        <artifactId>spring-boot-example</artifactId>
-        <groupId>com.example</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+  <artifactId>A.using</artifactId>
+  <packaging>pom</packaging>
 
-    <modules>
-        <module>devtools</module>
-        <module>hello-world</module>
-        <module>package-image</module>
-        <module>package-war</module>
-        <module>package-zip</module>
-    </modules>
+  <name>A.using</name>
+  <description>Spring Boot 使用示例</description>
+
+  <modules>
+    <module>devtools</module>
+    <module>hello-world</module>
+    <module>package-image</module>
+    <module>package-war</module>
+    <module>package-zip</module>
+  </modules>
 
 </project>

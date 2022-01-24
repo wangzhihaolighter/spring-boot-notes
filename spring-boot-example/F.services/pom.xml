@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>F.services</artifactId>
-    <packaging>pom</packaging>
-    <name>services</name>
-    <description>利用 Spring Boot 实现的一些功能服务示例</description>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>spring-boot-example</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <parent>
-        <artifactId>spring-boot-example</artifactId>
-        <groupId>com.example</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+  <artifactId>F.services</artifactId>
+  <packaging>pom</packaging>
 
-    <modules>
-    </modules>
+  <name>F.services</name>
+  <description>利用 Spring Boot 实现的一些功能服务示例</description>
+
+  <modules>
+    <module>api-data-codec</module>
+    <module>distributed-scheduling-service</module>
+  </modules>
 
 </project>

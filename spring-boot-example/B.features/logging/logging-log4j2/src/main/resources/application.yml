@@ -6,4 +6,4 @@ server:
 logging:
   config: classpath:log4j2-spring.xml
   file:
-    path: ./spring-boot-example/B.features/logging/logging-log4j2/temp/service/logs
+    path: ./temp/logs

@@ -16,7 +16,7 @@ public class TestTask {
   }
 
   /** initialDelay毫秒后开始执行，方法执行结束后fixedDelay豪秒再重复执行 */
-  @SneakyThrows
+  @SneakyThrows(InterruptedException.class)
   @Scheduled(initialDelay = 2000, fixedDelay = 5000)
   public void test2() {
     log.info("test2");

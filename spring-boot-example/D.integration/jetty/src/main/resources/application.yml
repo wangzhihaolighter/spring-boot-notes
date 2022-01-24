@@ -1,0 +1,13 @@
+server:
+  port: 8080
+  jetty:
+    threads:
+      # acceptors负责接受新连接
+      acceptors: 2
+      # selectors处理HTTP消息协议的解包
+      selectors: 4
+    accesslog:
+      enabled: true
+spring:
+  application:
+    name: jetty integration demo

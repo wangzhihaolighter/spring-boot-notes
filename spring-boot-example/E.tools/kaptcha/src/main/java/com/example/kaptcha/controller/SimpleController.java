@@ -12,25 +12,24 @@ import org.springframework.web.servlet.ModelAndView;
 @CrossOrigin
 @Controller
 public class SimpleController {
-    private final CacheService cacheService;
+  private final CacheService cacheService;
 
-    @GetMapping("/")
-    public ModelAndView index(@RequestParam(value = "token", defaultValue = "") String token) {
-        String viewName = "index";
-        if (!cacheService.existKey(token)) {
-            viewName = "login";
-        }
-        return new ModelAndView(viewName);
+  @GetMapping("/")
+  public ModelAndView index(@RequestParam(value = "token", defaultValue = "") String token) {
+    String viewName = "index";
+    if (!cacheService.existKey(token)) {
+      viewName = "login";
     }
+    return new ModelAndView(viewName);
+  }
 
-    @GetMapping("/login")
-    public ModelAndView login() {
-        return new ModelAndView("login");
-    }
+  @GetMapping("/login")
+  public ModelAndView login() {
+    return new ModelAndView("login");
+  }
 
-    @GetMapping("/error")
-    public ModelAndView error() {
-        return new ModelAndView("error");
-    }
-
+  @GetMapping("/error")
+  public ModelAndView error() {
+    return new ModelAndView("error");
+  }
 }

@@ -4,18 +4,17 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>devtools</artifactId>
-  <version>${revision}</version>
-
-  <name>devtools</name>
-  <description>devtools</description>
-
   <parent>
-    <artifactId>A.using</artifactId>
     <groupId>com.example</groupId>
+    <artifactId>A.using</artifactId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+
+  <artifactId>devtools</artifactId>
+
+  <name>devtools</name>
+  <description>一组额外的工具,提供额外的开发时特性</description>
 
   <dependencies>
     <dependency>
@@ -26,18 +25,8 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
-      <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>

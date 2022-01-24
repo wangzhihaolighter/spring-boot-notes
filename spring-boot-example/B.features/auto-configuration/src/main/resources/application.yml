@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: auto-configuration
+
+wrap:
+  enabled: true
+  prefix: prefix.
+  suffix: .suffix
+
+okhttp:
+  enable: true
+  connect-timeout: 60
+  read-timeout: 60
+  write-timeout: 60

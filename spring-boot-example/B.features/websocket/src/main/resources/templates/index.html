@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <!-- Import style -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css"/>
+    <!-- Import Vue 3 -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- Import component library -->
+    <script src="https://unpkg.com/element-plus"></script>
+</head>
+<body>
+
+<div id="app">
+    <div class="login">
+        <el-form class="login-form" ref="form" :model="form" label-position="right">
+            <h3 class="login-title">登 录</h3>
+            <el-form-item label="用户" prop="username">
+                <el-input
+                        v-model="form.username"
+                        maxlength="10"
+                        show-word-limit
+                        type="text"
+                />
+            </el-form-item>
+            <el-form-item label="房间" prop="room">
+                <el-input
+                        v-model="form.room"
+                        maxlength="4"
+                        show-word-limit
+                        type="text"
+                />
+            </el-form-item>
+            <el-button size="medium"
+                       style="width: 100%"
+                       type="primary"
+                       @click="onSubmit"
+            >进入聊天室
+            </el-button>
+        </el-form>
+        </el-row>
+    </div>
+</div>
+
+</body>
+
+<script>
+    const Main = {
+        data() {
+            return {
+                form: {
+                    username: '',
+                    room: '',
+                },
+            }
+        },
+        methods: {
+            onSubmit() {
+                if (!this.form.username || !this.form.room) {
+                    return;
+                }
+                window.location.href = "/chat?username=" + this.form.username + "&room=" + this.form.room;
+            },
+        },
+    };
+
+    const app = Vue.createApp(Main);
+    app.use(ElementPlus);
+    app.mount("#app");
+</script>
+
+<style>
+    body {
+        margin: 0 0 0 0;
+    }
+
+    .login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: lightgray;
+    }
+
+    .login-form {
+        border-radius: 6px;
+        background: #ffffff;
+        width: 360px;
+        padding: 25px 25px 25px 25px;
+        opacity: 0.95;
+    }
+
+    .login-title {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #707070;
+    }
+</style>
+
+</html>

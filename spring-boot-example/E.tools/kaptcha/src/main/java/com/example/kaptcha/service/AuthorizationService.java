@@ -9,14 +9,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthorizationService {
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
-    public AuthorizationService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+  public AuthorizationService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
-    public User findUser(String username, String password) {
-        return userRepository.findUsersByUsernameAndPassword(username, password);
-    }
-
+  public User findUser(String username, String password) {
+    return userRepository.findUsersByUsernameAndPassword(username, password);
+  }
 }

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>package-war</artifactId>
-  <version>${revision}</version>
-
-  <name>package-war</name>
-  <description>构建war格式部署包</description>
-  <packaging>war</packaging>
-
   <parent>
-    <artifactId>A.using</artifactId>
     <groupId>com.example</groupId>
+    <artifactId>A.using</artifactId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+
+  <artifactId>package-war</artifactId>
+  <packaging>war</packaging>
+
+  <name>package-war</name>
+  <description>打包构建 war</description>
 
   <properties>
     <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -33,6 +32,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -41,21 +41,13 @@
   </dependencies>
 
   <build>
+    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring-boot.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>repackage</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
-    <finalName>app</finalName>
   </build>
 
 </project>

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PackageImageApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(PackageImageApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(PackageImageApplication.class, args);
+    }
 }

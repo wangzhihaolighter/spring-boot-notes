@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: spring-web-integration-demo
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 20MB
+  web:
+    resources:
+      static-locations: 'classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/'
+  mvc:
+    format:
+      date: dd/MM/yyyy
+      time: HH:mm:ss
+      date-time: yyyy-MM-dd HH:mm:ss
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss

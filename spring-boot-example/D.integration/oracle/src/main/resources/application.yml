@@ -1,0 +1,18 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: oracle-integration-demo
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@//127.0.0.1:1521/helowin
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql

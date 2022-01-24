@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>E.tools</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>mybatis</artifactId>
+  <packaging>pom</packaging>
+
+  <name>mybatis</name>
+  <description>MyBatis 是一款优秀的持久层框架,它支持自定义 SQL、存储过程以及高级映射</description>
+
+  <modules>
+    <module>mybatis-mapper</module>
+    <module>mybatis-pagehelper</module>
+    <module>mybatis-plus</module>
+    <module>mybatis-simple</module>
+  </modules>
+
+</project>

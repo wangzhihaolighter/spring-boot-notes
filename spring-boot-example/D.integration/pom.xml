@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>D.integration</artifactId>
-    <packaging>pom</packaging>
-    <name>starters</name>
-    <description>Spring Boot 与一些外部服务组件的集成示例</description>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>spring-boot-example</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <parent>
-        <artifactId>spring-boot-example</artifactId>
-        <groupId>com.example</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+  <artifactId>D.integration</artifactId>
+  <packaging>pom</packaging>
 
-    <modules>
-        <module>mongodb-integration-demo</module>
-        <module>rabbitmq-integration-demo</module>
-        <module>redis-integration-demo</module>
-        <module>zookeeper-integration-demo</module>
-    </modules>
+  <name>D.integration</name>
+  <description>Spring Boot 与一些开源服务组件的集成示例</description>
+
+  <modules>
+    <module>derby</module>
+    <module>elastic-search</module>
+    <module>h2database</module>
+    <module>hsqldb</module>
+    <module>jetty</module>
+    <module>kafka</module>
+    <module>mongodb</module>
+    <module>mysql</module>
+    <module>oracle</module>
+    <module>prometheus</module>
+    <module>rabbitmq</module>
+    <module>redis</module>
+    <module>undertow</module>
+    <module>zookeeper</module>
+  </modules>
 
 </project>

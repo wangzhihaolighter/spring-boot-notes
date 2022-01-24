@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: transaction-multi-datasource-mybatis-demo
+  datasource:
+    db1:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/db1
+      username: root
+      password: 123456
+    db2:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/db2
+      username: root
+      password: 123456
+  jta:
+    enabled: true
+    # @see com.atomikos:transactions / transactions-defaults.properties
+    # @see com.atomikos.icatch.provider.imp.AssemblerImp
+    atomikos:
+      properties:
+        enable-logging: true
+        log-base-dir: ./temp/logs/atomikos-logs/
+        log-base-name: tmlog
+      datasource:
+        min-pool-size: 5
+        max-pool-size: 20
+  # 数据库迁移，多数据源则使用自定义配置进行初始化
+  liquibase:
+    enabled: false
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    com.example.dao: debug # log sql

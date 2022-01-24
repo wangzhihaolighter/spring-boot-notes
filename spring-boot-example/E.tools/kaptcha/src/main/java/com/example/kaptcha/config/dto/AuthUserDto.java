@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class AuthUserDto {
-    private String username;
-    private String password;
-    private String captchaUuid;
-    private String captchaText;
+  private String username;
+  private String password;
+  private String captchaUuid;
+  private String captchaText;
 }

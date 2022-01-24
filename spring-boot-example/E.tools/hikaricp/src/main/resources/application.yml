@@ -1,0 +1,33 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./temp/h2database_data/test_db;MODE=MYSQL
+    username: sa
+    password:
+    hikari:
+      # 池中维护的最小空闲连接数，默认10
+      minimum-idle: 10
+      # 池中最大连接数，包括闲置和使用中的连接，默认10
+      maximum-pool-size: 20
+      # 自动提交从池中返回的连接，默认：true
+      auto-commit: true
+      # 等待来自池的连接的最大毫秒，默认：SECONDS.toMillis(30) = 30000
+      connection-timeout: 30000
+      # 连接允许在池中闲置的最长时间，默认：MINUTES.toMillis(10) = 600000
+      idle-timeout: 600000
+      # 池中连接最长生命周期，默认：MINUTES.toMillis(30) = 1800000
+      max-lifetime: 1800000
+      # 设置一个SQL语句，在将每个新连接创建后，将其添加到池中之前执行该语句。
+      connection-test-query: SELECT 1
+      # 连接将被测试活动的最大时间量，默认：SECONDS.toMillis(5) = 5000
+      validation-timeout: 5000
+      # 连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置，默认：HikariPool-1
+      pool-name: HikariPool-1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

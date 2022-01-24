@@ -1,0 +1,11 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: template-freemarker-demo
+  freemarker:
+    enabled: true
+    cache: false
+    template-loader-path:
+      - classpath:/templates/
+    suffix: .ftlh

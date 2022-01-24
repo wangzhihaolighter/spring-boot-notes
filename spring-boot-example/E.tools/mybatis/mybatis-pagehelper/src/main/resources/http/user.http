@@ -1,0 +1,7 @@
+### 查询所有
+GET /user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 分页查询
+GET /user/page HTTP/1.1
+Host: 127.0.0.1:8080

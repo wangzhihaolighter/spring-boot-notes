@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: HyperSQL integration demo
+  datasource:
+    driver-class-name: org.hsqldb.jdbcDriver
+    # 嵌入式数据库（本地）连接：jdbc:hsqldb:file:test_db
+    # 内存数据库（本地）连接：jdbc:hsqldb:mem:test_db
+    url: jdbc:hsqldb:file:./temp/HyperSQL_data/test_db
+    username: SA
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+# 官网：http://hsqldb.org/

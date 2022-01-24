@@ -1,0 +1,27 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: multi-datasource-mybatis-demo
+  datasource:
+    # properties can see: com.zaxxer.hikari.HikariConfig
+    db1:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:file:./temp/h2database_data/db1
+      username: sa
+      password:
+    db2:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:file:./temp/h2database_data/db2
+      username: sa
+      password:
+  # 数据库迁移，多数据源则使用自定义配置进行初始化
+  liquibase:
+    enabled: false
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    com.example.dao: debug # log sql

@@ -8,7 +8,6 @@ import org.springframework.web.servlet.handler.DispatcherServletWebRequest;
 
 @Slf4j
 public class WebRequestInterceptorImpl implements WebRequestInterceptor {
-
   @Override
   public void preHandle(WebRequest request) throws Exception {
     log.info(

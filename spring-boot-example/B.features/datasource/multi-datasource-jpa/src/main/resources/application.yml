@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: multi-datasource-jpa-demo
+  datasource:
+    # properties can see: com.zaxxer.hikari.HikariConfig
+    db1:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:file:./temp/h2database_data/db1
+      username: sa
+      password:
+    db2:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:file:./temp/h2database_data/db2
+      username: sa
+      password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: h2

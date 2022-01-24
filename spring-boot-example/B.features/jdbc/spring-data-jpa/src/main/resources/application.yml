@@ -5,7 +5,7 @@ spring:
     name: spring-data-jpa-demo
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:./spring-boot-example/B.features/jdbc/spring-data-jpa/temp/h2database_data/test_db;MODE=MYSQL
+    url: jdbc:h2:file:./temp/h2database_data/test_db;MODE=MYSQL
     username: admin
     password: 123456
   sql:
@@ -13,3 +13,7 @@ spring:
       mode: always
       schema-locations: classpath:db/schema.sql
       data-locations: classpath:db/data.sql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

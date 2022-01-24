@@ -1,5 +1,9 @@
 package com.example.testing;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.example.testing.controller.UserController;
 import com.example.testing.entity.User;
 import com.example.testing.repository.UserRepository;
@@ -16,9 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -46,10 +48,10 @@ public class MockMvcTests {
 
     MvcResult mvcResult =
         this.mvc
-            .perform(MockMvcRequestBuilders.get("/user"))
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .perform(get("/user"))
+            .andExpect(status().isOk())
             .andDo(MockMvcResultHandlers.print())
-            .andExpect(MockMvcResultMatchers.content().string(mapper.writeValueAsString(users)))
+            .andExpect(content().string(mapper.writeValueAsString(users)))
             .andReturn();
 
     System.out.println("===== Mock Mvc Query =====");

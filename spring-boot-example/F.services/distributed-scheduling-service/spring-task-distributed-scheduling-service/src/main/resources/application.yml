@@ -1,0 +1,48 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: spring-task-distributed-scheduling-service
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./temp/h2database_data/scheduling_db;MODE=MYSQL
+    username: root
+    password: 123456
+  # redis配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
+    connect-timeout: 3000ms
+    timeout: 30000ms
+    lettuce:
+      shutdown-timeout: 3000ms
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 1
+  # 数据库初始化
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+  # spring data jpa配置
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+  # 调度线程池配置
+  task:
+    scheduling:
+      pool:
+        size: 5
+      thread-name-prefix: scheduling-
+      shutdown:
+        await-termination: false

@@ -6,22 +6,22 @@
 
   <groupId>com.example</groupId>
   <artifactId>spring-boot-example</artifactId>
-  <version>${revision}</version>
   <packaging>pom</packaging>
+  <version>${revision}</version>
 
   <name>Spring Boot Example</name>
   <description>Demo project for Spring Boot</description>
 
   <properties>
+    <!-- project version -->
+    <revision>1.0.0</revision>
+
+    <!-- build -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
-    <revision>1.0.0</revision>
-    <spring-boot.version>2.5.5</spring-boot.version>
+    <spring-boot.version>2.5.4</spring-boot.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-    <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
-    <docker-maven-plugin.version>0.38.0</docker-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -70,16 +70,6 @@
         <enabled>true</enabled>
       </releases>
     </repository>
-    <repository>
-      <id>spring</id>
-      <url>https://maven.aliyun.com/repository/spring</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
   </repositories>
 
   <pluginRepositories>
@@ -93,11 +83,6 @@
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-    </pluginRepository>
-    <pluginRepository>
-      <id>aliyun maven spring plugin</id>
-      <name>aliyun maven spring plugin</name>
-      <url>https://maven.aliyun.com/repository/spring-plugin</url>
     </pluginRepository>
   </pluginRepositories>
 

@@ -4,12 +4,12 @@ spring:
 server:
   port: 8080
   tomcat:
-    basedir: ./spring-boot-example/B.features/logging/logging-tomcat-access/temp/tomcat
+    basedir: ./temp/tomcat
     accesslog:
       # 是否开启
       enabled: true
       # access log 文件路径
-      directory: access/
+      directory: accesslog
       # 日志输出格式
       # 依次为为：远程主机名称、远程用户名、被认证的远程用户、日期和时间、请求的第一行、response code、发送的字节数、耗时、request header 的 Referer 信息、request header 的 User-Agent 信息
       pattern: '%h %l %u %t "%r" %s %b (%D ms) "%{Referer}i" "%{User-Agent}i"'

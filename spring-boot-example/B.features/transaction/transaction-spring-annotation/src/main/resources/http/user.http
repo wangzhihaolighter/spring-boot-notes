@@ -1,0 +1,19 @@
+### 查询所有
+GET /user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 测试查询 - readOnly
+GET /user/readOnly HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 测试新增
+POST /user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 测试更新
+PUT /user HTTP/1.1
+Host: 127.0.0.1:8080
+
+### 测试删除
+DELETE /user HTTP/1.1
+Host: 127.0.0.1:8080

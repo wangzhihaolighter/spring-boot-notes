@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>E.tools</artifactId>
-    <packaging>pom</packaging>
-    <name>starters</name>
-    <description>Spring Boot 与一些框架工具的集成示例</description>
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>spring-boot-example</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
 
-    <parent>
-        <artifactId>spring-boot-example</artifactId>
-        <groupId>com.example</groupId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+  <artifactId>E.tools</artifactId>
+  <packaging>pom</packaging>
 
-    <modules>
-        <module>apache-poi</module>
-        <module>browscap-java</module>
-        <module>caffeine</module>
-        <module>flyway</module>
-        <module>google-zxing</module>
-        <module>h2database</module>
-        <module>ip2region</module>
-        <module>jasypt</module>
-        <module>jjwt</module>
-        <module>jsch</module>
-        <module>kaptcha</module>
-        <module>oshi-core</module>
-        <module>p6spy</module>
-        <module>resilience4j</module>
-        <module>springdoc-openapi</module>
-        <module>springfox-swagger</module>
-        <module>user-agent-utils</module>
-    </modules>
+  <name>E.tools</name>
+  <description>Spring Boot 与一些框架工具的集成示例</description>
+
+  <modules>
+    <module>alibaba-druid</module>
+    <module>alibaba-easyexcel</module>
+    <module>alibaba-sentinel</module>
+    <module>apache-dubbo</module>
+    <module>apache-poi</module>
+    <module>browscap-java</module>
+    <module>caffeine</module>
+    <module>easy-captcha</module>
+    <module>flyway</module>
+    <module>google-zxing</module>
+    <module>hikaricp</module>
+    <module>ip2region</module>
+    <module>jasypt</module>
+    <module>jjwt</module>
+    <module>jsch</module>
+    <module>kaptcha</module>
+    <module>liquibase</module>
+    <module>macro-benchmarks</module>
+    <module>mapstruct</module>
+    <module>mybatis</module>
+    <module>netty</module>
+    <module>open-api</module>
+    <module>oshi-core</module>
+    <module>p6spy</module>
+    <module>redisson</module>
+    <module>resilience4j</module>
+    <module>rsocket</module>
+    <module>spring-boot-admin</module>
+    <module>useragentutils</module>
+  </modules>
 
 </project>

@@ -1,35 +1,32 @@
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
 
-  <!--
-    生成的zip文件的名称格式为：<maven build finalName>-<assembly id>.format
-    [maven-assembly-plugin插件中配置的finalName]-[assembly.xml配置的id(若assembly中没有指定id，则只有前半部分)]
-  -->
-  <id>assembly</id>
-  <formats>
-    <format>zip</format>
-  </formats>
-  <includeBaseDirectory>false</includeBaseDirectory>
+    <!--生成的zip文件的名字为：[maven-assembly-plugin插件中配置的finalName]-[assembly.xml配置的id(若assembly中没有指定id，则只有前半部分)].-->
+    <id>${revision}</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
 
-  <fileSets>
-    <!-- 把配置文件打包进zip文件的diff目录 -->
-    <fileSet>
-      <directory>${project.basedir}/diff</directory>
-      <outputDirectory>${file.separator}diff</outputDirectory>
-      <includes>
-        <include>**/*.config</include>
-      </includes>
-    </fileSet>
+    <fileSets>
+        <!--把接入wiseapm-Detector监控的配置文件，打包进zip文件的diff目录-->
+        <fileSet>
+            <directory>${project.basedir}/diff</directory>
+            <outputDirectory>${file.separator}diff</outputDirectory>
+            <includes>
+                <include>**/detector.config</include>
+            </includes>
+        </fileSet>
 
-    <!-- 把项目编译出来的jar文件，打包进zip文件的common目录 -->
-    <fileSet>
-      <directory>${project.build.directory}</directory>
-      <outputDirectory>${file.separator}common</outputDirectory>
-      <includes>
-        <include>*.jar</include>
-      </includes>
-    </fileSet>
-  </fileSets>
+        <!--把项目编译出来的jar文件，打包进zip文件的common目录-->
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>${file.separator}common</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+    </fileSets>
 
 </assembly>

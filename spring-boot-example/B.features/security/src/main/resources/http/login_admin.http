@@ -1,0 +1,73 @@
+### 登录 - 错误的登录信息
+POST /login HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123"
+}
+
+### 登录
+POST /login HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
+> {%
+// 设置选中环境的全局变量
+client.global.set("Authentication", response.body.data);
+// 输出日志
+client.log("Authentication: "+response.body.data);
+// 添加断言
+client.test("Request executed successfully", function() {
+    client.assert(response.status === 200, "Response status is not 200");
+});
+  %}
+
+### 查询
+GET /user HTTP/1.1
+Host: 127.0.0.1:8080
+Authentication: {{Authentication}}
+
+### 新增
+POST /user HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Authentication: {{Authentication}}
+
+{
+  "username": "xxx",
+  "password": "123456"
+}
+
+### 更新
+PUT /user HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Authentication: {{Authentication}}
+
+{
+  "id": 3,
+  "username": "yyy",
+  "password": "123456"
+}
+
+### 删除
+DELETE /user HTTP/1.1
+Host: 127.0.0.1:8080
+Authentication: {{Authentication}}
+
+### 登出
+DELETE /logout HTTP/1.1
+Host: 127.0.0.1:8080
+Authentication: {{Authentication}}
+
+### 查询
+GET /user HTTP/1.1
+Host: 127.0.0.1:8080
+Authentication: {{Authentication}}

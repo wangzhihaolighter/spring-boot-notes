@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: dubbo-consumer
+dubbo:
+  application:
+    name: dubbo-consumer
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: com.example.dubbo.consumer.controller

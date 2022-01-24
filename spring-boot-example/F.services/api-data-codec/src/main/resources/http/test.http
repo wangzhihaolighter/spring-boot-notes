@@ -1,0 +1,10 @@
+### 编码处理后的响应
+GET /codec/res HTTP/1.1
+Host: localhost:8080
+
+### 解码处理后的请求
+POST /codec/req HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+
+"eyJpZCI6MSwiY29udGVudCI6Inh4eCJ9"

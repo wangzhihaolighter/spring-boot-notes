@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: elastic-search-integration-demo
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      client:
+        reactive:
+          endpoints:
+            - http://localhost:9200

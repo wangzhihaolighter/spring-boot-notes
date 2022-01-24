@@ -2,4 +2,6 @@ server:
   port: 8080
 spring:
   application:
-    name: aspect
+    name: aop-aspect-demo
+  aop:
+    auto: true

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.example</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>mybatis-simple</artifactId>
+
+  <name>mybatis-simple</name>
+  <description>mybatis 整合示例</description>
+
+  <properties>
+    <mybatis-spring-boot-starter.version>2.2.1</mybatis-spring-boot-starter.version>
+    <mybatis-generator-maven-plugin.version>1.4.0</mybatis-generator-maven-plugin.version>
+    <h2.version>1.4.200</h2.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>${mybatis-spring-boot-starter.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- mybatis代码生成器插件 -->
+      <!-- 官方文档：http://mybatis.org/generator/index.html -->
+      <plugin>
+        <groupId>org.mybatis.generator</groupId>
+        <artifactId>mybatis-generator-maven-plugin</artifactId>
+        <version>${mybatis-generator-maven-plugin.version}</version>
+        <configuration>
+          <!-- 是否覆盖 -->
+          <overwrite>true</overwrite>
+          <!-- 允许移动生成的文件 -->
+          <verbose>true</verbose>
+          <!-- 自动生成的配置 -->
+          <configurationFile>${basedir}/src/main/resources/mybatis/generator/generatorConfig.xml
+          </configurationFile>
+        </configuration>
+        <dependencies>
+          <!--数据库驱动-->
+          <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>runtime</scope>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

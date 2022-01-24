@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>jdbc</artifactId>
     <groupId>com.example</groupId>
+    <artifactId>jdbc</artifactId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -14,11 +14,7 @@
   <artifactId>spring-jdbc</artifactId>
 
   <name>spring-jdbc</name>
-  <description>spring-jdbc</description>
-
-  <properties>
-    <java.version>1.8</java.version>
-  </properties>
+  <description>通过Spring JdbcTemplate 操作数据库</description>
 
   <dependencies>
     <dependency>
@@ -43,22 +39,5 @@
       <optional>true</optional>
     </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-            </exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>

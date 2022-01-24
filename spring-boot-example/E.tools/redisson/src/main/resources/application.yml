@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: redisson-demo
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
+    connect-timeout: 3000ms
+    timeout: 30000ms
+    lettuce:
+      shutdown-timeout: 3000ms
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 1

@@ -1,0 +1,5 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: spring-boot-admin-server

@@ -1,0 +1,43 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: redis
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./temp/h2database_data/test_db;MODE=MYSQL
+    username: admin
+    password: 123456
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+  cache:
+    type: redis
+  # Redis_config - 由于配置了pool属性，所以需要引入commons-pool2依赖
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    # 连接超时时间（毫秒）
+    timeout: 3600ms
+    # 连接池最大连接数（使用负值表示没有限制）
+    lettuce.pool.max-active: 8
+    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    lettuce.pool.max-wait: -1ms
+    # lettuce超时
+    lettuce.shutdown-timeout: 100ms
+    # 连接池中的最大空闲连接（默认为8，负数表示无限）
+    lettuce.pool.max-idle: 8
+    # 连接池中的最小空闲连接（默认为0，该值只有为正数才有作用）
+    lettuce.pool.min-idle: 0

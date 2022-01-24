@@ -5,4 +5,4 @@ spring:
     locale: zh
     locale-resolver: accept_header
   messages:
-    basename: i18n/message
+    basename: i18n/messages

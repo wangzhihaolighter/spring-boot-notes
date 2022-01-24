@@ -1,0 +1,8 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: sentinel-simple-demo
+
+# 启动时加入 JVM 参数 -Dcsp.sentinel.dashboard.server=consoleIp:consolePort -Dproject.name=projectName
+# -Dcsp.sentinel.dashboard.server=localhost:8085 -Dproject.name=sentinel-simple-demo

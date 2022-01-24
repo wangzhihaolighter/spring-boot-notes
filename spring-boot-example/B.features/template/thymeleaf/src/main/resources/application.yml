@@ -1,0 +1,11 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: template-thymeleaf-demo
+  thymeleaf:
+    enabled: true
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML # @see org.thymeleaf.templatemode.TemplateMode

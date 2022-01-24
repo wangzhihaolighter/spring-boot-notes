@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <el-container>
+    <el-header>
+      <el-button type="primary" @click="handleOpenAddDialog">新增任务</el-button>
+      <el-button type="info" @click="handleOpenLogDialog">调度日志</el-button>
+    </el-header>
+    <el-main>
+      <el-table
+          :data="tableData"
+          border
+          style="width: 100%">
+        <el-table-column
+            prop="id"
+            label="id">
+        </el-table-column>
+        <el-table-column
+            prop="taskName"
+            label="任务">
+        </el-table-column>
+        <el-table-column
+            prop="taskMemo"
+            label="说明">
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button
+                size="mini"
+                @click="handleDetail(scope.$index, scope.row)">详情
+            </el-button>
+            <el-button
+                size="mini"
+                type="primary"
+                @click="handleEdit(scope.$index, scope.row)">编辑
+            </el-button>
+            <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)">删除
+            </el-button>
+            <el-button
+                size="mini"
+                type="success"
+                v-if="!scope.row.enable"
+                @click="handleEnable(scope.$index, scope.row)">启用
+            </el-button>
+            <el-button
+                size="mini"
+                type="warning"
+                v-else
+                @click="handleDisable(scope.$index, scope.row)">暂停
+            </el-button>
+            <el-button
+                size="mini"
+                @click="handleOnceRun(scope.$index, scope.row)">执行一次
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="page.current"
+          :total="page.total"
+          :page-sizes="page.sizes"
+          :page-size="page.size"
+          layout="total, sizes, prev, pager, next, jumper"
+      >
+      </el-pagination>
+    </el-main>
+  </el-container>
+
+  <el-dialog title="调度日志" :visible.sync="schedulingLog.open">
+    <el-table :data="schedulingLog.tableData">
+      <el-table-column property="taskId" label="任务ID"></el-table-column>
+      <el-table-column property="startTime" label="开始时间"></el-table-column>
+      <el-table-column property="endTime" label="结束时间"></el-table-column>
+      <el-table-column property="success" label="是否成功"
+                       :formatter="booleanFormatter"></el-table-column>
+    </el-table>
+  </el-dialog>
+</div>
+</body>
+<script type="text/javascript">
+  new Vue({
+    el: '#app',
+    data() {
+      return {
+        tableData: null,
+        schedulingLog: {
+          open: false,
+          tableData: null,
+        },
+        page: {
+          current: 1,
+          total: 0,
+          size: 10,
+          sizes: [10, 20, 50, 100]
+        }
+      };
+    },
+    created: function () {
+      this.list();
+    },
+    mounted: function () {
+    },
+    methods: {
+      todo() {
+        this.$message('coming soon');
+      },
+      list() {
+        axios
+        .get('/scheduling')
+        .then(response => {
+          console.log(JSON.stringify(response))
+          this.tableData = response.data.content;
+          this.page.total = response.data.totalElements;
+          this.page.current = response.data.number + 1
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+      listLog() {
+        axios
+        .get('/scheduling/log')
+        .then(response => {
+          console.log(JSON.stringify(response))
+          this.schedulingLog.tableData = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      },
+      booleanFormatter(row, column, cellValue, index) {
+        return cellValue ? '是' : '否';
+      },
+      handleSizeChange() {
+        this.list();
+      },
+      handleCurrentChange() {
+        this.list();
+      },
+      handleOpenAddDialog() {
+        this.todo();
+      },
+      handleOpenLogDialog() {
+        this.listLog();
+        this.schedulingLog.open = true;
+      },
+      handleDetail() {
+        this.todo();
+      },
+      handleEdit() {
+        this.todo();
+      },
+      handleDelete() {
+        this.todo();
+      },
+      handleEnable() {
+        this.todo();
+      },
+      handleDisable() {
+        this.todo();
+      },
+      handleOnceRun(index, row) {
+        axios({
+          method: 'post',
+          url: "/scheduling/task/run/" + row.id,
+        })
+        .then(response => {
+          this.$message({
+            message: row.beanName + '.' + row.methodName + ' 执行成功',
+            type: 'success'
+          });
+        })
+        .catch(function (error) {
+          this.$message.error(row.beanName + '.' + row.methodName + ' 执行错误，错误：' + error);
+        });
+      },
+    },
+  });
+</script>
+<style lang="css">
+
+</style>
+</html>

@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  undertow:
+    accesslog:
+      enabled: true
+      dir: spring-boot-example/D.integration/undertow/temp/undertow
+    threads:
+      # IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 4
+      # 阻塞任务线程数, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 20
+spring:
+  application:
+    name: undertow integration demo

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+/** @author wangzhihao */
 @Slf4j
 @Component
 public class TestEventListener {
@@ -13,6 +14,6 @@ public class TestEventListener {
   @EventListener(TestEvent.class)
   public void test(TestEvent event) {
     TestDTO dto = (TestDTO) event.getSource();
-    log.info("监听到TestEvent，事件消息：{}", dto.getMsg());
+    log.info("test event: {}", dto);
   }
 }

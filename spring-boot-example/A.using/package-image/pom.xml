@@ -1,31 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>package-image</artifactId>
-  <version>${revision}</version>
-
-  <name>package-image</name>
-  <description>构建部署镜像</description>
-
   <parent>
-    <artifactId>A.using</artifactId>
     <groupId>com.example</groupId>
+    <artifactId>A.using</artifactId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
+
+  <artifactId>package-image</artifactId>
+
+  <name>package-image</name>
+  <description>打包构建 image 镜像</description>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>docker-maven-plugin</artifactId>
+      <version>0.38.0</version>
+      <type>maven-plugin</type>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <!-- 编译 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
       <!-- 生成可执行JAR包 -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -43,7 +61,7 @@
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>${docker-maven-plugin.version}</version>
+        <version>0.38.0</version>
         <!--全局配置-->
         <configuration>
           <!-- 构建参数 -->

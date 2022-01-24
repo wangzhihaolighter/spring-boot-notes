@@ -1,1 +1,0 @@
--- 正常情况下，项目使用外部数据库，任务持久化需要数据库建对应的quartz表，建表sql在quartz-2.3.0.jar的org.quartz.impl.jdbcjobstore包下

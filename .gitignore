@@ -34,8 +34,14 @@ build/
 ### VS Code ###
 .vscode/
 
-### Other ###
+### project ###
+*.log
+
 temp/
 h2database_data/
+HyperSQL_data/
+derby_data/
+.idea/
+*.lck
 logs/
-*.log
+

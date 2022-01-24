@@ -1,10 +1,13 @@
 package com.example.testing;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DynamicTest;
@@ -130,8 +133,8 @@ class JupiterTests {
   @DisplayName("生成动态测试的单元测试")
   Iterator<DynamicTest> dynamicTests() {
     return Arrays.asList(
-            DynamicTest.dynamicTest("第一个动态测试", () -> Assertions.assertTrue(true)),
-            DynamicTest.dynamicTest("第二个动态测试", () -> Assertions.assertEquals(4, 2 * 2)))
+            dynamicTest("第一个动态测试", () -> assertTrue(true)),
+            dynamicTest("第二个动态测试", () -> assertEquals(4, 2 * 2)))
         .iterator();
   }
 

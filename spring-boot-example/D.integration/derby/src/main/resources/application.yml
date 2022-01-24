@@ -1,0 +1,18 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: Apache Derby integration demo
+  datasource:
+    driver-class-name: org.apache.derby.jdbc.AutoloadedDriver
+    # 嵌入式数据库（本地）连接：jdbc:derby:/path/derby_data/test_db;create=true
+    # create=true表示不存在则创建，否则报错。
+    url: jdbc:derby:./temp/derby_data/test_db;create=true
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+# 官网：https://db.apache.org/derby/

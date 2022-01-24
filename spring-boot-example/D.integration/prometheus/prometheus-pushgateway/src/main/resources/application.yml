@@ -1,0 +1,23 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: prometheus-pushgateway-integration-demo
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+          # - "prometheus" # 暴露/actuator/prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name} # 暴露的数据中添加application label
+    export:
+      prometheus:
+        pushgateway:
+          enabled: true
+          base-url: http://127.0.0.1:9091
+          job: ${spring.application.name}
+          push-rate: 15s
+
+# Grafana SLS JVM监控大盘：https://grafana.com/grafana/dashboards/12856

@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>aop</artifactId>
     <groupId>com.example</groupId>
+    <artifactId>aop</artifactId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -14,7 +14,7 @@
   <artifactId>aspect</artifactId>
 
   <name>aspect</name>
-  <description>Spring切面处理</description>
+  <description>切面</description>
 
   <dependencies>
     <dependency>

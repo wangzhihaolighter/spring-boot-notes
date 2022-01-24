@@ -1,0 +1,7 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: spring-reactive-web-demo
+
+# 文档：https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux
