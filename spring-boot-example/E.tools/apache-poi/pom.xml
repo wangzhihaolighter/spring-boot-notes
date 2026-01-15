@@ -17,7 +17,7 @@
   <description>the Java API for Microsoft Documents</description>
 
   <properties>
-    <poi.version>5.2.0</poi.version>
+    <poi.version>5.4.0</poi.version>
   </properties>
 
   <dependencies>
