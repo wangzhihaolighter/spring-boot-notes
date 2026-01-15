@@ -17,7 +17,7 @@
   <description>dubbo 示例 - 服务提供者</description>
 
   <properties>
-    <dubbo.version>3.0.4</dubbo.version>
+    <dubbo.version>3.0.13</dubbo.version>
     <curator.version>5.2.0</curator.version>
   </properties>
 
