@@ -19,7 +19,7 @@
   <properties>
     <mybatis-spring-boot-starter.version>2.2.1</mybatis-spring-boot-starter.version>
     <mybatis-generator-maven-plugin.version>1.4.0</mybatis-generator-maven-plugin.version>
-    <h2.version>1.4.200</h2.version>
+    <h2.version>2.2.220</h2.version>
   </properties>
 
   <dependencies>
